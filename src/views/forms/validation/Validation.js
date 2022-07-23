@@ -1,60 +1,64 @@
-import { React, useState } from 'react'
-import { CForm, CCol, CFormInput, CButton } from '@coreui/react'
-import axios from 'axios'
+import { React, useState } from "react";
+import {
+  CForm,
+  CCol,
+  CFormInput,
+  CButton,
+  CFormCheck,
+  CInputGroup,
+  CFormSelect,
+  CFormTextarea,
+} from "@coreui/react";
+import axios from "axios";
+
+import Modal from "../../../components/Modal.js";
 
 const CustomStyles = () => {
   const initialValues = {
-    date_of_purchase: '',
-    contract_no: '',
-    analysis: '',
-    company_id: '',
-    material_id: '',
-    analysis_result: '',
-    sending_docs_to_seller: '',
-    exchange_status: '',
-    quantity: '',
-    container_size: '',
-    packaging_style: '',
-    certificate_of_origin: '',
-    buying_price: '',
-    selling_price: '',
-    packaging_weight: '',
-    term: '',
-    notes: '',
-  }
+    date_of_purchase: "",
+    contract_no: "",
+    analysis: "",
+    company_id: "",
+    material_id: "",
+    analysis_result: "",
+    sending_docs_to_seller: "",
+    exchange_status: "",
+    quantity: "",
+    container_size: "",
+    packaging_style: "",
+    certificate_of_origin: "",
+    buying_price: "",
+    selling_price: "",
+    packaging_weight: "",
+    term: "",
+    notes: "",
+  };
 
-  const [postRequest, setPostRequest] = useState('')
-  const [values, setValues] = useState(initialValues)
+  const [postRequest, setPostRequest] = useState("");
+  const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     setValues({
       ...values,
       [e.target.name]: value,
-    })
-  }
+    });
+  };
 
   const SubmitHandler = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/buy-orders/', values)
-      alert('success')
+      await axios.post("http://localhost:8000/api/buy-orders/", values);
+      alert("success");
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response);
     }
-  }
+  };
 
   return (
     <CForm className="row g-3">
-      <CCol md={4}>
-        <CFormInput
-          type="text"
-          label="agents"
-          value={postRequest}
-          onChange={(event) => {
-            setPostRequest(event.target.value)
-          }}
-        />
+      <CCol md={12}>
+        <Modal />
       </CCol>
       {/*buying-orders-table*/}
 
@@ -67,7 +71,7 @@ const CustomStyles = () => {
           value={values.date_of_purchase}
         />
       </CCol>
-      <CCol xs={4}>
+      <CCol md={4}>
         <CFormInput
           type="text"
           label="contract_no"
@@ -77,50 +81,49 @@ const CustomStyles = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="text"
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="company_id"
           label="company_id"
           name="company_id"
-          onChange={handleInputChange}
-          value={values.company_id}
-        />
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="text"
-          label="material_id"
-          name="material_id"
-          onChange={handleInputChange}
-          value={values.material_id}
-        />
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="company_id"
+          label="company_id"
+          name="company_id"
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
       </CCol>
       <CCol md={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="analysis"
           label="analysis"
           name="analysis"
-          onChange={handleInputChange}
-          value={values.analysis}
-        />
-      </CCol>
-      <CCol md={4}>
-        <CFormInput
-          type="text"
-          label="analysis_result"
-          name="analysis_result"
-          onChange={handleInputChange}
-          value={values.analysis_result}
-        />
-      </CCol>
-
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="sending_docs_to_seller"
-          name="sending_docs_to_seller"
-          onChange={handleInputChange}
-          value={values.sending_docs_to_seller}
-        />
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -141,31 +144,34 @@ const CustomStyles = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="certificate_of_origin"
-          name="certificate_of_origin"
-          onChange={handleInputChange}
-          value={values.certificate_of_origin}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="container_size"
           label="container_size"
           name="container_size"
-          onChange={handleInputChange}
-          value={values.container_size}
-        />
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="packaging_style"
           label="packaging_style"
           name="packaging_style"
-          onChange={handleInputChange}
-          value={values.packaging_style}
-        />
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -177,16 +183,34 @@ const CustomStyles = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
+          feedbackInvalid="Please select a valid id."
+          id="term"
           label="term"
           name="term"
+          required
+          tooltipFeedback
+        >
+          <option selected="" disabled="" value="">
+            Choose...
+          </option>
+          <option>...</option>
+        </CFormSelect>
+      </CCol>
+      
+      <CCol md={12}>
+        <CFormTextarea
+          type="text"
+          label="analysis_result"
+          name="analysis_result"
           onChange={handleInputChange}
-          value={values.term}
+          value={values.analysis_result}
         />
       </CCol>
-      <CCol xs={4}>
-        <CFormInput
+      <CCol xs={12}>
+        {" "}
+        {/* textarea */}
+        <CFormTextarea
           type="text"
           label="notes"
           name="notes"
@@ -194,13 +218,50 @@ const CustomStyles = () => {
           value={values.notes}
         />
       </CCol>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <CCol xs={6}>
+        {" "}
+        {/* checkbox */}
+        {/* <CFormInput
+          type="number"
+          label="sending_docs_to_seller"
+          name="sending_docs_to_seller"
+          onChange={handleInputChange}
+          value={values.sending_docs_to_seller}
+        /> */}
+        <CFormCheck inline id="inlineCheckbox1" value="option1" label="1" />
+        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+      </CCol>
+
+      <CCol xs={6}>
+        {/* <CFormInput
+          type="number"
+          label="certificate_of_origin"
+          name="certificate_of_origin"
+          onChange={handleInputChange}
+          value={values.certificate_of_origin}
+        /> */}
+        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+      </CCol>
+
       <CCol xs={12}>
-        <CButton type="submit" onClick={SubmitHandler}>
+        <CButton
+          style={{ marginBottom: "5px" }}
+          type="submit"
+          onClick={SubmitHandler}
+        >
           Submit
         </CButton>
       </CCol>
     </CForm>
-  )
-}
+  );
+};
 
-export default CustomStyles
+export default CustomStyles;
