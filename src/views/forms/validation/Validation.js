@@ -34,7 +34,6 @@ const CustomStyles = () => {
     notes: "",
   };
 
-  const [postRequest, setPostRequest] = useState("");
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
@@ -44,6 +43,20 @@ const CustomStyles = () => {
       [e.target.name]: value,
     });
   };
+
+  const handleSelect = () => {
+    var checkedValue = null;
+    var inputElements = document.getElementsByClassName("company_id");
+    for (var i = 0; inputElements[i]; ++i) {
+      if (inputElements[i].checked) {
+        checkedValue = inputElements[i].value;
+        break;
+      }
+    }
+    return checkedValue;
+  };
+
+  console.log(handleSelect());
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -89,18 +102,21 @@ const CustomStyles = () => {
           required
           tooltipFeedback
         >
-          <option selected="" disabled="" value="">
+          <option selected="" disabled="" value="choose">
             Choose...
           </option>
-          <option>...</option>
+          <option value="A"> A </option>
+          <option value="B"> B </option>
+          <option value="C"> C </option>
+          <option value="D"> D </option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormSelect
           feedbackInvalid="Please select a valid id."
-          id="company_id"
-          label="company_id"
-          name="company_id"
+          id="material_id"
+          label="material_id"
+          name="material_id"
           required
           tooltipFeedback
         >
@@ -197,7 +213,7 @@ const CustomStyles = () => {
           <option>...</option>
         </CFormSelect>
       </CCol>
-      
+
       <CCol md={12}>
         <CFormTextarea
           type="text"
@@ -233,9 +249,9 @@ const CustomStyles = () => {
           onChange={handleInputChange}
           value={values.sending_docs_to_seller}
         /> */}
-        <CFormCheck inline id="inlineCheckbox1" value="option1" label="1" />
-        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
-        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+        <CFormCheck inline id="" value="option1" label="1" />
+        <CFormCheck inline id="" value="option2" label="2" />
+        <CFormCheck inline id="" value="option2" label="2" />
       </CCol>
 
       <CCol xs={6}>
@@ -246,9 +262,9 @@ const CustomStyles = () => {
           onChange={handleInputChange}
           value={values.certificate_of_origin}
         /> */}
-        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
-        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
-        <CFormCheck inline id="inlineCheckbox2" value="option2" label="2" />
+        <CFormCheck inline id="" value="option2" label="2" />
+        <CFormCheck inline id="" value="option2" label="2" />
+        <CFormCheck inline id="" value="option2" label="2" />
       </CCol>
 
       <CCol xs={12}>
