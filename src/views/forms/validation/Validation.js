@@ -5,7 +5,6 @@ import {
   CFormInput,
   CButton,
   CFormCheck,
-  CInputGroup,
   CFormSelect,
   CFormTextarea,
 } from "@coreui/react";
@@ -35,6 +34,33 @@ const CustomStyles = () => {
   };
 
   const [values, setValues] = useState(initialValues);
+  const [sdts1, setsdts1] = useState(false);
+  const [sdts2, setsdts2] = useState(false);
+  const [sdts3, setsdts3] = useState(false);
+
+  const ChangeSdts1 = () => {
+    setsdts1(!sdts1);
+  };
+
+  const ChangeSdts2 = () => {
+    setsdts2(!sdts2);
+  };
+
+  const ChangeSdts3 = () => {
+    setsdts3(!sdts3);
+  };
+
+  if (sdts1 === true) {
+    values.sending_docs_to_seller = "1";
+  }
+
+  if (sdts2 === true) {
+    values.sending_docs_to_seller = "2";
+  }
+
+  if (sdts3 === true) {
+    values.sending_docs_to_seller = "3";
+  }
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -44,19 +70,11 @@ const CustomStyles = () => {
     });
   };
 
-  const handleSelect = () => {
-    var checkedValue = null;
-    var inputElements = document.getElementsByClassName("company_id");
-    for (var i = 0; inputElements[i]; ++i) {
-      if (inputElements[i].checked) {
-        checkedValue = inputElements[i].value;
-        break;
-      }
-    }
-    return checkedValue;
-  };
-
-  console.log(handleSelect());
+  const checkboxes = [
+    { id: 1, text: "Checkbox 1" },
+    { id: 2, text: "Checkbox 1" },
+    { id: 3, text: "Checkbox 1" },
+  ];
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -239,7 +257,7 @@ const CustomStyles = () => {
       <br></br>
       <br></br>
       <br></br>
-      <CCol xs={6}>
+      <CCol xs={12}>
         {" "}
         {/* checkbox */}
         {/* <CFormInput
@@ -249,12 +267,31 @@ const CustomStyles = () => {
           onChange={handleInputChange}
           value={values.sending_docs_to_seller}
         /> */}
-        <CFormCheck inline id="" value="option1" label="1" />
-        <CFormCheck inline id="" value="option2" label="2" />
-        <CFormCheck inline id="" value="option2" label="2" />
+        <p>sending_docs_to_seller</p>
+        <CFormCheck
+          id="checks"
+          value="1"
+          label="1"
+          onChange={ChangeSdts1}
+          checked={sdts1}
+        />
+        <CFormCheck
+          id="checks"
+          value="2"
+          label="2"
+          onChange={ChangeSdts2}
+          checked={sdts2}
+        />
+        <CFormCheck
+          id="checks"
+          value="3"
+          label="3"
+          onChange={ChangeSdts3}
+          checked={sdts3}
+        />
       </CCol>
 
-      <CCol xs={6}>
+      <CCol xs={12}>
         {/* <CFormInput
           type="number"
           label="certificate_of_origin"
@@ -262,17 +299,14 @@ const CustomStyles = () => {
           onChange={handleInputChange}
           value={values.certificate_of_origin}
         /> */}
-        <CFormCheck inline id="" value="option2" label="2" />
-        <CFormCheck inline id="" value="option2" label="2" />
-        <CFormCheck inline id="" value="option2" label="2" />
+        <p>certificate_of_origin</p>
+        <CFormCheck id="checks" value="1" label="1" checked />
+        <CFormCheck id="checks" value="2" label="2" />
+        <CFormCheck id="checks" value="3" label="3" />
       </CCol>
 
       <CCol xs={12}>
-        <CButton
-          style={{ marginBottom: "5px" }}
-          type="submit"
-          onClick={SubmitHandler}
-        >
+        <CButton style={{ marginBottom: "5px" }} type="submit" onClick={""}>
           Submit
         </CButton>
       </CCol>
