@@ -82,15 +82,25 @@ const Validation = () => {
     values.sending_docs_to_seller = "3";
   }
 
+  if (coo1 === true) {
+    values.certificate_of_origin = "1";
+  }
+
+  if (coo2 === true) {
+    values.certificate_of_origin = "2";
+  }
+
+  if (coo3 === true) {
+    values.certificate_of_origin = "3";
+  }
 
   const handleInputChange = (e) => {
-    const {name , values} = e.target
+    const { name, value } = e.target;
     setValues({
       ...values,
-      [name]: values,
+      [name]: value,
     });
   };
-
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -139,10 +149,10 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          <option value="A"> A </option>
-          <option value="B"> B </option>
-          <option value="C"> C </option>
-          <option value="D"> D </option>
+          <option value="1"> A</option>
+          <option value="1"> B </option>
+          <option value="1"> C </option>
+          <option value="1"> D </option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -156,9 +166,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          <option value="d"> d</option>
-          <option value="e"> e</option>
-          <option value="f"> g</option>
+          <option value="1"> d</option>
+          <option value="1"> e</option>
+          <option value="1"> g</option>
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -172,9 +182,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.analysis}
         >
-          <option value="a"> a</option>
-          <option value="b"> b</option>
-          <option value="c"> c</option>
+          <option value="1"> a</option>
+          <option value="2"> b</option>
+          <option value="2"> c</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -206,9 +216,8 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.container_size}
         >
-          <option value="a"> a</option>
-          <option value="b"> b</option>
-          <option value="c"> c</option>
+          <option value="1"> a</option>
+          <option value="2"> b</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -222,9 +231,8 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.packaging_style}
         >
-          <option value="a"> a</option>
-          <option value="b"> b</option>
-          <option value="c"> c</option>
+          <option value="1"> a</option>
+          <option value="2"> b</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -247,9 +255,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.term}
         >
-          <option value="a"> a</option>
-          <option value="b"> b</option>
-          <option value="c"> c</option>
+          <option value="1"> a</option>
+          <option value="2"> b</option>
+          <option value="3"> c</option>
         </CFormSelect>
       </CCol>
 
@@ -306,7 +314,7 @@ const Validation = () => {
       <CCol xs={12}>
         <p>certificate_of_origin</p>
         <CFormCheck
-          name="coo"
+          name="certificate_of_origin"
           value="1"
           label="1"
           onChange={ChangeCoo1}
