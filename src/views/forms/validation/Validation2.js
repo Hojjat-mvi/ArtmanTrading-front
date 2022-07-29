@@ -16,7 +16,7 @@ import axios from "axios";
 
 import Modal from "../../../components/Modal.js";
 
-const Validation = () => {
+const Validation2 = () => {
   const initialValues = {
     date_of_purchase: "",
     contract_no: "",
@@ -249,7 +249,7 @@ const Validation = () => {
         >
           <option value="11"> 11</option>
           <option value="12"> 12</option>
-          <option value="13"> 13</option>{" "}
+          <option value="13"> 13</option>
         </CFormSelect>
       </CCol>
 
@@ -360,4 +360,4 @@ const Validation = () => {
   );
 };
 
-export default Validation;
+export default Validation2;
