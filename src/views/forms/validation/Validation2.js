@@ -172,9 +172,9 @@ const Validation2 = () => {
           onChange={handleInputChange}
           value={values.analysis}
         >
-          <option value="1"> 1</option>
-          <option value="2"> 2</option>
-          <option value="3"> 3</option>
+          <option value="a"> a</option>
+          <option value="b"> b</option>
+          <option value="c"> c</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -206,9 +206,9 @@ const Validation2 = () => {
           onChange={handleInputChange}
           value={values.container_size}
         >
-          <option value="4"> 4</option>
-          <option value="5"> 5</option>
-          <option value="6"> 6</option>
+          <option value="a"> a</option>
+          <option value="b"> b</option>
+          <option value="c"> c</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -222,9 +222,9 @@ const Validation2 = () => {
           onChange={handleInputChange}
           value={values.packaging_style}
         >
-          <option value="7"> 7</option>
-          <option value="8"> 8</option>
-          <option value="9"> 9</option>
+          <option value="a"> a</option>
+          <option value="b"> b</option>
+          <option value="c"> c</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -247,9 +247,9 @@ const Validation2 = () => {
           onChange={handleInputChange}
           value={values.term}
         >
-          <option value="11"> 11</option>
-          <option value="12"> 12</option>
-          <option value="13"> 13</option>
+          <option value="a"> a</option>
+          <option value="b"> b</option>
+          <option value="c"> c</option>
         </CFormSelect>
       </CCol>
 
@@ -348,7 +348,7 @@ const Validation2 = () => {
             </CButton>
             <CButton
               onClick={() => {
-                Navigate("/Validation2.js");
+                Navigate("/forms/Validation2.js");
               }}
             >
               2
