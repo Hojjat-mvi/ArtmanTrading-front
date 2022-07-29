@@ -37,6 +37,9 @@ const CustomStyles = () => {
   const [sdts1, setsdts1] = useState(false);
   const [sdts2, setsdts2] = useState(false);
   const [sdts3, setsdts3] = useState(false);
+  const [coo1, setCoo1] = useState(false);
+  const [coo2, setCoo2] = useState(false);
+  const [coo3, setCoo3] = useState(false);
 
   const ChangeSdts1 = () => {
     setsdts1(!sdts1);
@@ -50,6 +53,17 @@ const CustomStyles = () => {
     setsdts3(!sdts3);
   };
 
+  const ChangeCoo1 = () => {
+    setCoo1(!coo1);
+  };
+
+  const ChangeCoo2 = () => {
+    setCoo2(!coo2);
+  };
+
+  const ChangeCoo3 = () => {
+    setCoo3(!coo3);
+  };
   if (sdts1 === true) {
     values.sending_docs_to_seller = "1";
   }
@@ -62,19 +76,17 @@ const CustomStyles = () => {
     values.sending_docs_to_seller = "3";
   }
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setValues({
-      ...values,
-      [e.target.name]: value,
-    });
+  const setSelectValue = (e) => {
+    setValues({ ...values, company_id: e.target.value });
   };
 
-  const checkboxes = [
-    { id: 1, text: "Checkbox 1" },
-    { id: 2, text: "Checkbox 1" },
-    { id: 3, text: "Checkbox 1" },
-  ];
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -119,10 +131,9 @@ const CustomStyles = () => {
           name="company_id"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.company_id}
         >
-          <option selected="" disabled="" value="choose">
-            Choose...
-          </option>
           <option value="A"> A </option>
           <option value="B"> B </option>
           <option value="C"> C </option>
@@ -137,10 +148,9 @@ const CustomStyles = () => {
           name="material_id"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.material_id}
         >
-          <option selected="" disabled="" value="">
-            Choose...
-          </option>
           <option>...</option>
         </CFormSelect>
       </CCol>
@@ -152,10 +162,9 @@ const CustomStyles = () => {
           name="analysis"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.analysis}
         >
-          <option selected="" disabled="" value="">
-            Choose...
-          </option>
           <option>...</option>
         </CFormSelect>
       </CCol>
@@ -185,10 +194,9 @@ const CustomStyles = () => {
           name="container_size"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.container_size}
         >
-          <option selected="" disabled="" value="">
-            Choose...
-          </option>
           <option>...</option>
         </CFormSelect>
       </CCol>
@@ -200,10 +208,9 @@ const CustomStyles = () => {
           name="packaging_style"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.packaging_style}
         >
-          <option selected="" disabled="" value="">
-            Choose...
-          </option>
           <option>...</option>
         </CFormSelect>
       </CCol>
@@ -224,10 +231,9 @@ const CustomStyles = () => {
           name="term"
           required
           tooltipFeedback
+          onChange={handleInputChange}
+          value={values.term}
         >
-          <option selected="" disabled="" value="">
-            Choose...
-          </option>
           <option>...</option>
         </CFormSelect>
       </CCol>
@@ -269,21 +275,21 @@ const CustomStyles = () => {
         /> */}
         <p>sending_docs_to_seller</p>
         <CFormCheck
-          id="checks"
+          name="checks"
           value="1"
           label="1"
           onChange={ChangeSdts1}
           checked={sdts1}
         />
         <CFormCheck
-          id="checks"
+          name="checks"
           value="2"
           label="2"
           onChange={ChangeSdts2}
           checked={sdts2}
         />
         <CFormCheck
-          id="checks"
+          name="checks"
           value="3"
           label="3"
           onChange={ChangeSdts3}
@@ -300,9 +306,27 @@ const CustomStyles = () => {
           value={values.certificate_of_origin}
         /> */}
         <p>certificate_of_origin</p>
-        <CFormCheck id="checks" value="1" label="1" checked />
-        <CFormCheck id="checks" value="2" label="2" />
-        <CFormCheck id="checks" value="3" label="3" />
+        <CFormCheck
+          name="coo"
+          value="1"
+          label="1"
+          onChange={ChangeCoo1}
+          checked={coo1}
+        />
+        <CFormCheck
+          name="coo"
+          value="2"
+          label="2"
+          onChange={ChangeCoo2}
+          checked={coo2}
+        />
+        <CFormCheck
+          name="coo"
+          value="3"
+          label="3"
+          onChange={ChangeCoo3}
+          checked={coo3}
+        />
       </CCol>
 
       <CCol xs={12}>
