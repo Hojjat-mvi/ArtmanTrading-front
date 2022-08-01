@@ -19,8 +19,13 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Validation',
+        name: 'Form1',
         to: '/forms/validation',
+      },
+      {
+        component: CNavItem,
+        name: 'Form2',
+        to: '/forms/validation2',
       },
     ],
   },

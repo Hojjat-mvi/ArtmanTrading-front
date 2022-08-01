@@ -8,7 +8,6 @@ import {
   CFormCheck,
   CFormSelect,
   CFormTextarea,
-  CLink,
   CButtonToolbar,
   CButtonGroup,
 } from "@coreui/react";
@@ -356,7 +355,7 @@ const Validation = () => {
             </CButton>
             <CButton
               onClick={() => {
-                Navigate("/Validation2.js");
+                Navigate("/forms/Validation2");
               }}
             >
               2
