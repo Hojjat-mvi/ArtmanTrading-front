@@ -148,10 +148,10 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          <option value="1"> A</option>
-          <option value="1"> B </option>
-          <option value="1"> C </option>
-          <option value="1"> D </option>
+          <option value="1"> 1</option>
+          <option value="1"> 1 </option>
+          <option value="1"> 1 </option>
+          <option value="1"> 1 </option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -165,9 +165,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          <option value="1"> d</option>
-          <option value="1"> e</option>
-          <option value="1"> g</option>
+          <option value="1"> 1</option>
+          <option value="1"> 1</option>
+          <option value="1"> 1</option>
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -181,9 +181,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.analysis}
         >
-          <option value="1"> a</option>
-          <option value="2"> b</option>
-          <option value="2"> c</option>
+          <option value="1"> 1</option>
+          <option value="2"> 2</option>
+          <option value="2"> 2</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>

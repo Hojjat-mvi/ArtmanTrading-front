@@ -22,25 +22,45 @@ import {
 import axios from "axios";
 
 const Tables = () => {
+  const [orders, setOrders] = useState([]);
 
-  const [orders,setOrders] = useState([])
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   const getOrders = async () => {
     try {
-      const {orders: result} = await axios.get("http://localhost:8000/api/buy-orders");
-      setOrders(result)
-      console.log(result)
-      console.log(orders)
+      const result = await axios.get("http://localhost:8000/api/buy-orders");
+      await sleep(5000);
+      setOrders(result.data.data);
     } catch {
       alert("cant load information");
     }
-    return result;
   };
 
   useEffect(() => {
     getOrders();
   }, []);
 
+  const makeTableRow = () => {
+    return (
+      <>
+        {orders.map((agent) => (
+          <CTableRow>
+            <CTableDataCell scope="col"> {agent.id}</CTableDataCell>
+            <CTableHeaderCell scope="col">
+              {" "}
+              {agent.date_of_purchase}
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col">
+              {" "}
+              {agent.certificate_of_origin}
+            </CTableHeaderCell>
+          </CTableRow>
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
@@ -64,23 +84,7 @@ const Tables = () => {
             <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody>
-          <CTableRow>
-            {/* <CTableHeaderCell scope="row">Default</CTableHeaderCell>
-            <CTableDataCell>Cell</CTableDataCell>
-            <CTableDataCell>Cell</CTableDataCell> */}
-            {/* <div>
-              {result.map((agent) => {
-                <CTableHeaderCell key={agent.id}> agent code : {agent.id}</CTableHeaderCell>;
-              })}
-            </div>
-            <div>
-              {result.map((agent) => {
-                <CTableDataCell key={agent.id}>date : {agent.date_of_purchase}</CTableDataCell>
-              })}
-            </div> */}
-          </CTableRow>
-        </CTableBody>
+        <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
     </>
   );
