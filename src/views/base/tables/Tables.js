@@ -24,14 +24,10 @@ import axios from "axios";
 const Tables = () => {
   const [orders, setOrders] = useState([]);
 
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
 
   const getOrders = async () => {
     try {
       const result = await axios.get("http://localhost:8000/api/buy-orders");
-      await sleep(5000);
       setOrders(result.data.data);
     } catch {
       alert("cant load information");
@@ -46,7 +42,7 @@ const Tables = () => {
     return (
       <>
         {orders.map((agent) => (
-          <CTableRow>
+          <CTableRow key={agent.id}>
             <CTableDataCell scope="col"> {agent.id}</CTableDataCell>
             <CTableHeaderCell scope="col">
               {" "}
@@ -76,15 +72,15 @@ const Tables = () => {
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable>
+      <CTable borderless hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Class</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Agent ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody>{makeTableRow()}</CTableBody>
+        <CTableBody >{makeTableRow()}</CTableBody>
       </CTable>
     </>
   );
