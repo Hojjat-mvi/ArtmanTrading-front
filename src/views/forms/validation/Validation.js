@@ -106,10 +106,12 @@ const Validation = () => {
     try {
       await axios.post("http://localhost:8000/api/buy-orders/", values);
       alert("success");
+      Navigate('/forms/Validation2')
     } catch (error) {
       alert("error");
       console.log(error.response);
     }
+    
   };
 
   return (
@@ -341,26 +343,8 @@ const Validation = () => {
             type="submit"
             onClick={SubmitHandler}
           >
-            Submit
+            Next Page
           </CButton>
-        </CCol>
-        <CCol>
-          <CButtonGroup>
-            <CButton
-              onClick={() => {
-                Navigate("/forms/Validation");
-              }}
-            >
-              1
-            </CButton>
-            <CButton
-              onClick={() => {
-                Navigate("/forms/Validation2");
-              }}
-            >
-              2
-            </CButton>
-          </CButtonGroup>
         </CCol>
       </CButtonToolbar>
     </CForm>
