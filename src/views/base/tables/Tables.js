@@ -20,10 +20,12 @@ import {
   CButton,
 } from "@coreui/react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
 
+  const Navigate = useNavigate();
 
   const getOrders = async () => {
     try {
@@ -48,9 +50,18 @@ const Tables = () => {
               {" "}
               {agent.date_of_purchase}
             </CTableHeaderCell>
-            <CTableHeaderCell scope="col">
+            <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
-              {agent.certificate_of_origin}
+              <CButton
+                onClick={() => {
+                  Navigate("/base/tables/Edit");
+                }}
+              >
+                edit
+              </CButton>
+              <CButton color="danger" className="me-md-2">
+                delete
+              </CButton>
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -62,9 +73,13 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Navbar</CNavbarBrand>
+          <CNavbarBrand href="#">Orders</CNavbarBrand>
           <CForm className="d-flex">
-            <CFormInput type="search" className="me-2" placeholder="Search" />
+            <CFormInput
+              type="search"
+              className="me-2"
+              placeholder="Search your Order id"
+            />
             <CButton type="submit" color="success" variant="outline">
               Search
             </CButton>
@@ -75,12 +90,12 @@ const Tables = () => {
       <CTable borderless hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Agent ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Heading</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody >{makeTableRow()}</CTableBody>
+        <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
     </>
   );
