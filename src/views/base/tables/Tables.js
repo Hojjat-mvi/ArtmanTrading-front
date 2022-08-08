@@ -21,6 +21,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "./Modal";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
@@ -29,12 +30,14 @@ const Tables = () => {
 
   const getOrders = async () => {
     try {
-      const result = await axios.get("http://localhost:8000/api/buy-orders");
+      const result = await axios.get("http://localhost:8000/api/buying-orders");
       setOrders(result.data.data);
     } catch {
       alert("cant load information");
     }
   };
+
+  
 
   useEffect(() => {
     getOrders();
@@ -59,9 +62,7 @@ const Tables = () => {
               >
                 edit
               </CButton>
-              <CButton color="danger" className="me-md-2">
-                delete
-              </CButton>
+              <Modal orderId={agent.id} reRender={getOrders}/>
             </CTableHeaderCell>
           </CTableRow>
         ))}

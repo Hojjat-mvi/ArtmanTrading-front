@@ -104,7 +104,7 @@ const Validation = () => {
   const SubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/buy-orders/", values);
+      await axios.post("http://localhost:8000/api/buying-orders/", values);
       alert("success");
       Navigate('/forms/Validation2')
     } catch (error) {
