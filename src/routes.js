@@ -1,6 +1,8 @@
 import React from 'react'
 import { Edit } from './views/base/tables/Edit'
 import { Validation2 } from './views/forms/validation/Validation2'
+import { Validation3 } from './views/forms/validation/Validation3'
+import { Validation4 } from './views/forms/validation/Validation4'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -91,8 +93,10 @@ const routes = [
   { path: '/forms/input-group', name: 'Input Group', element: InputGroup },
   { path: '/forms/floating-labels', name: 'Floating Labels', element: FloatingLabels },
   { path: '/forms/layout', name: 'Layout', element: Layout },
-  { path: '/forms/validation', name: 'Validation', element: Validation },
-  { path: '/forms/validation2', name: 'Validation2', element: Validation2 },
+  { path: '/forms/validation', name: 'Form', element: Validation },
+  { path: '/forms/validation2', name: 'Form2', element: Validation2 },
+  { path: '/forms/validation3', name: 'Form3', element: Validation3 },
+  { path: '/forms/validation4', name: 'Form4', element: Validation4 },
   { path: '/icons', exact: true, name: 'Icons', element: CoreUIIcons },
   { path: '/icons/coreui-icons', name: 'CoreUI Icons', element: CoreUIIcons },
   { path: '/icons/flags', name: 'Flags', element: Flags },
