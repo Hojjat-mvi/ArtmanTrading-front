@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   CForm,
   CCol,
@@ -10,8 +10,6 @@ import {
   CFormTextarea,
   CButtonToolbar,
   CButtonGroup,
-  
-
 } from "@coreui/react";
 import axios from "axios";
 
@@ -35,13 +33,12 @@ export const Edit = () => {
     term: "",
     notes: "",
   };
-  const location = useLocation()
+  const location = useLocation();
   const Navigate = useNavigate();
 
   // console.log(location.state.order)
 
-  const order = location.state.order
-  console.log(order)
+  const order = location.state.order;
 
   const [values, setValues] = useState(order);
   const [sdts1, setsdts1] = useState(false);
@@ -109,7 +106,7 @@ export const Edit = () => {
   const SubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      await axios.put("http://localhost:8000/api/buying-orders/", values);
+      await axios.put(`http://localhost:8000/api/buying-orders/${order.id}`, values);
       alert("success");
       Navigate("/forms/Validation2");
     } catch (error) {
@@ -118,10 +115,9 @@ export const Edit = () => {
     }
   };
 
-  
+
   return (
     <CForm className="row g-3">
-      
       {/*buying-orders-table*/}
 
       <CCol xs={4}>
@@ -353,4 +349,3 @@ export const Edit = () => {
     </CForm>
   );
 };
-
