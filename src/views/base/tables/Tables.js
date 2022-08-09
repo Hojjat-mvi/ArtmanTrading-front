@@ -22,6 +22,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "./Modal";
+import { Edit } from "./Edit";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
@@ -46,23 +47,24 @@ const Tables = () => {
   const makeTableRow = () => {
     return (
       <>
-        {orders.map((agent) => (
-          <CTableRow key={agent.id}>
-            <CTableDataCell scope="col"> {agent.id}</CTableDataCell>
+        {orders.map((order) => (
+          <CTableRow key={order.id}>
+            <CTableDataCell scope="col"> {order.id}</CTableDataCell>
             <CTableHeaderCell scope="col">
               {" "}
-              {agent.date_of_purchase}
+              {order.date_of_purchase}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 onClick={() => {
-                  Navigate("/base/tables/Edit");
+                  
+                  Navigate("/base/tables/Edit",{state:{order}});
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getOrders}/>
+              <Modal orderId={order.id} reRender={getOrders}/>
             </CTableHeaderCell>
           </CTableRow>
         ))}

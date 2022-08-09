@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   CButton,
   CModal,
@@ -9,7 +9,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-export const Modal = ({orderId,reRender}) => {
+export const Modal = ({ orderId, reRender }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -26,22 +26,27 @@ export const Modal = ({orderId,reRender}) => {
           <CModalHeader>
             <CModalTitle>Delete order</CModalTitle>
           </CModalHeader>
-          <CModalBody>
-            are you sure you want to delete this item?
-          </CModalBody>
+          <CModalBody>are you sure you want to delete this item?</CModalBody>
           <CModalFooter>
             <CButton color="secondary" onClick={() => setVisible(false)}>
               cancel
             </CButton>
-            <CButton color="danger" onClick={async() => {
-                try{
-                    await axios.delete(`http://localhost:8000/api/buying-orders/${orderId}`)
-                    setVisible(false)
-                    reRender()
-                }catch(e){
-                    alert('delete failed')
+            <CButton
+              color="danger"
+              onClick={async () => {
+                try {
+                  await axios.delete(
+                    `http://localhost:8000/api/buying-orders/${orderId}`
+                  );
+                  setVisible(false);
+                  reRender();
+                } catch (e) {
+                  alert("delete failed");
                 }
-            }}>delete</CButton>
+              }}
+            >
+              delete
+            </CButton>
           </CModalFooter>
         </CModal>
       </>
