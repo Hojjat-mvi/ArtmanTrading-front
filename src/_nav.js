@@ -54,27 +54,27 @@ const _nav = [
   {
     component: CNavItem,
     name: "exchanges",
-    to: "/forms/validation4",
+    to: "/pages/exchanges",
   },
   {
     component: CNavItem,
     name: "orders",
-    to: "/forms/validation4",
+    to: "/pages/orders",
   },
   {
     component: CNavItem,
     name: "materials",
-    to: "/forms/validation4",
+    to: "/pages/materials",
   },
   {
     component: CNavItem,
     name: "transit",
-    to: "/forms/validation4",
+    to: "/pages/transit",
   },
   {
     component: CNavItem,
     name: "users",
-    to: "/forms/validation4",
+    to: "/pages/users",
   },
 ];
 
