@@ -5,14 +5,14 @@ import { useLocation } from "react-router-dom";
 const Show = () => {
   const location = useLocation();
 
-  const order = location.state.order;
+  const agent = location.state.agent;
 
   return (
     <CCard>
       <CCardHeader>Details</CCardHeader>
       <CCardBody>
         <blockquote className="blockquote mb-0">
-          <p>{order.name}</p>
+          <p>{agent.name}</p>
         </blockquote>
       </CCardBody>
     </CCard>
