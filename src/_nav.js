@@ -46,6 +46,36 @@ const _nav = [
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [{ component: CNavItem, name: "Tables", to: "/base/tables" }],
   },
+  {
+    component: CNavItem,
+    name: "agents",
+    to: "/pages/agents",
+  },
+  {
+    component: CNavItem,
+    name: "exchanges",
+    to: "/forms/validation4",
+  },
+  {
+    component: CNavItem,
+    name: "orders",
+    to: "/forms/validation4",
+  },
+  {
+    component: CNavItem,
+    name: "materials",
+    to: "/forms/validation4",
+  },
+  {
+    component: CNavItem,
+    name: "transit",
+    to: "/forms/validation4",
+  },
+  {
+    component: CNavItem,
+    name: "users",
+    to: "/forms/validation4",
+  },
 ];
 
 export default _nav;
