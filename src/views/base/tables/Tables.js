@@ -18,28 +18,43 @@ import {
   CForm,
   CFormInput,
   CButton,
+  CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "./Modal";
-import { Edit } from "./Edit";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
+  const [check, setCheck] = useState(false);
 
   const Navigate = useNavigate();
 
-  const getOrders = async () => {
+  const getOrders = async (url) => {
     try {
-      const result = await axios.get("http://localhost:8000/api/buying-orders");
-      setOrders(result.data.data);
+      const result = await axios.get(`http://localhost:8000/api/${url}`);
+      if (url === "buying-orders") {
+        setOrders(result.data.data);
+      }
+      if (url === "agents") {
+        setOrders(result.data);
+      }
     } catch {
       alert("cant load information");
     }
   };
 
-  
+  if (check === true) {
+    getOrders("agents");
+  } else {
+    getOrders("buying-orders");
+  }
 
+  const changeSearch = () => {
+    setCheck(!check);
+  };
+
+  debugger;
   useEffect(() => {
     getOrders();
   }, []);
@@ -58,13 +73,12 @@ const Tables = () => {
               {" "}
               <CButton
                 onClick={() => {
-                  
-                  Navigate("/base/tables/Edit",{state:{order}});
+                  Navigate("/base/tables/Edit", { state: { order } });
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={order.id} reRender={getOrders}/>
+              <Modal orderId={order.id} reRender={getOrders} />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -77,6 +91,13 @@ const Tables = () => {
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">Orders</CNavbarBrand>
+          <CNavbarBrand href="#">search in :</CNavbarBrand>
+          <CFormCheck
+            label="agents"
+            id="agents"
+            onChange={changeSearch}
+            checked={check}
+          />
           <CForm className="d-flex">
             <CFormInput
               type="search"
