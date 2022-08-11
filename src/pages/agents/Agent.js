@@ -22,7 +22,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../views/base/tables/Modal";
+import { Modal } from "../orders/Modal";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);

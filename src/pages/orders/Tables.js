@@ -54,7 +54,10 @@ const Tables = () => {
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
-              <CButton color="success">show</CButton>
+              <CButton color="success" onClick={() => {
+                  Navigate("/base/tables/Show", { state: { order } });
+
+              }}>show</CButton>
               <CButton
                 onClick={() => {
                   Navigate("/base/tables/Edit", { state: { order } });
