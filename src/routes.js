@@ -1,4 +1,3 @@
-import { exact } from 'prop-types'
 import React from 'react'
 import { Edit } from './views/base/tables/Edit'
 import { Validation2 } from './views/forms/validation/Validation2'

@@ -6,7 +6,6 @@ import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
-import { sygnet } from 'src/assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -32,7 +31,7 @@ const AppSidebar = () => {
         <span>
           <b>Artman Trading</b>
         </span>
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+        <CIcon className="sidebar-brand-narrow"  height={35} />
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
