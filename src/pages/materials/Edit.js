@@ -1,20 +1,20 @@
-import { CForm, CFormInput } from "@coreui/react";
+import { CForm, CFormInput ,CCol,CButton} from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Edit = () => {
   const location = useLocation();
 
-  const agent = location.state.agent;
+  const material = location.state.material;
 
-  const [values, setValues] = useState(agent);
+  const [values, setValues] = useState(material);
 
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
     try {
       await axios.put(
-        `http://localhost:8000/api/buying-orders/${agent.id}`,
+        `http://localhost:8000/api/materials/${material.id}`,
         values
       );
       alert("success");
@@ -40,6 +40,10 @@ const Edit = () => {
         onChange={handleInputChange}
         value={values.name}
       />
+      <br></br>
+      <CCol xs={2}>
+        <CButton onClick={SubmitHandler}>submit</CButton>
+      </CCol>
     </CForm>
   );
 };

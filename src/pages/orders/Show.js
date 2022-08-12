@@ -12,7 +12,7 @@ const Show = () => {
       <CCardHeader>Details</CCardHeader>
       <CCardBody>
         <blockquote className="blockquote mb-0">
-          <p>{order.name}</p>
+          <p>{JSON.stringify(order)}</p>
         </blockquote>
       </CCardBody>
     </CCard>

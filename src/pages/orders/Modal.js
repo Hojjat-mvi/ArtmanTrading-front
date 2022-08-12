@@ -36,7 +36,7 @@ export const Modal = ({ orderId, reRender, url }) => {
               onClick={async () => {
                 try {
                   await axios.delete(
-                    `http://localhost:8000/api/${url}/${orderId}`
+                    `http://localhost:8000/api/${url}/${orderId.id}`
                   );
                   setVisible(false);
                   reRender();

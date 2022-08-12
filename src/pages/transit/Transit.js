@@ -24,50 +24,50 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../pages/orders/Modal";
 
-const Tables = () => {
-  const [agents, setAgents] = useState([]);
+const Transit = () => {
+  const [transits, setTransit] = useState([]);
 
   const Navigate = useNavigate();
 
-  const getAgents = async () => {
+  const getTransits = async () => {
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`);
-      setAgents(result.data.data);
+      const result = await axios.get(`http://localhost:8000/api/transit-companies`);
+      setTransit(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getAgents();
+    getTransits();
   }, []);
 
   const makeTableRow = () => {
     return (
       <>
-        {agents.map((agent) => (
-          <CTableRow key={agent.id}>
+        {transits.map((transit) => (
+          <CTableRow key={transit.id}>
             <CTableHeaderCell scope="col" className="col-12">
-              {agent.name}
+              {transit.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/agents/Show", { state: { agent } });
+                  Navigate("/pages/transit/Show", { state: { transit } });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/agents/Edit", { state: { agent } });
+                  Navigate("/pages/transit/Edit", { state: { transit } });
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getAgents} url={"agents"} />
+              <Modal orderId={transit} reRender={getTransits} url={"transit-companies"} />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -79,12 +79,12 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Agents</CNavbarBrand>
+          <CNavbarBrand href="#">transits</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your Agent id"
+              placeholder="Search your transit id"
             />
             <CButton type="submit" color="success" variant="outline">
               Search
@@ -106,4 +106,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Transit;

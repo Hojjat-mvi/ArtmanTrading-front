@@ -22,52 +22,50 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../pages/orders/Modal";
+import { Modal } from "./Modal";
 
 const Tables = () => {
-  const [agents, setAgents] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const Navigate = useNavigate();
 
-  const getAgents = async () => {
+  const getOrders = async () => {
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`);
-      setAgents(result.data.data);
+      const result = await axios.get(`http://localhost:8000/api/buying-orders`);
+      setOrders(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getAgents();
+    getOrders();
   }, []);
 
   const makeTableRow = () => {
     return (
       <>
-        {agents.map((agent) => (
-          <CTableRow key={agent.id}>
-            <CTableHeaderCell scope="col" className="col-12">
-              {agent.name}
-            </CTableHeaderCell>
+        {orders.map((order) => (
+          <CTableRow key={order.id}>
+            <CTableDataCell scope="col" className="col-12"> {order.id}</CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
-              <CButton
-                color="success"
-                onClick={() => {
-                  Navigate("/pages/agents/Show", { state: { agent } });
-                }}
-              >
-                show
-              </CButton>
+              <CButton color="success" onClick={() => {
+                  Navigate("/pages/orders/Show", { state: { order } });
+
+              }}>show</CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/agents/Edit", { state: { agent } });
+                  Navigate("/base/tables/Edit", { state: { order } });
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getAgents} url={"agents"} />
+              <Modal
+                orderId={order}
+                reRender={getOrders}
+                url={"buying-orders"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -79,12 +77,12 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Agents</CNavbarBrand>
+          <CNavbarBrand href="#">Orders</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your Agent id"
+              placeholder="Search your Order id"
             />
             <CButton type="submit" color="success" variant="outline">
               Search
@@ -96,8 +94,8 @@ const Tables = () => {
       <CTable borderless hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Action</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>

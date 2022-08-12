@@ -1,20 +1,19 @@
-import { CForm, CFormInput } from "@coreui/react";
+import { CButton, CForm, CFormInput, CCol } from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Edit = () => {
   const location = useLocation();
 
-  const agent = location.state.agent;
+  const exchange = location.state.exchange;
 
-  const [values, setValues] = useState(agent);
-
+  const [values, setValues] = useState(exchange);
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
     try {
       await axios.put(
-        `http://localhost:8000/api/buying-orders/${agent.id}`,
+        `http://localhost:8000/api/exchanges/${exchange.id}`,
         values
       );
       alert("success");
@@ -34,12 +33,18 @@ const Edit = () => {
 
   return (
     <CForm>
-      <CFormInput
-        label="name"
-        name="name"
-        onChange={handleInputChange}
-        value={values.name}
-      />
+      <CCol xs={6}>
+        <CFormInput
+          label="name"
+          name="name"
+          onChange={handleInputChange}
+          value={values.name}
+        ></CFormInput>
+      </CCol>
+      <br></br>
+      <CCol xs={2}>
+        <CButton onClick={SubmitHandler}>submit</CButton>
+      </CCol>
     </CForm>
   );
 };

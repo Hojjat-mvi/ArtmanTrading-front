@@ -9,7 +9,6 @@ const Edit = () => {
 
   const [values, setValues] = useState(agent);
 
-
   const SubmitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -40,6 +39,7 @@ const Edit = () => {
         onChange={handleInputChange}
         value={values.name}
       />
+      <CButton onClick={SubmitHandler}>submit</CButton>
     </CForm>
   );
 };

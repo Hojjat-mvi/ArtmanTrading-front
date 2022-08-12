@@ -24,50 +24,54 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../pages/orders/Modal";
 
-const Tables = () => {
-  const [agents, setAgents] = useState([]);
+const Materials = () => {
+  const [materials, setMaterials] = useState([]);
 
   const Navigate = useNavigate();
 
-  const getAgents = async () => {
+  const getMaterials = async () => {
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`);
-      setAgents(result.data.data);
+      const result = await axios.get(`http://localhost:8000/api/materials`);
+      setMaterials(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getAgents();
+    getMaterials();
   }, []);
 
   const makeTableRow = () => {
     return (
       <>
-        {agents.map((agent) => (
-          <CTableRow key={agent.id}>
+        {materials.map((material) => (
+          <CTableRow key={material.id}>
             <CTableHeaderCell scope="col" className="col-12">
-              {agent.name}
+              {material.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/agents/Show", { state: { agent } });
+                  Navigate("/pages/materials/Show", { state: { material } });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/agents/Edit", { state: { agent } });
+                  Navigate("/pages/materials/Edit", { state: { material } });
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getAgents} url={"agents"} />
+              <Modal
+                orderId={material}
+                reRender={getMaterials}
+                url={"materials"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -79,12 +83,12 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Agents</CNavbarBrand>
+          <CNavbarBrand href="#">materials</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your Agent id"
+              placeholder="Search your materials id"
             />
             <CButton type="submit" color="success" variant="outline">
               Search
@@ -106,4 +110,4 @@ const Tables = () => {
   );
 };
 
-export default Tables;
+export default Materials;

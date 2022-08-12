@@ -19,7 +19,7 @@ const Validation = React.lazy(() => import('./views/forms/validation/Validation'
 const Agents = React.lazy(() => import('./pages/agents/Agent'))
 const agentEdit = React.lazy(() => import('./pages/agents/Edit'))
 const agentShow = React.lazy(() => import('./pages/agents/Show'))
-const Order = React.lazy(() => import('./pages/orders/Tables'))
+const Order = React.lazy(() => import('./pages/orders/Order'))
 
 
 //// Exchanges
