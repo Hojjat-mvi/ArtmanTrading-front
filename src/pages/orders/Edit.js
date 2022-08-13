@@ -123,7 +123,7 @@ export const Edit = () => {
       <CCol xs={4}>
         <CFormInput
           type="date"
-          label="date_of_purchase"
+          label="Purchase Date"
           name="date_of_purchase"
           onChange={handleInputChange}
           value={values.date_of_purchase}
@@ -132,7 +132,7 @@ export const Edit = () => {
       <CCol md={4}>
         <CFormInput
           type="text"
-          label="contract_no"
+          label="Contract No."
           name="contract_no"
           onChange={handleInputChange}
           value={values.contract_no}
@@ -142,7 +142,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="company_id"
-          label="company_id"
+          label="Seller"
           name="company_id"
           required
           tooltipFeedback
@@ -159,7 +159,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="material_id"
-          label="material_id"
+          label="Material"
           name="material_id"
           required
           tooltipFeedback
@@ -175,7 +175,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="analysis"
-          label="analysis"
+          label="Analysis"
           name="analysis"
           required
           tooltipFeedback
@@ -190,7 +190,7 @@ export const Edit = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="quantity"
+          label="Quantity"
           name="quantity"
           onChange={handleInputChange}
           value={values.quantity}
@@ -199,7 +199,7 @@ export const Edit = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="packaging_weight"
+          label="Packaging Weight"
           name="packaging_weight"
           onChange={handleInputChange}
           value={values.packaging_weight}
@@ -209,7 +209,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="container_size"
-          label="container_size"
+          label="Container Size"
           name="container_size"
           required
           tooltipFeedback
@@ -224,7 +224,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="packaging_style"
-          label="packaging_style"
+          label="Packaging Style"
           name="packaging_style"
           required
           tooltipFeedback
@@ -238,7 +238,7 @@ export const Edit = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="selling_price"
+          label="Selling Price"
           name="selling_price"
           onChange={handleInputChange}
           value={values.selling_price}
@@ -248,7 +248,7 @@ export const Edit = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="term"
-          label="term"
+          label="Term"
           name="term"
           required
           tooltipFeedback
@@ -264,7 +264,7 @@ export const Edit = () => {
       <CCol md={12}>
         <CFormTextarea
           type="text"
-          label="analysis_result"
+          label="Analysis Result"
           name="analysis_result"
           onChange={handleInputChange}
           value={values.analysis_result}
@@ -275,7 +275,7 @@ export const Edit = () => {
         {/* textarea */}
         <CFormTextarea
           type="text"
-          label="notes"
+          label="Notes"
           name="notes"
           onChange={handleInputChange}
           value={values.notes}
@@ -287,7 +287,7 @@ export const Edit = () => {
       <br></br>
       <br></br>
       <CCol xs={12}>
-        <p>sending_docs_to_seller</p>
+        <p>Sending Docs to Seller</p>
         <CFormCheck
           name="checks"
           value="1"
@@ -312,7 +312,7 @@ export const Edit = () => {
       </CCol>
 
       <CCol xs={12}>
-        <p>certificate_of_origin</p>
+        <p>Certificate of Origin</p>
         <CFormCheck
           name="certificate_of_origin"
           value="1"

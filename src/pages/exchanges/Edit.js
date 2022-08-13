@@ -35,7 +35,7 @@ const Edit = () => {
     <CForm>
       <CCol xs={6}>
         <CFormInput
-          label="name"
+          label="Name"
           name="name"
           onChange={handleInputChange}
           value={values.name}
@@ -43,7 +43,7 @@ const Edit = () => {
       </CCol>
       <br></br>
       <CCol xs={2}>
-        <CButton onClick={SubmitHandler}>submit</CButton>
+        <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>
   );

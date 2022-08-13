@@ -33,14 +33,14 @@ const Edit = () => {
   return (
     <CForm>
       <CFormInput
-        label="name"
+        label="Name"
         name="name"
         onChange={handleInputChange}
         value={values.name}
       />
       <br></br>
       <CCol xs={2}>
-        <CButton onClick={SubmitHandler}>submit</CButton>
+        <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>
   );

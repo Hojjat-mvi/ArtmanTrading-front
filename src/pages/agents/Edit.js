@@ -1,4 +1,4 @@
-import { CForm, CFormInput } from "@coreui/react";
+import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -34,12 +34,15 @@ const Edit = () => {
   return (
     <CForm>
       <CFormInput
-        label="name"
+        label="Name"
         name="name"
         onChange={handleInputChange}
         value={values.name}
       />
-      <CButton onClick={SubmitHandler}>submit</CButton>
+      <br></br>
+      <CCol xs={2}>
+        <CButton onClick={SubmitHandler}>Submit</CButton>
+      </CCol>
     </CForm>
   );
 };
