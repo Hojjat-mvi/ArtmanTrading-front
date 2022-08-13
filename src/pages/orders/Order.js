@@ -82,7 +82,7 @@ const Tables = () => {
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your Order id"
+              placeholder="Search Orders"
             />
             <CButton type="submit" color="success" variant="outline">
               Search

@@ -42,7 +42,7 @@ const Edit = () => {
       />
       <br></br>
       <CCol xs={2}>
-        <CButton onClick={SubmitHandler}>submit</CButton>
+        <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>
   );

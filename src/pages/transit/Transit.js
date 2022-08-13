@@ -84,7 +84,7 @@ const Transit = () => {
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your transit id"
+              placeholder="Search Transit Companies"
             />
             <CButton type="submit" color="success" variant="outline">
               Search

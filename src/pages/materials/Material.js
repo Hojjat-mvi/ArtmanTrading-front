@@ -88,7 +88,7 @@ const Materials = () => {
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your materials id"
+              placeholder="Search Materials"
             />
             <CButton type="submit" color="success" variant="outline">
               Search

@@ -22,63 +22,63 @@ export const Validation3 = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="buying_order_id"
+          label="Buying Order ID"
           name="buying_order_id"
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="number" name="number" />
+        <CFormInput type="number" label="Number" name="number" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="to_port" name="to_port" />
+        <CFormInput type="number" label="To Port" name="to_port" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="analysis" name="analysis" />
+        <CFormInput type="number" label="Analysis" name="analysis" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="process" name="process" />
+        <CFormInput type="number" label="Process" name="process" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="pic" name="pic" />
+        <CFormInput type="number" label="Picture" name="pic" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="seal_pic" name="seal_pic" />
+        <CFormInput type="number" label="Seal Picture" name="seal_pic" />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="submit" name="submit" />
+        <CFormInput type="number" label="Submit" name="submit" />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="text"
-          label="thc_accounting_approval_text"
+          label="THC Accounting Approval Text"
           name="thc_accounting_approval_text"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="thc_accounting_approval"
+          label="THC Accounting Approval"
           name="thc_accounting_approval"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="custom_agent_invoice_status"
+          label="Custom Agent Invoice Status"
           name="custom_agent_invoice_status"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="custom_agent_invoice_currency"
+          label="Custom Agent Invoice Currency"
           name="custom_agent_invoice_currency"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="custom_agent_invoice_amount"
+          label="Custom Agent Invoice Amount"
           name="custom_agent_invoice_amount"
         />
       </CCol>

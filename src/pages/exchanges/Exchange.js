@@ -84,7 +84,7 @@ const Exchanges = () => {
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your exchange id"
+              placeholder="Search exchanges"
             />
             <CButton type="submit" color="success" variant="outline">
               Search

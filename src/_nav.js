@@ -41,32 +41,32 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: "agents",
+    name: "Agents",
     to: "/pages/agents",
   },
   {
     component: CNavItem,
-    name: "exchanges",
+    name: "Exchanges",
     to: "/pages/exchanges",
   },
   {
     component: CNavItem,
-    name: "orders",
+    name: "Orders",
     to: "/pages/orders",
   },
   {
     component: CNavItem,
-    name: "materials",
+    name: "Materials",
     to: "/pages/materials",
   },
   {
     component: CNavItem,
-    name: "transit",
+    name: "Transit",
     to: "/pages/transit",
   },
   {
     component: CNavItem,
-    name: "users",
+    name: "Users",
     to: "/pages/users",
   },
 ];

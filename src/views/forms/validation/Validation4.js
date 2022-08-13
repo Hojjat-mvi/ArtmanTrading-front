@@ -21,67 +21,67 @@ export const Validation4 = () => {
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="buying_order_id"
+            label="Buying Order ID"
             name="buying_order_id"
           />
         </CCol>
         <CCol xs={4}>
-          <CFormInput type="number" label="company_id" name="company_id" />
+          <CFormInput type="number" label="Buyer" name="company_id" />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="transit_company_id"
+            label="Transit Company"
             name="transit_company_id"
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="transit_agent"
+            label="Transit Agent"
             name="transit_agent"
           />
         </CCol>
         <CCol xs={4}>
-          <CFormInput type="number" label="booking" name="booking" />
+          <CFormInput type="number" label="Booking" name="booking" />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="shipping_correspondence"
+            label="Shipping Correspondence"
             name="shipping_correspondence"
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="announce_booking"
+            label="Announce Booking"
             name="announce_booking"
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="send_package_to_client"
+            label="Send Package to Client"
             name="send_package_to_client"
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="invoice_status"
+            label="Invoice Status"
             name="invoice_status"
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="cargos_statement"
+            label="Cargos_Statement"
             name="cargos_statement"
           />
         </CCol>
         <CCol xs={4}>
-          <CFormInput type="number" label="claim" name="claim" />
+          <CFormInput type="number" label="Claim" name="claim" />
         </CCol>
       </CForm>
     </div>
