@@ -13,7 +13,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-import Modal from "../../../components/Modal.js";
+import CreationModal from "../../../components/CreationModal.js";
 
 const Validation = () => {
   const initialValues = {
@@ -117,7 +117,7 @@ const Validation = () => {
   return (
     <CForm className="row g-3">
       <CCol md={12}>
-        <Modal />
+        <CreationModal url={"agents"} />
       </CCol>
       {/*buying-orders-table*/}
 

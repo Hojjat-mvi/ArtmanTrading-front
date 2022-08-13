@@ -22,7 +22,8 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../pages/orders/Modal";
+import { DeletionModal } from "../../components/DeletionModal";
+import { CreationModal } from "../../components/CreationModal";
 
 const Exchanges = () => {
   const [exchanges, setExchanges] = useState([]);
@@ -67,7 +68,7 @@ const Exchanges = () => {
               >
                 edit
               </CButton>
-              <Modal orderId={exchange} reRender={getExchanges} url={"exchanges"} />
+              <DeletionModal resource={exchange.id} reRender={getExchanges} url={"exchanges"} />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -90,10 +91,13 @@ const Exchanges = () => {
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CreationModal url={"exchanges"} />
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable small hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

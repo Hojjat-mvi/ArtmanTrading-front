@@ -22,7 +22,8 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../orders/Modal";
+import { DeletionModal } from "../../components/DeletionModal";
+import { CreationModal } from "../../components/CreationModal";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);
@@ -67,7 +68,11 @@ const Tables = () => {
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getAgents} url={"agents"} />
+              <DeletionModal
+                resource={agent.id}
+                reRender={getAgents}
+                url={"agents"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -90,10 +95,13 @@ const Tables = () => {
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CreationModal url={"agents"} />
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable small hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

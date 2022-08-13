@@ -22,7 +22,8 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../pages/orders/Modal";
+import { DeletionModal } from "../../components/DeletionModal";
+import { CreationModal } from "../../components/CreationModal";
 
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
@@ -67,8 +68,8 @@ const Materials = () => {
               >
                 edit
               </CButton>
-              <Modal
-                orderId={material}
+              <DeletionModal
+                resource={material}
                 reRender={getMaterials}
                 url={"materials"}
               />
@@ -94,10 +95,13 @@ const Materials = () => {
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CreationModal url={"materials"} />
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable small hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
