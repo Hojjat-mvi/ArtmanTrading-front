@@ -22,52 +22,58 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../pages/orders/Modal";
+import { DeletionModal } from "../../components/DeletionModal";
 
 const Tables = () => {
-  const [agents, setAgents] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const Navigate = useNavigate();
 
-  const getAgents = async () => {
+  const getUsers = async () => {
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`);
-      setAgents(result.data.data);
+      const result = await axios.get(`http://localhost:8000/api/users`);
+      setUsers(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getAgents();
+    getUsers();
   }, []);
 
   const makeTableRow = () => {
     return (
       <>
-        {agents.map((agent) => (
-          <CTableRow key={agent.id}>
+        {users.map((user) => (
+          <CTableRow key={user.id}>
             <CTableHeaderCell scope="col" className="col-12">
-              {agent.name}
+              {user.name}
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="col-12">
+              {user.email}
+            </CTableHeaderCell>
+            <CTableHeaderCell scope="col" className="col-12">
+              {user.role}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/agents/Show", { state: { agent } });
+                  Navigate("/pages/users/Show", { state: { user } });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/agents/Edit", { state: { agent } });
+                  Navigate("/pages/users/Edit", { state: { user } });
                 }}
               >
                 edit
               </CButton>
-              <Modal orderId={agent.id} reRender={getAgents} url={"agents"} />
+              <DeletionModal resource={user.id} reRender={getUsers} url={"users"} />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -79,24 +85,29 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Agents</CNavbarBrand>
+          <CNavbarBrand href="#">Users</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search your Agent id"
+              placeholder="Search Users"
             />
             <CButton type="submit" color="success" variant="outline">
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CButton className={"col-12"} color="primary">Create New</CButton>
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Email</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Role</CTableHeaderCell>
             <CTableHeaderCell scope="col">Action</CTableHeaderCell>
           </CTableRow>
         </CTableHead>

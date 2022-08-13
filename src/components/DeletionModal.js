@@ -9,7 +9,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-export const Modal = ({ orderId, reRender, url }) => {
+export const DeletionModal = ({ resource, reRender, url }) => {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -36,7 +36,7 @@ export const Modal = ({ orderId, reRender, url }) => {
               onClick={async () => {
                 try {
                   await axios.delete(
-                    `http://localhost:8000/api/${url}/${orderId.id}`
+                    `http://localhost:8000/api/${url}/${resource}`
                   );
                   setVisible(false);
                   reRender();

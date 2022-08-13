@@ -22,7 +22,8 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../pages/orders/Modal";
+import { DeletionModal } from "../../components/DeletionModal";
+import { CreationModal } from "../../components/CreationModal";
 
 const Transit = () => {
   const [transits, setTransit] = useState([]);
@@ -67,7 +68,7 @@ const Transit = () => {
               >
                 edit
               </CButton>
-              <Modal orderId={transit} reRender={getTransits} url={"transit-companies"} />
+              <DeletionModal orderId={transit} reRender={getTransits} url={"transit-companies"} />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -90,10 +91,13 @@ const Transit = () => {
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CreationModal url={"transit-companies"} />
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable small hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>

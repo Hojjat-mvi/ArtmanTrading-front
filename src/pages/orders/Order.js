@@ -22,7 +22,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "./Modal";
+import { DeletionModal } from "../../components/DeletionModal";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
@@ -47,13 +47,20 @@ const Tables = () => {
       <>
         {orders.map((order) => (
           <CTableRow key={order.id}>
-            <CTableDataCell scope="col" className="col-12"> {order.id}</CTableDataCell>
+            <CTableDataCell scope="col" className="col-12">
+              {" "}
+              {order.id}
+            </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
-              <CButton color="success" onClick={() => {
+              <CButton
+                color="success"
+                onClick={() => {
                   Navigate("/pages/orders/Show", { state: { order } });
-
-              }}>show</CButton>
+                }}
+              >
+                show
+              </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/base/tables/Edit", { state: { order } });
@@ -61,8 +68,8 @@ const Tables = () => {
               >
                 edit
               </CButton>
-              <Modal
-                orderId={order}
+              <DeletionModal
+                resource={order.id}
                 reRender={getOrders}
                 url={"buying-orders"}
               />
@@ -88,10 +95,13 @@ const Tables = () => {
               Search
             </CButton>
           </CForm>
+          <CCol md={12} className={"my-2"}>
+            <CButton className={"col-12"} color="primary">Create New</CButton>
+          </CCol>
         </CContainer>
       </CNavbar>
       {/*table intro*/}
-      <CTable borderless hover>
+      <CTable hover>
         <CTableHead>
           <CTableRow>
             <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>

@@ -11,7 +11,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-export const Modal = () => {
+export const CreationModal = ({ url }) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
 
@@ -19,7 +19,7 @@ export const Modal = () => {
     e.preventDefault()
     var config = {
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/agents/',
+      url: `http://127.0.0.1:8000/api/${url}`,
       data: {
         name: postRequest,
       },
@@ -35,7 +35,7 @@ export const Modal = () => {
   return (
     <div>
       <>
-        <CButton onClick={() => setVisible(!visible)}>create new agent</CButton>
+        <CButton className="col-12" onClick={() => setVisible(!visible)}>Create New</CButton>
         <CModal visible={visible} onClose={() => setVisible(false)}>
           <CModalHeader onClose={() => setVisible(false)}>
             <CModalTitle> new agent </CModalTitle>
@@ -43,7 +43,7 @@ export const Modal = () => {
           <CModalBody>
             <CFormInput
               type="text"
-              label="agents"
+              label="Name"
               value={postRequest}
               onChange={(event) => {
                 setPostRequest(event.target.value);
@@ -66,4 +66,4 @@ export const Modal = () => {
   );
 };
 
-export default Modal;
+export default CreationModal;
