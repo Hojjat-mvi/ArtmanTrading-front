@@ -11,7 +11,7 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-export const CreationModal = ({ url }) => {
+export const CreationModal = ({ url ,header}) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
 
@@ -38,7 +38,7 @@ export const CreationModal = ({ url }) => {
         <CButton className="col-12" onClick={() => setVisible(!visible)}>Create New</CButton>
         <CModal visible={visible} onClose={() => setVisible(false)}>
           <CModalHeader onClose={() => setVisible(false)}>
-            <CModalTitle> new agent </CModalTitle>
+            <CModalTitle> {`new ${header}`} </CModalTitle>
           </CModalHeader>
           <CModalBody>
             <CFormInput
