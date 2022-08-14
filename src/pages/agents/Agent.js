@@ -96,7 +96,7 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"agents"} />
+            <CreationModal url={"agents"} header={'Agent'}/>
           </CCol>
         </CContainer>
       </CNavbar>

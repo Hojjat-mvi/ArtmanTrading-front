@@ -96,7 +96,7 @@ const Materials = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"materials"} />
+            <CreationModal url={"materials"} header={'Material'}/>
           </CCol>
         </CContainer>
       </CNavbar>

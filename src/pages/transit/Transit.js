@@ -92,7 +92,7 @@ const Transit = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"transit-companies"} />
+            <CreationModal url={"transit-companies"} header={'Transit'}/>
           </CCol>
         </CContainer>
       </CNavbar>

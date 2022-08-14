@@ -92,7 +92,7 @@ const Exchanges = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"exchanges"} />
+            <CreationModal url={"exchanges"} header={'Exchange'}/>
           </CCol>
         </CContainer>
       </CNavbar>
