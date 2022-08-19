@@ -64,7 +64,7 @@ const Tables = () => {
               <CButton
                 onClick={() => {
                   Navigate("/pages/agents/Edit", { state: { agent } });
-                }}
+                }} 
               >
                 edit
               </CButton>

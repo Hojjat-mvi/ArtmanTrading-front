@@ -5,11 +5,12 @@ import { Validation3 } from './views/forms/validation/Validation3'
 import { Validation4 } from './views/forms/validation/Validation4'
 
 
+
 // Base
 const Spinners = React.lazy(() => import('./views/base/spinners/Spinners'))
 
 
-
+ 
 
 //Forms
 const Validation = React.lazy(() => import('./views/forms/validation/Validation'))
@@ -48,8 +49,9 @@ const userEdit = React.lazy(() => import('./pages/users/Edit'))
 const userShow = React.lazy(() => import('./pages/users/Show'))
 
 
+
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Home',},
   { path: '/pages/agents' , name: 'Agents', element: Agents , exact: true},
   { path: '/pages/agents/Edit' , name: 'agentEdit', element: agentEdit },
   { path: '/pages/agents/Show' , name: 'agentShow', element: agentShow },

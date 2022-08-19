@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import {
   CButton,
@@ -15,7 +15,9 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "src/Store/actions";
 
 const Login = () => {
   const details = {
@@ -25,22 +27,22 @@ const Login = () => {
 
   const [values, setValues] = useState(details);
 
-  const token = "$2a$12$TysOk3IYffnaK2HGN2guLuzWm2rQu/we5GJj1wHPeE7uXUp6B030i";
+  const dispatch = useDispatch()
 
-  const postDetails = async (e) => {
-    e.preventDefault();
-    var config = {
-      url: "http://localhost:8000/api/login",
-      method: "post",
-      data: values,
-    };
-    try {
-      await axios(config);
-    } catch (e) {
-      alert("error");
-      console.log(Error);
-    }
+  const submit = (event) => {
+    event.preventDefault();
+    return dispatch(login(values));
   };
+
+  const navigate = useNavigate();
+  const { authentication } = useSelector((store) => store.authentication);
+  console.log(authentication);
+
+  useEffect(() => {
+    if (authentication === true) {
+      navigate("/");
+    }
+  }, [authentication]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,7 +80,7 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
-                      
+
                       <CFormInput
                         type="password"
                         placeholder="password"
@@ -89,11 +91,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton
-                          color="primary"
-                          className="px-4"
-                          onClick={postDetails}
-                        >
+                        <CButton color="primary" className="px-4" onClick={submit}>
                           Login
                         </CButton>
                       </CCol>

@@ -339,7 +339,7 @@ const Validation = () => {
       <CButtonToolbar className="mb-3">
         <CCol>
           <CButton
-            style={{ marginBottom: "5px" }}
+            style={{ marginBottom: "5px" , }}
             type="submit"
             onClick={SubmitHandler}
           >
