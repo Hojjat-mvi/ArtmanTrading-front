@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { Login_Success, Login_Failed, undefinedRes } from "../types";
+import { Login_Success, Login_Failed, undefinedRes,Logout } from "../types";
 
 const AuthState = { authentication: false };
 const loginReducer = (state = AuthState, action) => {
@@ -9,6 +9,8 @@ const loginReducer = (state = AuthState, action) => {
     case undefinedRes:
       return { authentication: false };
     case Login_Failed:
+      return { authentication: false };
+      case Logout:
       return { authentication: false };
     default:
       return state;
@@ -37,8 +39,18 @@ const changeState = (state = initialState, { type, ...rest }) => {
   }
 }
 
+const logOutReducer = (state = AuthState, action) => {
+  switch (action.type) {
+    case Logout:
+      return { authentication: false };
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   authentication: loginReducer,
   undefinedAuth: undefinedReducer,
-  sidebarToggle: changeState
+  sidebarToggle: changeState,
+  logout:logOutReducer
 });

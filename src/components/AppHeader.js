@@ -9,20 +9,45 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CButton,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import { cilBell, cilEnvelopeOpen, cilMenu ,cilAccountLogout} from "@coreui/icons";
+import {
+  cilBell,
+  cilEnvelopeOpen,
+  cilMenu,
+  cilAccountLogout,
+} from "@coreui/icons";
+import { logout } from "src/Store/actions";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AppHeader = () => {
   const dispatch = useDispatch();
   const sidebarShow = useSelector((state) => state.sidebarToggle);
+  const { authentication } = useSelector((store) => store.authentication);
+
+  const navigate = useNavigate();
+
+  const submit = (event) => {
+    event.preventDefault();
+    return dispatch(logout());
+  };
+
+  useEffect(() => {
+    if (authentication === false) {
+      navigate("/login");
+    }
+  }, [authentication]);
 
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => dispatch({ type: "set", sidebarShow: !sidebarShow.sidebarShow })}
+          onClick={() =>
+            dispatch({ type: "set", sidebarShow: !sidebarShow.sidebarShow })
+          }
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
@@ -31,8 +56,9 @@ const AppHeader = () => {
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto"></CHeaderNav>
         <CHeaderNav>
-          <CIcon icon={cilAccountLogout} height={25} />  
-          Logout
+          <CButton color="dark" variant="ghost" onClick={submit}>
+            Logout
+          </CButton>
         </CHeaderNav>
       </CContainer>
     </CHeader>

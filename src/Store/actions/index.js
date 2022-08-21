@@ -1,4 +1,4 @@
-import { Login_Success, Login_Failed, undefinedRes } from "../types";
+import { Login_Success, Login_Failed, undefinedRes, Logout } from "../types";
 import axios from "axios";
 
 export const login = (values) => {
@@ -14,9 +14,9 @@ export const login = (values) => {
 
       if (token === undefined) {
         dispatch(undefinedLogin(token));
-        return
+        return;
       }
-      
+
       dispatch({
         type: Login_Success,
         payload: response.data,
@@ -27,10 +27,16 @@ export const login = (values) => {
   };
 };
 
-export const undefinedLogin = (token) => {
+export const logout = () => {
+  localStorage.removeItem("token");
   return {
-    type: undefinedRes,
-    payload: token
+    type: Logout,
   };
 };
 
+export const undefinedLogin = (token) => {
+  return {
+    type: undefinedRes,
+    payload: token,
+  };
+};
