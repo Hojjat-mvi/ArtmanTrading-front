@@ -100,7 +100,13 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CButton className={"col-12"} color="primary">
+            <CButton
+              className={"col-12"}
+              color="primary"
+              onClick={() => {
+                Navigate("/forms/validation");
+              }}
+            >
               Create New
             </CButton>
           </CCol>

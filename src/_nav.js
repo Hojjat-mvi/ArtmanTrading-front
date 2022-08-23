@@ -12,33 +12,7 @@ const _nav = [
       color: "info",
     },
   },
-  {
-    component: CNavGroup,
-    name: "Create Form",
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: "Form1",
-        to: "/forms/validation",
-      },
-      {
-        component: CNavItem,
-        name: "Form2",
-        to: "/forms/validation2",
-      },
-      {
-        component: CNavItem,
-        name: "Form3",
-        to: "/forms/validation3",
-      },
-      {
-        component: CNavItem,
-        name: "Form4",
-        to: "/forms/validation4",
-      },
-    ],
-  },
+
   {
     component: CNavItem,
     name: "Agents",
