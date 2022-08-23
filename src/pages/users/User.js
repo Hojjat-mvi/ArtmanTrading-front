@@ -30,8 +30,9 @@ const Tables = () => {
   const Navigate = useNavigate();
 
   const getUsers = async () => {
+    const token = localStorage.getItem('token')
     try {
-      const result = await axios.get(`http://localhost:8000/api/users`);
+      const result = await axios.get(`http://localhost:8000/api/users`,{headers:{'Authorization':`Bearer ${token}`}});
       setUsers(result.data.data);
     } catch (e) {
       alert("error");

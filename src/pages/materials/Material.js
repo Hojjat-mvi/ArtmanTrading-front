@@ -31,8 +31,12 @@ const Materials = () => {
   const Navigate = useNavigate();
 
   const getMaterials = async () => {
+    const token = localStorage.getItem("token");
+
     try {
-      const result = await axios.get(`http://localhost:8000/api/materials`);
+      const result = await axios.get(`http://localhost:8000/api/materials`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setMaterials(result.data.data);
     } catch (e) {
       alert("error");
@@ -96,7 +100,7 @@ const Materials = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"materials"} header={'Material'}/>
+            <CreationModal url={"materials"} header={"Material"} />
           </CCol>
         </CContainer>
       </CNavbar>

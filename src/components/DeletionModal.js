@@ -34,9 +34,11 @@ export const DeletionModal = ({ resource, reRender, url }) => {
             <CButton
               color="danger"
               onClick={async () => {
+                const token = localStorage.getItem("token");
                 try {
                   await axios.delete(
-                    `http://localhost:8000/api/${url}/${resource}`
+                    `http://localhost:8000/api/${url}/${resource}`,
+                    { headers: { Authorization: `Bearer ${token}` } }
                   );
                   setVisible(false);
                   reRender();

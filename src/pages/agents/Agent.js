@@ -31,8 +31,12 @@ const Tables = () => {
   const Navigate = useNavigate();
 
   const getAgents = async () => {
+    const token = localStorage.getItem("token");
+
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`);
+      const result = await axios.get(`http://localhost:8000/api/agents`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setAgents(result.data.data);
     } catch (e) {
       alert("error");
@@ -64,7 +68,7 @@ const Tables = () => {
               <CButton
                 onClick={() => {
                   Navigate("/pages/agents/Edit", { state: { agent } });
-                }} 
+                }}
               >
                 edit
               </CButton>
@@ -96,7 +100,7 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"agents"} header={'Agent'}/>
+            <CreationModal url={"agents"} header={"Agent"} />
           </CCol>
         </CContainer>
       </CNavbar>

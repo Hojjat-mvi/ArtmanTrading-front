@@ -1,5 +1,4 @@
-import React, { useState ,useEffect} from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import {
   CButton,
   CCard,
@@ -18,6 +17,8 @@ import { cilLockLocked, cilUser } from "@coreui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "src/Store/actions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const details = {
@@ -27,7 +28,7 @@ const Login = () => {
 
   const [values, setValues] = useState(details);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const submit = (event) => {
     event.preventDefault();
@@ -51,6 +52,7 @@ const Login = () => {
       [name]: value,
     });
   };
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -80,7 +82,7 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
-
+                      <ToastContainer />
                       <CFormInput
                         type="password"
                         placeholder="password"
@@ -91,7 +93,11 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4" onClick={submit}>
+                        <CButton
+                          color="primary"
+                          className="px-4"
+                          onClick={submit}
+                        >
                           Login
                         </CButton>
                       </CCol>

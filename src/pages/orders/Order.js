@@ -30,8 +30,12 @@ const Tables = () => {
   const Navigate = useNavigate();
 
   const getOrders = async () => {
+    const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/buying-orders`);
+      const result = await axios.get(
+        `http://localhost:8000/api/buying-orders`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setOrders(result.data.data);
     } catch (e) {
       alert("error");
@@ -96,7 +100,9 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CButton className={"col-12"} color="primary">Create New</CButton>
+            <CButton className={"col-12"} color="primary">
+              Create New
+            </CButton>
           </CCol>
         </CContainer>
       </CNavbar>

@@ -105,8 +105,13 @@ export const Edit = () => {
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:8000/api/buying-orders/${order.id}`, values);
+      await axios.put(
+        `http://localhost:8000/api/buying-orders/${order.id}`,
+        values,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       alert("success");
       Navigate("/forms/Validation2");
     } catch (error) {
@@ -114,7 +119,6 @@ export const Edit = () => {
       console.log(error.response);
     }
   };
-
 
   return (
     <CForm className="row g-3">

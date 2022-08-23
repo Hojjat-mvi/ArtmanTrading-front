@@ -11,31 +11,37 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-export const CreationModal = ({ url ,header}) => {
+export const CreationModal = ({ url, header }) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
 
   const SubmitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const token = localStorage.getItem("token");
     var config = {
-      method: 'post',
+      method: "post",
       url: `http://127.0.0.1:8000/api/${url}`,
+      Headers: {
+        Authorization: `Bearer ${token}`,
+      },
       data: {
         name: postRequest,
       },
-    }
+    };
     try {
-      await axios(config)
-      alert('success')
+      await axios(config);
+      alert("success");
     } catch (event) {
-      alert('error')
+      alert("error");
     }
-  }
+  };
 
   return (
     <div>
       <>
-        <CButton className="col-12" onClick={() => setVisible(!visible)}>Create New</CButton>
+        <CButton className="col-12" onClick={() => setVisible(!visible)}>
+          Create New
+        </CButton>
         <CModal visible={visible} onClose={() => setVisible(false)}>
           <CModalHeader onClose={() => setVisible(false)}>
             <CModalTitle> {`new ${header}`} </CModalTitle>

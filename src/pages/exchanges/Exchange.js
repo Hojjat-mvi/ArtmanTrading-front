@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   CCard,
   CCardBody,
@@ -18,6 +18,10 @@ import {
   CForm,
   CFormInput,
   CButton,
+  CToast,
+  CToastBody,
+  CToastClose,
+  CToaster,
   CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
@@ -31,13 +35,16 @@ const Exchanges = () => {
   const Navigate = useNavigate();
 
   const getExchanges = async () => {
+    const token = localStorage.getItem('token')
     try {
-      const result = await axios.get(`http://localhost:8000/api/exchanges`);
+      const result = await axios.get(`http://localhost:8000/api/exchanges`,{headers:{'Authorization':`Bearer ${token}`}});
       setExchanges(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
+  
+  
 
   useEffect(() => {
     getExchanges();
@@ -68,7 +75,11 @@ const Exchanges = () => {
               >
                 edit
               </CButton>
-              <DeletionModal resource={exchange.id} reRender={getExchanges} url={"exchanges"} />
+              <DeletionModal
+                resource={exchange.id}
+                reRender={getExchanges}
+                url={"exchanges"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -92,7 +103,7 @@ const Exchanges = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"exchanges"} header={'Exchange'}/>
+            <CreationModal url={"exchanges"} header={"Exchange"} />
           </CCol>
         </CContainer>
       </CNavbar>

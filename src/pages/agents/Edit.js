@@ -1,6 +1,17 @@
-import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
+import {
+  CForm,
+  CFormInput,
+  CButton,
+  CCol,
+  CToast,
+  CToastBody,
+  CToastClose,
+  CToaster,
+} from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const Edit = () => {
   const location = useLocation();
@@ -11,14 +22,12 @@ const Edit = () => {
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem('token')
     try {
-      await axios.put(
-        `http://localhost:8000/api/buying-orders/${agent.id}`,
-        values
-      );
-      alert("success");
+      await axios.put(`http://localhost:8000/api/agents/${agent.id}`, values,{headers:{'Authorization':`Bearer ${token}`}});
+      toast.success("created");
     } catch (error) {
-      alert("error");
+      toast.error('didnt created')
       console.log(error.response);
     }
   };
@@ -33,6 +42,18 @@ const Edit = () => {
 
   return (
     <CForm>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <CFormInput
         label="Name"
         name="name"

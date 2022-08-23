@@ -31,8 +31,12 @@ const Transit = () => {
   const Navigate = useNavigate();
 
   const getTransits = async () => {
+    const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/transit-companies`);
+      const result = await axios.get(
+        `http://localhost:8000/api/transit-companies`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setTransit(result.data.data);
     } catch (e) {
       alert("error");
@@ -68,7 +72,11 @@ const Transit = () => {
               >
                 edit
               </CButton>
-              <DeletionModal orderId={transit} reRender={getTransits} url={"transit-companies"} />
+              <DeletionModal
+                orderId={transit}
+                reRender={getTransits}
+                url={"transit-companies"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -92,7 +100,7 @@ const Transit = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"transit-companies"} header={'Transit'}/>
+            <CreationModal url={"transit-companies"} header={"Transit"} />
           </CCol>
         </CContainer>
       </CNavbar>
