@@ -83,43 +83,9 @@ const Validation = () => {
   const [coo1, setCoo1] = useState(false);
   const [coo2, setCoo2] = useState(false);
   const [coo3, setCoo3] = useState(false);
+  const [sdts, setsdts] = useState(0);
   const [coo, setCoo] = useState(0);
   const [selects, setSelects] = useState([]);
-
-  const ChangeSdts1 = () => {
-    setsdts1(!sdts1);
-  };
-
-  const ChangeSdts2 = () => {
-    setsdts2(!sdts2);
-  };
-
-  const ChangeSdts3 = () => {
-    setsdts3(!sdts3);
-  };
-
-  // const ChangeCoo1 = () => {
-  //   setCoo1(!coo1);
-  // };
-
-  // const ChangeCoo2 = () => {
-  //   setCoo2(!coo2);
-  // };
-
-  // const ChangeCoo3 = () => {
-  //   setCoo3(!coo3);
-  // };
-  if (sdts1 === true) {
-    values.sending_docs_to_seller = "1"
-  }
-
-  if (sdts2 === true) {
-    values.sending_docs_to_seller = "2";
-  }
-
-  if (sdts3 === true) {
-    values.sending_docs_to_seller = "3";
-  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -135,7 +101,7 @@ const Validation = () => {
   };
 
   const getData = async () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
         `http://localhost:8000/api/buying-orders`,
@@ -144,7 +110,7 @@ const Validation = () => {
       setSelects(result.data.data);
     } catch (e) {
       toast.error("can not get data");
-      console.log(e.message)
+      console.log(e.message);
     }
   };
 
@@ -173,27 +139,62 @@ const Validation = () => {
   };
 
   // New way to handle coo value
-  const handleCooChange = (event) => {  
+  const handleCooChange = (event) => {
     if (event.target.name == "coo1") {
-      if (coo1){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
-      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
-        setCoo1(!coo1); 
+      if (coo1) {
+        setCoo(parseInt(coo) - parseInt(event.target.value));
+      } else {
+        setCoo(parseInt(coo) + parseInt(event.target.value));
       }
-    else if (event.target.name == "coo2") {
-      if (coo2){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
-      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
+      setCoo1(!coo1);
+    } else if (event.target.name == "coo2") {
+      if (coo2) {
+        setCoo(parseInt(coo) - parseInt(event.target.value));
+      } else {
+        setCoo(parseInt(coo) + parseInt(event.target.value));
+      }
       setCoo2(!coo2);
-    }
-    else if (event.target.name == "coo3") {
-      if (coo3){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
-      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
+    } else if (event.target.name == "coo3") {
+      if (coo3) {
+        setCoo(parseInt(coo) - parseInt(event.target.value));
+      } else {
+        setCoo(parseInt(coo) + parseInt(event.target.value));
+      }
       setCoo3(!coo3);
     }
+    console.log(coo);
     values.certificate_of_origin = coo;
-  }
+  };
+
+  const handleSendingDocsChange = (event) => {
+    if (event.target.name == "sdts1") {
+      if (sdts1) {
+        setsdts(parseInt(sdts) - parseInt(event.target.value));
+      } else {
+        setsdts(parseInt(sdts) + parseInt(event.target.value));
+      }
+      setsdts1(!sdts1);
+    } else if (event.target.name == "sdts2") {
+      if (sdts2) {
+        setsdts(parseInt(sdts) - parseInt(event.target.value));
+      } else {
+        setsdts(parseInt(sdts) + parseInt(event.target.value));
+      }
+      setsdts2(!sdts2);
+    } else if (event.target.name == "sdts3") {
+      if (sdts3) {
+        setsdts(parseInt(sdts) - parseInt(event.target.value));
+      } else {
+        setsdts(parseInt(sdts) + parseInt(event.target.value));
+      }
+      setsdts3(!sdts3);
+    }
+    console.log(sdts);
+    values.sending_docs_to_seller = sdts;
+  };
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
   return (
@@ -203,6 +204,7 @@ const Validation = () => {
           onClick={() => {
             Navigate("/pages/agents");
           }}
+          
         >
           Create new agent
         </CButton>
@@ -373,24 +375,24 @@ const Validation = () => {
       <CCol xs={12}>
         <p>sending_docs_to_seller</p>
         <CFormCheck
-          name="checks"
+          name="sdts1"
           value="1"
           label="1"
-          onChange={ChangeSdts1}
+          onChange={handleSendingDocsChange}
           checked={sdts1}
         />
         <CFormCheck
-          name="checks"
+          name="sdts2"
           value="2"
           label="2"
-          onChange={ChangeSdts2}
+          onChange={handleSendingDocsChange}
           checked={sdts2}
         />
         <CFormCheck
-          name="checks"
+          name="sdts3"
           value="3"
           label="3"
-          onChange={ChangeSdts3}
+          onChange={handleSendingDocsChange}
           checked={sdts3}
         />
       </CCol>
