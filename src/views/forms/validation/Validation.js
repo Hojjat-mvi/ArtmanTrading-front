@@ -83,6 +83,7 @@ const Validation = () => {
   const [coo1, setCoo1] = useState(false);
   const [coo2, setCoo2] = useState(false);
   const [coo3, setCoo3] = useState(false);
+  const [coo, setCoo] = useState(0);
   const [selects, setSelects] = useState([]);
 
   const ChangeSdts1 = () => {
@@ -97,17 +98,17 @@ const Validation = () => {
     setsdts3(!sdts3);
   };
 
-  const ChangeCoo1 = () => {
-    setCoo1(!coo1);
-  };
+  // const ChangeCoo1 = () => {
+  //   setCoo1(!coo1);
+  // };
 
-  const ChangeCoo2 = () => {
-    setCoo2(!coo2);
-  };
+  // const ChangeCoo2 = () => {
+  //   setCoo2(!coo2);
+  // };
 
-  const ChangeCoo3 = () => {
-    setCoo3(!coo3);
-  };
+  // const ChangeCoo3 = () => {
+  //   setCoo3(!coo3);
+  // };
   if (sdts1 === true) {
     values.sending_docs_to_seller = "1"
   }
@@ -118,18 +119,6 @@ const Validation = () => {
 
   if (sdts3 === true) {
     values.sending_docs_to_seller = "3";
-  }
-
-  if (coo1 === true) {
-    values.certificate_of_origin = "1";
-  }
-
-  if (coo2 === true) {
-    values.certificate_of_origin = "2";
-  }
-
-  if (coo3 === true) {
-    values.certificate_of_origin = "3";
   }
 
   const handleInputChange = (e) => {
@@ -182,6 +171,26 @@ const Validation = () => {
       </>
     );
   };
+
+  // New way to handle coo value
+  const handleCooChange = (event) => {  
+    if (event.target.name == "coo1") {
+      if (coo1){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
+      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
+        setCoo1(!coo1); 
+      }
+    else if (event.target.name == "coo2") {
+      if (coo2){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
+      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
+      setCoo2(!coo2);
+    }
+    else if (event.target.name == "coo3") {
+      if (coo3){ setCoo(parseInt (coo) - parseInt(event.target.value)) }
+      else {setCoo(parseInt (coo) + parseInt(event.target.value))}
+      setCoo3(!coo3);
+    }
+    values.certificate_of_origin = coo;
+  }
 
   useEffect(() => {
     getData()
@@ -389,24 +398,24 @@ const Validation = () => {
       <CCol xs={12}>
         <p>certificate_of_origin</p>
         <CFormCheck
-          name="certificate_of_origin"
+          name="coo1"
           value="1"
           label="1"
-          onChange={ChangeCoo1}
+          onChange={handleCooChange}
           checked={coo1}
         />
         <CFormCheck
-          name="coo"
+          name="coo2"
           value="2"
           label="2"
-          onChange={ChangeCoo2}
+          onChange={handleCooChange}
           checked={coo2}
         />
         <CFormCheck
-          name="coo"
+          name="coo3"
           value="3"
           label="3"
-          onChange={ChangeCoo3}
+          onChange={handleCooChange}
           checked={coo3}
         />
       </CCol>
