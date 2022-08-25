@@ -4,16 +4,7 @@ import React from "react";
 export const Validation4 = () => {
   const initialValues4 = {
     buying_order_id: "",
-    company_id: "",
-    transit_company_id: "",
-    transit_agent: "",
-    booking: "",
-    shipping_correspondence: "",
-    announce_booking: "",
-    send_package_to_client: "",
-    invoice_status: "",
-    cargos_statement: "",
-    claim: "",
+    
   };
   return (
     <div>

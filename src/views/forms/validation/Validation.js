@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   CForm,
@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 
 import CreationModal from "../../../components/CreationModal.js";
+import { toast } from "react-toastify";
 
 const Validation = () => {
   const initialValues = {
@@ -34,6 +35,43 @@ const Validation = () => {
     packaging_weight: "",
     term: "",
     notes: "",
+    number: "",
+    loading_date: "",
+    origin_weight: "",
+    departure_date: "",
+    first_weight: "",
+    second_weight: "",
+    sealed_weight: "",
+    pod: "",
+    bundle: "",
+    seller_net_weight: "",
+    buyer_net_weight: "",
+    container_number: "",
+    seal_number: "",
+    fixed_seller_lme_price: "",
+    fixed_buyer_lme_price: "",
+    fixed_buyer_lme_price_date: "",
+    lme_fixed_date: "",
+    lme_expiration_date: "",
+    number: "",
+    to_port: "",
+    process: "",
+    pic: "",
+    seal_pic: "",
+    submit: "",
+    thc_accounting_approval_text: "",
+    thc_accounting_approval: "",
+    custom_agent_invoice_status: "",
+    custom_agent_invoice_currency: "",
+    custom_agent_invoice_amount: "",
+    transit_agent: "",
+    booking: "",
+    shipping_correspondence: "",
+    announce_booking: "",
+    send_package_to_client: "",
+    invoice_status: "",
+    cargos_statement: "",
+    claim: "",
   };
 
   const Navigate = useNavigate();
@@ -45,6 +83,7 @@ const Validation = () => {
   const [coo1, setCoo1] = useState(false);
   const [coo2, setCoo2] = useState(false);
   const [coo3, setCoo3] = useState(false);
+  const [selects, setSelects] = useState([]);
 
   const ChangeSdts1 = () => {
     setsdts1(!sdts1);
@@ -70,7 +109,7 @@ const Validation = () => {
     setCoo3(!coo3);
   };
   if (sdts1 === true) {
-    values.sending_docs_to_seller = "1";
+    values.sending_docs_to_seller = "1"
   }
 
   if (sdts2 === true) {
@@ -103,21 +142,61 @@ const Validation = () => {
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    try {
-      await axios.post("http://localhost:8000/api/buying-orders/", values);
-      alert("success");
-      Navigate('/forms/Validation2')
-    } catch (error) {
-      alert("error");
-      console.log(error.response);
-    }
-    
+    Navigate("/forms/Validation2", { state: { values } });
   };
+
+  const getData = async () => {
+    const token = localStorage.getItem('token')
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/buying-orders`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setSelects(result.data.data);
+    } catch (e) {
+      toast.error("can not get data");
+      console.log(e.message)
+    }
+  };
+
+  const makeOption = () => {
+    return (
+      <>
+        {selects.map((select) => (
+          <option value={select.company_id} key={select.id}>
+            {select.company_id}
+          </option>
+        ))}
+      </>
+    );
+  };
+
+  const makeOption1 = () => {
+    return (
+      <>
+        {selects.map((select) => (
+          <option value={select.material_id} key={select.id}>
+            {select.material_id}
+          </option>
+        ))}
+      </>
+    );
+  };
+
+  useEffect(() => {
+    getData()
+  }, []);
 
   return (
     <CForm className="row g-3">
       <CCol md={12}>
-        <CreationModal url={"agents"} />
+        <CButton
+          onClick={() => {
+            Navigate("/pages/agents");
+          }}
+        >
+          Create new agent
+        </CButton>
       </CCol>
       {/*buying-orders-table*/}
 
@@ -150,10 +229,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          <option value="1"> 1</option>
-          <option value="1"> 1 </option>
-          <option value="1"> 1 </option>
-          <option value="1"> 1 </option>
+          {makeOption()}
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -167,9 +243,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          <option value="1"> 1</option>
-          <option value="1"> 1</option>
-          <option value="1"> 1</option>
+          {makeOption1()}
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -339,7 +413,7 @@ const Validation = () => {
       <CButtonToolbar className="mb-3">
         <CCol>
           <CButton
-            style={{ marginBottom: "5px" , }}
+            style={{ marginBottom: "5px" }}
             type="submit"
             onClick={SubmitHandler}
           >

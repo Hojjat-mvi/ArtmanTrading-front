@@ -4,18 +4,7 @@ import React from "react";
 export const Validation3 = () => {
   const initialValues3 = {
     buying_order_id: "",
-    number: "",
-    to_port: "",
-    analysis: "",
-    process: "",
-    pic: "",
-    seal_pic: "",
-    submit: "",
-    thc_accounting_approval_text: "",
-    thc_accounting_approval: "",
-    custom_agent_invoice_status: "",
-    custom_agent_invoice_currency: "",
-    custom_agent_invoice_amount: "",
+   
   };
   return (
     <CForm className="row g-3">
