@@ -17,7 +17,8 @@ import CreationModal from "../../../components/CreationModal.js";
 import { toast } from "react-toastify";
 
 const Validation = () => {
-  const initialValues = {
+  let initialValues = [];
+  initialValues.push([{
     date_of_purchase: "",
     contract_no: "",
     analysis: "",
@@ -72,11 +73,11 @@ const Validation = () => {
     invoice_status: "",
     cargos_statement: "",
     claim: "",
-  };
+  }]);
 
   const Navigate = useNavigate();
 
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(initialValues[0]);
   const [sdts1, setsdts1] = useState(false);
   const [sdts2, setsdts2] = useState(false);
   const [sdts3, setsdts3] = useState(false);
@@ -104,7 +105,7 @@ const Validation = () => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
-        `http://localhost:8000/api/buying-orders`,
+        `http://localhost:8000/api/companies`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSelects(result.data.data);
@@ -140,12 +141,10 @@ const Validation = () => {
 
   // New way to handle coo value
   const handleCooChange = (event) => {
+    if (event.target.checked) {setCoo(parseInt(coo) + parseInt(event.target.value));} 
+    else {setCoo(parseInt(coo) - parseInt(event.target.value));}
+
     if (event.target.name == "coo1") {
-      if (coo1) {
-        setCoo(parseInt(coo) - parseInt(event.target.value));
-      } else {
-        setCoo(parseInt(coo) + parseInt(event.target.value));
-      }
       setCoo1(!coo1);
     } else if (event.target.name == "coo2") {
       if (coo2) {
@@ -162,34 +161,16 @@ const Validation = () => {
       }
       setCoo3(!coo3);
     }
-    console.log(coo);
     values.certificate_of_origin = coo;
   };
 
   const handleSendingDocsChange = (event) => {
-    if (event.target.name == "sdts1") {
-      if (sdts1) {
-        setsdts(parseInt(sdts) - parseInt(event.target.value));
-      } else {
-        setsdts(parseInt(sdts) + parseInt(event.target.value));
-      }
-      setsdts1(!sdts1);
-    } else if (event.target.name == "sdts2") {
-      if (sdts2) {
-        setsdts(parseInt(sdts) - parseInt(event.target.value));
-      } else {
-        setsdts(parseInt(sdts) + parseInt(event.target.value));
-      }
-      setsdts2(!sdts2);
-    } else if (event.target.name == "sdts3") {
-      if (sdts3) {
-        setsdts(parseInt(sdts) - parseInt(event.target.value));
-      } else {
-        setsdts(parseInt(sdts) + parseInt(event.target.value));
-      }
-      setsdts3(!sdts3);
-    }
-    console.log(sdts);
+    if (event.target.checked) {setsdts(parseInt(sdts) - parseInt(event.target.value));} 
+    else {setsdts(parseInt(sdts) + parseInt(event.target.value));}
+    
+    if (event.target.name == "sdts1") {setsdts1(!sdts1);} 
+    else if (event.target.name == "sdts2") {setsdts2(!sdts2);} 
+    else if (event.target.name == "sdts3") {setsdts3(!sdts3);}
     values.sending_docs_to_seller = sdts;
   };
 
@@ -199,22 +180,12 @@ const Validation = () => {
 
   return (
     <CForm className="row g-3">
-      <CCol md={12}>
-        <CButton
-          onClick={() => {
-            Navigate("/pages/agents");
-          }}
-          
-        >
-          Create new agent
-        </CButton>
-      </CCol>
       {/*buying-orders-table*/}
 
       <CCol xs={4}>
         <CFormInput
           type="date"
-          label="date_of_purchase"
+          label="Date of Purchase"
           name="date_of_purchase"
           onChange={handleInputChange}
           value={values.date_of_purchase}
@@ -223,7 +194,7 @@ const Validation = () => {
       <CCol md={4}>
         <CFormInput
           type="text"
-          label="contract_no"
+          label="Contract No."
           name="contract_no"
           onChange={handleInputChange}
           value={values.contract_no}
@@ -233,7 +204,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="company_id"
-          label="company_id"
+          label="Company"
           name="company_id"
           required
           tooltipFeedback
@@ -247,7 +218,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="material_id"
-          label="material_id"
+          label="Material "
           name="material_id"
           required
           tooltipFeedback
@@ -261,7 +232,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="analysis"
-          label="analysis"
+          label="Analysis"
           name="analysis"
           required
           tooltipFeedback
@@ -276,7 +247,7 @@ const Validation = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="quantity"
+          label="Quantity"
           name="quantity"
           onChange={handleInputChange}
           value={values.quantity}
@@ -285,7 +256,7 @@ const Validation = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="packaging_weight"
+          label="Packaging Weight"
           name="packaging_weight"
           onChange={handleInputChange}
           value={values.packaging_weight}
@@ -295,7 +266,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="container_size"
-          label="container_size"
+          label="Container Size"
           name="container_size"
           required
           tooltipFeedback
@@ -310,7 +281,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="packaging_style"
-          label="packaging_style"
+          label="Packaging Style"
           name="packaging_style"
           required
           tooltipFeedback
@@ -324,7 +295,7 @@ const Validation = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="selling_price"
+          label="Selling Price"
           name="selling_price"
           onChange={handleInputChange}
           value={values.selling_price}
@@ -334,7 +305,7 @@ const Validation = () => {
         <CFormSelect
           feedbackInvalid="Please select a valid id."
           id="term"
-          label="term"
+          label="Term"
           name="term"
           required
           tooltipFeedback
@@ -351,7 +322,7 @@ const Validation = () => {
         <CFormTextarea
           type="text"
           label="analysis_result"
-          name="analysis_result"
+          name="Analysis Result"
           onChange={handleInputChange}
           value={values.analysis_result}
         />
@@ -361,7 +332,7 @@ const Validation = () => {
         {/* textarea */}
         <CFormTextarea
           type="text"
-          label="notes"
+          label="Notes"
           name="notes"
           onChange={handleInputChange}
           value={values.notes}
@@ -372,8 +343,8 @@ const Validation = () => {
       <br></br>
       <br></br>
       <br></br>
-      <CCol xs={12}>
-        <p>sending_docs_to_seller</p>
+      <CCol xs={6}>
+        <p>Sending Docs to Seller</p>
         <CFormCheck
           name="sdts1"
           value="1"
@@ -397,8 +368,8 @@ const Validation = () => {
         />
       </CCol>
 
-      <CCol xs={12}>
-        <p>certificate_of_origin</p>
+      <CCol xs={6}>
+        <p>Certificate of Origin</p>
         <CFormCheck
           name="coo1"
           value="1"

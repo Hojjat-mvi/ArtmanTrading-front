@@ -3,7 +3,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 export const Validation2 = () => {
-  const initialValues2 = {};
 
   const location = useLocation();
 
@@ -12,13 +11,6 @@ export const Validation2 = () => {
 
   return (
     <CForm className="row g-3">
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Buying Order ID"
-          name="buying_order_id"
-        />
-      </CCol>
       <CCol md={4}>
         <CFormInput type="number" label="Number" name="number" />
       </CCol>
@@ -68,7 +60,7 @@ export const Validation2 = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="seal_number" name="seal_number" />
+        <CFormInput type="number" label="Seal Number" name="seal_number" />
       </CCol>
       <CCol xs={4}>
         <CFormInput

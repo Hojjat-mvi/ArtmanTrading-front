@@ -2,10 +2,7 @@ import { CForm, CFormInput, CCol } from "@coreui/react";
 import React from "react";
 
 export const Validation3 = () => {
-  const initialValues3 = {
-    buying_order_id: "",
-   
-  };
+  
   return (
     <CForm className="row g-3">
       <CCol xs={4}>
