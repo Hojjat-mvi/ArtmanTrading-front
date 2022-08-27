@@ -1,13 +1,23 @@
-import { CCol, CForm, CFormInput } from "@coreui/react";
+import {
+  CCol,
+  CForm,
+  CFormInput,
+  CButtonToolbar,
+  CButton,
+} from "@coreui/react";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Validation2 = () => {
-
+  const Navigate = useNavigate();
   const location = useLocation();
 
+  const SubmitHandler = async (event) => {
+    event.preventDefault();
+    Navigate("/forms/Validation3", { state: { values } });
+  };
+
   const values = location.state.values;
-  console.log(values);
 
   return (
     <CForm className="row g-3">
@@ -94,6 +104,17 @@ export const Validation2 = () => {
           style={{ marginBottom: "10px" }}
         />
       </CCol>
+      <CButtonToolbar className="mb-3">
+        <CCol>
+          <CButton
+            style={{ marginBottom: "5px" }}
+            type="submit"
+            onClick={SubmitHandler}
+          >
+            Next Page
+          </CButton>
+        </CCol>
+      </CButtonToolbar>
     </CForm>
   );
 };
