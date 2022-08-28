@@ -154,7 +154,6 @@ const Validation = () => {
   return (
     <CForm className="row g-3">
       {/*buying-orders-table*/}
-
       <CCol xs={4}>
         <CFormInput
           type="date"
@@ -366,7 +365,6 @@ const Validation = () => {
           checked={sdts3}
         />
       </CCol>
-
       <CCol xs={4}>
         <p>Certificate of Origin</p>
         <CFormCheck
