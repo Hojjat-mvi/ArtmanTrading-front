@@ -6,7 +6,6 @@ import {
   CButtonToolbar,
   CButton,
 } from "@coreui/react";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const Validation2 = () => {

@@ -6,7 +6,6 @@ import {
   CButton,
   CButtonToolbar,
 } from "@coreui/react";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 
