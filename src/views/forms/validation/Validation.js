@@ -17,81 +17,10 @@ import CreationModal from "../../../components/CreationModal.js";
 import { toast } from "react-toastify";
 
 const Validation = () => {
-  let initialValues = [];
-  initialValues.push([
-    {
-      // date_of_purchase: "",
-      // contract_no: "",
-      // analysis: "",
-      // company_id: "",
-      // material_id: "",
-      // analysis_result: "",
-      // sending_docs_to_seller: "",
-      // exchange_status: "",
-      // quantity: "",
-      // container_size: "",
-      // packaging_style: "",
-      // certificate_of_origin: "",
-      // buying_price: "",
-
-      agent_id: "",
-      transit:"",
-      exchange_id: "",
-      selling_price:"",
-      packaging_weight:"",
-      term:"",
-      notes:"",
-    },
-    {
-      // number: "",
-      // loading_date: "",
-      // origin_weight: "",
-      // departure_date: "",
-      // first_weight: "",
-      // second_weight: "",
-      // sealed_weight: "",
-      // pod: "",
-      // bundle: "",
-      // seller_net_weight: "",
-      // buyer_net_weight: "",
-      // container_number: "",
-      // seal_number: "",
-      // fixed_seller_lme_price: "",
-      // fixed_buyer_lme_price: "",
-      // fixed_buyer_lme_price_date: "",
-      // lme_fixed_date: "",
-      // lme_expiration_date: "",
-    },
-    {
-      // number: "",
-      // to_port: "",
-      // process: "",
-      // pic: "",
-      // seal_pic: "",
-      // submit: "",
-      // thc_accounting_approval_text: "",
-      // thc_accounting_approval: "",
-      // custom_agent_invoice_status: "",
-      // custom_agent_invoice_currency: "",
-      // custom_agent_invoice_amount: "",
-      // transit_agent: "",
-      transit_company_id: "",
-      company_id: "",
-      // booking: "",
-      // shipping_correspondence: "",
-      // announce_booking: "",
-      // send_package_to_client: "",
-      // invoice_status: "",
-      // cargos_statement: "",
-      // claim: "",
-
-      analysis:"",
-    },
-  ]);
 
   const Navigate = useNavigate();
 
-  const [values, setValues] = useState(initialValues[0]);
+  const [values, setValues] = useState(false);
   const [sdts1, setsdts1] = useState(false);
   const [sdts2, setsdts2] = useState(false);
   const [sdts3, setsdts3] = useState(false);
@@ -389,7 +318,7 @@ const Validation = () => {
         <CFormTextarea
           type="text"
           label="Analysis Result"
-          name="Analysis Result"
+          name="analysis_result"
           onChange={handleInputChange}
           value={values.analysis_result}
         />
