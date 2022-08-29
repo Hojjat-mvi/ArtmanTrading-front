@@ -51,7 +51,7 @@ const Validation = () => {
   const getData = async () => {
     const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/companies`, {
+      const result = await axios.get(`http://localhost:8000/api/buying-orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setSelects(result.data.data);

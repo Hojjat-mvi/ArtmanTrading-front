@@ -5,8 +5,11 @@ import {
   CCol,
   CButton,
   CButtonToolbar,
+  CSpinner,
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 export const Validation4 = () => {
   const location = useLocation();
@@ -15,7 +18,7 @@ export const Validation4 = () => {
   const [secondState, setSecondState] = useState(location.state.secondState);
   const [thirdState, setThirdState] = useState(location.state.values);
   const [values, setValues] = useState(false);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -25,15 +28,52 @@ export const Validation4 = () => {
   };
 
   const Navigate = useNavigate();
-
-  console.log(firstState);
-  console.log(secondState);
-  console.log(thirdState);
-
+  // eslint-disable-next-line no-debugger
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    // POST
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = axios.post(
+        "http://localhost:8000/api/buying-orders",
+        secondState,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const buyingOrderId = (await response).data.data.id;
+      console.log(buyingOrderId);
+      if (!buyingOrderId) {
+        return <CSpinner color="primary" />;
+      }
+      axios.post(
+        `http://localhost:8000/api/buying-orders/${buyingOrderId}/incoming-shipments`,
+        firstState,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      axios.post(
+        `http://localhost:8000/api/buying-orders/${buyingOrderId}/outgoing-shipments`,
+        thirdState,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      axios.post(
+        `http://localhost:8000/api/buying-orders/${buyingOrderId}/selling-orders`,
+        values,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      toast.success("data saved successfully");
+    } catch (e) {
+      toast.error("can not send data");
+      console.log(e.message);
+    }
   };
+
   return (
     <div>
       <CForm className="row g-3">

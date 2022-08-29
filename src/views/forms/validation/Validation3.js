@@ -148,7 +148,7 @@ export const Validation3 = () => {
             type="submit"
             onClick={SubmitHandler}
           >
-            Submit
+            next page
           </CButton>
         </CCol>
       </CButtonToolbar>
