@@ -21,42 +21,95 @@ export const Validation2 = () => {
   const Navigate = useNavigate();
   const location = useLocation();
 
+  const [firstState, setFirst] = useState(location.state.values);
+
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    Navigate("/forms/Validation3", { state: { values, firstState } });
+    Navigate("/forms/Validation3", { state: { values, firstState }});
   };
-
-  const firstState = location.state.values;
-  console.log(firstState);
 
   return (
     <CForm className="row g-3">
       <CCol md={4}>
-        <CFormInput type="number" label="Number" name="number" onChange={handleInputChange} value={values.number}/>
+        <CFormInput
+          type="number"
+          label="Number"
+          name="number"
+          onChange={handleInputChange}
+          value={values.number}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="date" label="Loading Date" name="loading_date" onChange={handleInputChange} value={values.number}/>
+        <CFormInput
+          type="date"
+          label="Loading Date"
+          name="loading_date"
+          onChange={handleInputChange}
+          value={values.loading_date}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="Origin Weight" name="origin_weight" onChange={handleInputChange} value={values.origin_weight}/>
+        <CFormInput
+          type="number"
+          label="Origin Weight"
+          name="origin_weight"
+          onChange={handleInputChange}
+          value={values.origin_weight}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="date" label="Departure Date" name="departure_date" onChange={handleInputChange} value={values.departure_date}/>
+        <CFormInput
+          type="date"
+          label="Departure Date"
+          name="departure_date"
+          onChange={handleInputChange}
+          value={values.departure_date}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="First Weight" name="first_weight" onChange={handleInputChange} value={values.first_weight}/>
+        <CFormInput
+          type="number"
+          label="First Weight"
+          name="first_weight"
+          onChange={handleInputChange}
+          value={values.first_weight}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="Second Weight" name="second_weight" onChange={handleInputChange} value={values.second_weight}/>
+        <CFormInput
+          type="number"
+          label="Second Weight"
+          name="second_weight"
+          onChange={handleInputChange}
+          value={values.second_weight}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="Sealed Weight" name="sealed_weight" onChange={handleInputChange} value={values.sealed_weight}/>
+        <CFormInput
+          type="number"
+          label="Sealed Weight"
+          name="sealed_weight"
+          onChange={handleInputChange}
+          value={values.sealed_weight}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="text" label="POD" name="pod" onChange={handleInputChange} value={values.pod}/>
+        <CFormInput
+          type="text"
+          label="POD"
+          name="pod"
+          onChange={handleInputChange}
+          value={values.pod}
+        />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="text" label="Bundle" name="bundle" onChange={handleInputChange} value={values.bundle}/>
+        <CFormInput
+          type="text"
+          label="Bundle"
+          name="bundle"
+          onChange={handleInputChange}
+          value={values.bundle}
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput

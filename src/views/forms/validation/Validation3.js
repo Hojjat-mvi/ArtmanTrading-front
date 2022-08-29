@@ -9,7 +9,11 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const Validation3 = () => {
+  const location = useLocation();
   const [values, setValues] = useState(false);
+  const [secondState, setSecondState] = useState(location.state.firstState);
+  const [firstState, setFirst] = useState(location.state.values);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -18,16 +22,14 @@ export const Validation3 = () => {
     });
   };
 
-  const location = useLocation();
   const Navigate = useNavigate();
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    Navigate("/forms/Validation4", { state: { values } });
-  };
-
-  const state = location.state.values;
-  console.log(state);
+    Navigate("/forms/Validation4", {
+      state: { values, firstState, secondState },
+    });
+  };  
 
   return (
     <CForm className="row g-3">
