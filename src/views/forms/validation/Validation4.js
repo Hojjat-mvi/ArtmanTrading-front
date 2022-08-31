@@ -6,10 +6,12 @@ import {
   CButton,
   CButtonToolbar,
   CSpinner,
+  CFormSelect,
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Options from "src/components/Options";
 
 export const Validation4 = () => {
   const location = useLocation();
@@ -78,22 +80,23 @@ export const Validation4 = () => {
     <div>
       <CForm className="row g-3">
         <CCol xs={4}>
-          <CFormInput
-            type="number"
+          <CFormSelect
             label="Buyer"
             name="company_id"
             onChange={handleInputChange}
             value={values.company_id}
-          />
+          ><Options url={"transit-companies"} />
+          </CFormSelect>
         </CCol>
         <CCol xs={4}>
-          <CFormInput
-            type="number"
+          <CFormSelect
             label="Transit Company"
             name="transit_company_id"
             onChange={handleInputChange}
             value={values.transit_company_id}
-          />
+          >
+            <Options url={"transit-companies"} />
+          </CFormSelect>
         </CCol>
         <CCol xs={4}>
           <CFormInput
