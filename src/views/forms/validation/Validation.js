@@ -220,8 +220,8 @@ const Validation = () => {
           name="agent_id"
           onChange={handleInputChange}
           value={values.agent_id}
-        />
-        <Options url={"agents"} />
+        >
+        <Options url={"agents"} /> </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormSelect

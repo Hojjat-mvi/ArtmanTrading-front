@@ -95,7 +95,7 @@ export const Validation2 = () => {
       </CCol>
       <CCol xs={4}>
         <CFormInput
-          type="text"
+          type="number"
           label="POD"
           name="pod"
           onChange={handleInputChange}
@@ -104,7 +104,7 @@ export const Validation2 = () => {
       </CCol>
       <CCol xs={4}>
         <CFormInput
-          type="text"
+          type="number"
           label="Bundle"
           name="bundle"
           onChange={handleInputChange}
@@ -181,3 +181,4 @@ export const Validation2 = () => {
     </CForm>
   );
 };
+// pod , bundle = number
