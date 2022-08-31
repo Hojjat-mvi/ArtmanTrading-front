@@ -198,7 +198,7 @@ const Validation = () => {
       <CCol md={4}>
         <CFormSelect
           id="exchange"
-          label="Exchange Id"
+          label="Exchange"
           name="exchange"
           onChange={handleInputChange}
         >
@@ -224,9 +224,9 @@ const Validation = () => {
         <Options url={"agents"} />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
+        <CFormSelect
           type="number"
-          label="transit Company Id"
+          label="Transit Company"
           name="transit_company_id"
           onChange={handleInputChange}
           value={values.transit_company_id}
