@@ -99,8 +99,8 @@ export const Validation3 = () => {
       <CCol xs={4}>
         <CFormInput
           type="text"
-          label="THC Accounting Approval Text"
-          name="thc_accounting_approval_text"
+          label="THE Accounting Approval Text"
+          name="the_accounting_approval_text"
           onChange={handleInputChange}
           value={values.thc_accounting_approval_text}
         />
@@ -108,8 +108,8 @@ export const Validation3 = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="THC Accounting Approval"
-          name="thc_accounting_approval"
+          label="THE Accounting Approval"
+          name="the_accounting_approval"
           onChange={handleInputChange}
           value={values.thc_accounting_approval}
         />
@@ -117,7 +117,8 @@ export const Validation3 = () => {
       <CCol xs={4}>
         <CFormInput
           type="number"
-          label="Custom Agent Invoice Status"
+          label="
+          tom Agent Invoice Status"
           name="custom_agent_invoice_status"
           onChange={handleInputChange}
           value={values.custom_agent_invoice_status}

@@ -20,7 +20,6 @@ const Validation = React.lazy(() => import('./views/forms/validation/Validation'
 const Agents = React.lazy(() => import('./pages/agents/Agent'))
 const agentEdit = React.lazy(() => import('./pages/agents/Edit'))
 const agentShow = React.lazy(() => import('./pages/agents/Show'))
-const Order = React.lazy(() => import('./pages/orders/Order'))
 
 
 //// Exchanges
@@ -47,6 +46,11 @@ const transitShow = React.lazy(() => import('./pages/transit/Show'))
 const Users = React.lazy(() => import('./pages/users/User'))
 const userEdit = React.lazy(() => import('./pages/users/Edit'))
 const userShow = React.lazy(() => import('./pages/users/Show'))
+
+//// companies
+const companies = React.lazy(() => import('./pages/companies/Company'))
+const CompanyEdit = React.lazy(() => import('./pages/companies/Edit'))
+const CompanyShow = React.lazy(() => import('./pages/companies/Show'))
 
 
 
@@ -75,6 +79,10 @@ const routes = [
   { path: '/pages/users' , name: 'Users', element: Users , exact: true},
   { path: '/pages/users/Edit' , name: 'userEdit', element: userEdit },
   { path: '/pages/users/Show' , name: 'userShow', element: userShow },
+  
+  { path: '/pages/companies' , name: 'companies', element: companies , exact: true},
+  { path: '/pages/companies/Edit' , name: 'CompanyEdit', element: CompanyEdit },
+  { path: '/pages/companies/Show' , name: 'CompanyShow', element: CompanyShow },
   
   { path: '/base/spinners', name: 'Spinners', element: Spinners },
   { path: '/base/tables/Edit', name: 'Edit', element: Edit },

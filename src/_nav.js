@@ -40,6 +40,11 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: "Companies",
+    to: "/pages/companies",
+  },
+  {
+    component: CNavItem,
     name: "Users",
     to: "/pages/users",
   },

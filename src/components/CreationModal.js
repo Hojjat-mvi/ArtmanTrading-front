@@ -11,9 +11,11 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
+// eslint-disable-next-line react/prop-types
 export const CreationModal = ({ url, header }) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
+
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -49,12 +51,12 @@ export const CreationModal = ({ url, header }) => {
           <CModalBody>
             <CFormInput
               type="text"
-              label="Name"
+              label="name"
               value={postRequest}
               onChange={(event) => {
                 setPostRequest(event.target.value);
               }}
-              placeholder="enter the agent name"
+              placeholder={`enter the ${header} name`}
             />
           </CModalBody>
           <CModalFooter>

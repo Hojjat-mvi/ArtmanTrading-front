@@ -17,7 +17,6 @@ import CreationModal from "../../../components/CreationModal.js";
 import { toast } from "react-toastify";
 
 const Validation = () => {
-
   const Navigate = useNavigate();
 
   const [values, setValues] = useState(false);
@@ -51,10 +50,14 @@ const Validation = () => {
   const getData = async () => {
     const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/buying-orders`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const result = await axios.get(
+        `http://localhost:8000/api/buying-orders`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setSelects(result.data.data);
+      console.log(result.data.data);
     } catch (e) {
       toast.error("can not get data");
       console.log(e.message);
@@ -183,7 +186,8 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          {makeOption()}
+          {/* {makeOption()} */}
+          <option value={1}>1</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -197,7 +201,8 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          {makeOption1()}
+          {/* {makeOption1()} */}
+          <option value={1}>1</option>
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -218,14 +223,10 @@ const Validation = () => {
       </CCol>
       <CCol md={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="exchange"
-          label="Exchange"
+          label="Exchange Id"
           name="exchange"
-          required
-          tooltipFeedback
           onChange={handleInputChange}
-          value={values.analysis}
         >
           <option value="1"> 1</option>
           <option value="2"> 2</option>
@@ -239,6 +240,24 @@ const Validation = () => {
           name="quantity"
           onChange={handleInputChange}
           value={values.quantity}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          type="number"
+          label="Agent Id"
+          name="agent_id"
+          onChange={handleInputChange}
+          value={values.agent_id}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          type="number"
+          label="transit Company Id"
+          name="transit_company_id"
+          onChange={handleInputChange}
+          value={values.transit_company_id}
         />
       </CCol>
       <CCol xs={4}>
@@ -281,11 +300,7 @@ const Validation = () => {
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Buying Price"
-          name="buying_price"
-        />
+        <CFormInput type="number" label="Buying Price" name="buying_price" />
       </CCol>
       <CCol xs={4}>
         <CFormInput
