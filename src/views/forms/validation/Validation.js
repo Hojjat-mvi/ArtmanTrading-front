@@ -13,8 +13,8 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 
-import CreationModal from "../../../components/CreationModal.js";
 import { toast } from "react-toastify";
+import Options from "src/components/Options";
 
 const Validation = () => {
   const Navigate = useNavigate();
@@ -62,30 +62,6 @@ const Validation = () => {
       toast.error("can not get data");
       console.log(e.message);
     }
-  };
-
-  const makeOption = () => {
-    return (
-      <>
-        {selects.map((select) => (
-          <option value={select.company_id} key={select.id}>
-            {select.company_id}
-          </option>
-        ))}
-      </>
-    );
-  };
-
-  const makeOption1 = () => {
-    return (
-      <>
-        {selects.map((select) => (
-          <option value={select.material_id} key={select.id}>
-            {select.material_id}
-          </option>
-        ))}
-      </>
-    );
   };
 
   // New way to handle coo value
@@ -186,8 +162,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          {/* {makeOption()} */}
-          <option value={1}>1</option>
+          <Options url={'companies'} />
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -201,8 +176,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          {/* {makeOption1()} */}
-          <option value={1}>1</option>
+          <Options url={'materials'} />
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -228,9 +202,7 @@ const Validation = () => {
           name="exchange"
           onChange={handleInputChange}
         >
-          <option value="1"> 1</option>
-          <option value="2"> 2</option>
-          <option value="2"> 2</option>
+          <Options url={'exchanges'} />
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -243,13 +215,13 @@ const Validation = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
           label="Agent Id"
           name="agent_id"
           onChange={handleInputChange}
           value={values.agent_id}
         />
+        <Options url={"agents"} />
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -258,7 +230,7 @@ const Validation = () => {
           name="transit_company_id"
           onChange={handleInputChange}
           value={values.transit_company_id}
-        />
+        /> <Options url={'transit-companies'} />
       </CCol>
       <CCol xs={4}>
         <CFormInput

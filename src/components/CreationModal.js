@@ -23,7 +23,7 @@ export const CreationModal = ({ url, header }) => {
     var config = {
       method: "post",
       url: `http://127.0.0.1:8000/api/${url}`,
-      headers: {
+      Headers: {
         Authorization: `Bearer ${token}`,
       },
       data: {
