@@ -162,7 +162,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.company_id}
         >
-          <Options url={'companies'} />
+          <Options url={"companies"} />
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -176,7 +176,7 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          <Options url={'materials'} />
+          <Options url={"materials"} />
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -202,7 +202,7 @@ const Validation = () => {
           name="exchange"
           onChange={handleInputChange}
         >
-          <Options url={'exchanges'} />
+          <Options url={"exchanges"} />
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -216,12 +216,12 @@ const Validation = () => {
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          label="Agent Id"
+          label="Agent"
           name="agent_id"
           onChange={handleInputChange}
           value={values.agent_id}
-        >
-        <Options url={"agents"} /> </CFormSelect>
+        />
+        <Options url={"agents"} />
       </CCol>
       <CCol xs={4}>
         <CFormSelect
@@ -230,7 +230,8 @@ const Validation = () => {
           name="transit_company_id"
           onChange={handleInputChange}
           value={values.transit_company_id}
-        /> <Options url={'transit-companies'} />
+        />{" "}
+        <Options url={"transit-companies"} />
       </CCol>
       <CCol xs={4}>
         <CFormInput
