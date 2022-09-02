@@ -35,16 +35,16 @@ const Exchanges = () => {
   const Navigate = useNavigate();
 
   const getExchanges = async () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/exchanges`,{headers:{'Authorization':`Bearer ${token}`}});
+      const result = await axios.get(`http://localhost:8000/api/exchanges`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setExchanges(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
-  
-  
 
   useEffect(() => {
     getExchanges();
@@ -103,7 +103,11 @@ const Exchanges = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"exchanges"} header={"Exchange"} />
+            <CreationModal
+              url={"exchanges"}
+              header={"Exchange"}
+              reRender={getExchanges}
+            />
           </CCol>
         </CContainer>
       </CNavbar>

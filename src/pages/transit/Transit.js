@@ -73,7 +73,7 @@ const Transit = () => {
                 edit
               </CButton>
               <DeletionModal
-                orderId={transit}
+                resource={transit.id}
                 reRender={getTransits}
                 url={"transit-companies"}
               />
@@ -100,7 +100,7 @@ const Transit = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"transit-companies"} header={"Transit"} />
+            <CreationModal url={"transit-companies"} header={"Transit"} reRender={getTransits}/>
           </CCol>
         </CContainer>
       </CNavbar>

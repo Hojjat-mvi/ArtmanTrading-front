@@ -10,9 +10,10 @@ import {
   CFormInput,
 } from "@coreui/react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
-export const CreationModal = ({ url, header }) => {
+export const CreationModal = ({ url, header ,reRender}) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
 
@@ -32,10 +33,12 @@ export const CreationModal = ({ url, header }) => {
     };
     try {
       await axios(config);
-      alert("success");
+      toast.success('created')
+      setVisible(false)
     } catch (event) {
-      alert("error");
+      toast.error('not created')
     }
+    reRender()
   };
 
   return (

@@ -24,17 +24,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
+import Pagination from "src/components/Pagination";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);
+  const [address,setAddress] = useState(`http://localhost:8000/api/agents`)
 
   const Navigate = useNavigate();
 
-  const getAgents = async () => {
+  const getAgents = async (url) => {
     const token = localStorage.getItem("token");
 
     try {
-      const result = await axios.get(`http://localhost:8000/api/agents`, {
+      const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAgents(result.data.data);
@@ -44,9 +46,8 @@ const Tables = () => {
   };
 
   useEffect(() => {
-    getAgents();
-  }, []);
-
+    getAgents(address);
+  }, [address]);
   const makeTableRow = () => {
     return (
       <>
@@ -100,7 +101,11 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"agents"} header={"Agent"} />
+            <CreationModal
+              url={"agents"}
+              header={"Agent"}
+              reRender={getAgents}
+            />
           </CCol>
         </CContainer>
       </CNavbar>
@@ -114,6 +119,7 @@ const Tables = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
+      <Pagination url={'http://localhost:8000/api/agents'} onUrlChange={setAddress}/>
     </>
   );
 };

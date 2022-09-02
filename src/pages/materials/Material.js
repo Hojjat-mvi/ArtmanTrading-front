@@ -100,7 +100,11 @@ const Materials = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"materials"} header={"Material"} />
+            <CreationModal
+              url={"materials"}
+              header={"Material"}
+              reRender={getMaterials}
+            />
           </CCol>
         </CContainer>
       </CNavbar>

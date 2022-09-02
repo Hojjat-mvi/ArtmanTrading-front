@@ -23,6 +23,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
+import { CreationModal } from "../../components/CreationModal";
 
 const Tables = () => {
   const [users, setUsers] = useState([]);
@@ -30,9 +31,11 @@ const Tables = () => {
   const Navigate = useNavigate();
 
   const getUsers = async () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/users`,{headers:{'Authorization':`Bearer ${token}`}});
+      const result = await axios.get(`http://localhost:8000/api/users`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setUsers(result.data.data);
     } catch (e) {
       alert("error");
@@ -74,7 +77,11 @@ const Tables = () => {
               >
                 edit
               </CButton>
-              <DeletionModal resource={user.id} reRender={getUsers} url={"users"} />
+              <DeletionModal
+                resource={user.id}
+                reRender={getUsers}
+                url={"users"}
+              />
             </CTableHeaderCell>
           </CTableRow>
         ))}
@@ -98,7 +105,7 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CButton className={"col-12"} color="primary">Create New</CButton>
+            <CreationModal url={"users"} header={"User"} reRender={getUsers} />
           </CCol>
         </CContainer>
       </CNavbar>
