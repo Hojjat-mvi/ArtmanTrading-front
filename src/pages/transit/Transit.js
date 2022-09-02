@@ -24,9 +24,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
+import { toast,ToastContainer } from "react-toastify";
 
 const Transit = () => {
   const [transits, setTransit] = useState([]);
+  const [searchTerm,setSearchTerm] = useState('')
+
 
   const Navigate = useNavigate();
 
@@ -46,6 +49,22 @@ const Transit = () => {
   useEffect(() => {
     getTransits();
   }, []);
+
+  const search = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/transit-companies?search=${searchTerm}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setTransit(result.data.data);
+    } catch (e) {
+      toast.error("can not send data");
+    }
+  };
 
   const makeTableRow = () => {
     return (
@@ -86,6 +105,7 @@ const Transit = () => {
 
   return (
     <>
+      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">transits</CNavbarBrand>
@@ -94,8 +114,12 @@ const Transit = () => {
               type="search"
               className="me-2"
               placeholder="Search Transit Companies"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              value={searchTerm}
             />
-            <CButton type="submit" color="success" variant="outline">
+            <CButton type="submit" color="success" variant="outline" onClick={search}>
               Search
             </CButton>
           </CForm>

@@ -24,9 +24,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
+import { toast, ToastContainer } from "react-toastify";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const Navigate = useNavigate();
 
@@ -46,6 +48,22 @@ const Companies = () => {
   useEffect(() => {
     getCompanies();
   }, []);
+
+  const search = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/companies?search=${searchTerm}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setCompanies(result.data.data);
+    } catch (e) {
+      toast.error("can not send data");
+    }
+  };
 
   const makeTableRow = () => {
     return (
@@ -86,6 +104,7 @@ const Companies = () => {
 
   return (
     <>
+    <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">companies</CNavbarBrand>
@@ -94,13 +113,26 @@ const Companies = () => {
               type="search"
               className="me-2"
               placeholder="Search companies"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              value={searchTerm}
             />
-            <CButton type="submit" color="success" variant="outline">
+            <CButton
+              type="submit"
+              color="success"
+              variant="outline"
+              onClick={search}
+            >
               Search
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"companies"} header={"company"} reRender={getCompanies}/>
+            <CreationModal
+              url={"companies"}
+              header={"company"}
+              reRender={getCompanies}
+            />
           </CCol>
         </CContainer>
       </CNavbar>

@@ -25,10 +25,12 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import Pagination from "src/components/Pagination";
+import { toast,ToastContainer } from "react-toastify";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);
   const [address,setAddress] = useState(`http://localhost:8000/api/agents`)
+  const [searchTerm,setSearchTerm] = useState('')
 
   const Navigate = useNavigate();
 
@@ -48,6 +50,23 @@ const Tables = () => {
   useEffect(() => {
     getAgents(address);
   }, [address]);
+
+  const search = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/agents?search=${searchTerm}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setAgents(result.data.data);
+    } catch (e) {
+      toast.error("can not send data");
+    }
+  };
+
   const makeTableRow = () => {
     return (
       <>
@@ -87,6 +106,7 @@ const Tables = () => {
 
   return (
     <>
+      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">Agents</CNavbarBrand>
@@ -95,8 +115,12 @@ const Tables = () => {
               type="search"
               className="me-2"
               placeholder="Search Agents"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              value={searchTerm}
             />
-            <CButton type="submit" color="success" variant="outline">
+            <CButton type="submit" color="success" variant="outline" onClick={search}>
               Search
             </CButton>
           </CForm>

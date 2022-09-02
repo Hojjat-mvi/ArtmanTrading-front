@@ -24,9 +24,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
+import { toast, ToastContainer } from "react-toastify";
 
 const Tables = () => {
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const Navigate = useNavigate();
 
@@ -45,6 +47,22 @@ const Tables = () => {
   useEffect(() => {
     getUsers();
   }, []);
+
+  const search = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    try {
+      const result = await axios.get(
+        `http://localhost:8000/api/users?search=${searchTerm}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setUsers(result.data.data);
+    } catch (e) {
+      toast.error("can not send data");
+    }
+  };
 
   const makeTableRow = () => {
     return (
@@ -91,6 +109,7 @@ const Tables = () => {
 
   return (
     <>
+      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">Users</CNavbarBrand>
@@ -99,8 +118,12 @@ const Tables = () => {
               type="search"
               className="me-2"
               placeholder="Search Users"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              value={searchTerm}
             />
-            <CButton type="submit" color="success" variant="outline">
+            <CButton type="submit" color="success" variant="outline" onClick={search}>
               Search
             </CButton>
           </CForm>
