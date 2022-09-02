@@ -29,18 +29,20 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import { toast,ToastContainer } from "react-toastify";
+import Pagination from "src/components/Pagination";
 
 const Exchanges = () => {
   const [exchanges, setExchanges] = useState([]);
+  const [address,setAddress] = useState(`http://localhost:8000/api/exchanges`)
   const [searchTerm,setSearchTerm] = useState('')
 
 
   const Navigate = useNavigate();
 
-  const getExchanges = async () => {
+  const getExchanges = async (url) => {
     const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(`http://localhost:8000/api/exchanges`, {
+      const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setExchanges(result.data.data);
@@ -50,8 +52,8 @@ const Exchanges = () => {
   };
 
   useEffect(() => {
-    getExchanges();
-  }, []);
+    getExchanges(address);
+  }, [address]);
 
   const search = async (e) => {
     e.preventDefault();
@@ -145,6 +147,8 @@ const Exchanges = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
+      <Pagination url={'http://localhost:8000/api/exchanges'} onUrlChange={setAddress}/>
+
     </>
   );
 };

@@ -24,18 +24,21 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { toast, ToastContainer } from "react-toastify";
+import Pagination from "src/components/Pagination";
+
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [address,setAddress] = useState(`http://localhost:8000/api/buying-orders`)
 
   const Navigate = useNavigate();
 
-  const getOrders = async () => {
+  const getOrders = async (url) => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
-        `http://localhost:8000/api/buying-orders`,
+        url,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOrders(result.data.data);
@@ -45,8 +48,8 @@ const Tables = () => {
   };
 
   useEffect(() => {
-    getOrders();
-  }, []);
+    getOrders(address);
+  }, [address]);
 
   const search = async (e) => {
     e.preventDefault();
@@ -150,6 +153,7 @@ const Tables = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
+      <Pagination url={'http://localhost:8000/api/buying-orders'} onUrlChange={setAddress}/>
     </>
   );
 };

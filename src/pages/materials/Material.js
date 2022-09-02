@@ -25,18 +25,21 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import { toast, ToastContainer } from "react-toastify";
+import Pagination from "src/components/Pagination";
 
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [address,setAddress] = useState(`http://localhost:8000/api/materials`)
+
 
   const Navigate = useNavigate();
 
-  const getMaterials = async () => {
+  const getMaterials = async (url) => {
     const token = localStorage.getItem("token");
 
     try {
-      const result = await axios.get(`http://localhost:8000/api/materials`, {
+      const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMaterials(result.data.data);
@@ -46,8 +49,8 @@ const Materials = () => {
   };
 
   useEffect(() => {
-    getMaterials();
-  }, []);
+    getMaterials(address);
+  }, [address]);
 
   const search = async (e) => {
     e.preventDefault();
@@ -146,6 +149,8 @@ const Materials = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
+      <Pagination url={'http://localhost:8000/api/materials'} onUrlChange={setAddress}/>
+
     </>
   );
 };

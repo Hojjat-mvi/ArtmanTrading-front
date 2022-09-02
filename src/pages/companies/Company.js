@@ -25,18 +25,20 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import { toast, ToastContainer } from "react-toastify";
+import Pagination from "src/components/Pagination";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
+  const [address,setAddress] = useState(`http://localhost:8000/api/companies`)
   const [searchTerm, setSearchTerm] = useState("");
 
   const Navigate = useNavigate();
 
-  const getCompanies = async () => {
+  const getCompanies = async (url) => {
     const token = localStorage.getItem("token");
 
     try {
-      const result = await axios.get(`http://localhost:8000/api/companies`, {
+      const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCompanies(result.data.data);
@@ -46,8 +48,8 @@ const Companies = () => {
   };
 
   useEffect(() => {
-    getCompanies();
-  }, []);
+    getCompanies(address);
+  }, [address]);
 
   const search = async (e) => {
     e.preventDefault();
@@ -64,7 +66,6 @@ const Companies = () => {
       toast.error("can not send data");
     }
   };
-
   const makeTableRow = () => {
     return (
       <>
@@ -146,6 +147,8 @@ const Companies = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
+      <Pagination url={'http://localhost:8000/api/companies'} onUrlChange={setAddress}/>
+
     </>
   );
 };

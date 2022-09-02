@@ -19,14 +19,16 @@ const Pagination = ({ url, onUrlChange }) => {
       toast.error("can not load data");
     }
   };
+  const lastIndex = meta.length - 1;
 
-  const prev = meta[0].url;
-  const next = meta[lastIndex].url;
+  if (meta.length > 1) {
+    var prev = meta[0].url;
+    var next = meta[lastIndex].url;
+  }
 
   useEffect(() => {
     getData();
   }, [link]);
-  const lastIndex = meta.length - 1;
 
   const makeItem = () => {
     return (
