@@ -33,6 +33,7 @@ const Validation = () => {
   const [exchangeStatus2, setExchangeStatus2] = useState(false);
   const [exchangeStatus3, setExchangeStatus3] = useState(false);
   const [exchangeStatus, setExchangeStatus] = useState(false);
+  const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,8 +44,16 @@ const Validation = () => {
   };
 
   const SubmitHandler = async (event) => {
-    event.preventDefault();
-    Navigate("/forms/Validation2", { state: { values } });
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+    if (form.checkValidity()) {
+      event.preventDefault();
+      Navigate("/forms/Validation2", { state: { values } });
+    }
   };
 
   const getData = async () => {
@@ -57,7 +66,6 @@ const Validation = () => {
         }
       );
       setSelects(result.data.data);
-      console.log(result.data.data);
     } catch (e) {
       toast.error("can not get data");
       console.log(e.message);
@@ -131,7 +139,12 @@ const Validation = () => {
   }, []);
 
   return (
-    <CForm className="row g-3">
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={SubmitHandler}
+    >
       {/*buying-orders-table*/}
       <CCol xs={4}>
         <CFormInput
@@ -140,20 +153,21 @@ const Validation = () => {
           name="date_of_purchase"
           onChange={handleInputChange}
           value={values.date_of_purchase}
+          required
         />
       </CCol>
       <CCol md={4}>
         <CFormInput
           type="text"
-          label="Contract No."
+          label="Contract"
           name="contract_no"
           onChange={handleInputChange}
           value={values.contract_no}
+          required
         />
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="company_id"
           label="Company"
           name="company_id"
@@ -167,7 +181,6 @@ const Validation = () => {
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="material_id"
           label="Material "
           name="material_id"
@@ -181,18 +194,16 @@ const Validation = () => {
       </CCol>
       <CCol md={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="analysis"
           label="Analysis"
           name="analysis"
-          required
           tooltipFeedback
           onChange={handleInputChange}
           value={values.analysis}
         >
-          <option value="1"> 1</option>
-          <option value="2"> 2</option>
-          <option value="2">2</option>
+          <option value="1">Needed</option>
+          <option value="2">Reported</option>
+          <option value="2">Sent</option>
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -212,6 +223,8 @@ const Validation = () => {
           name="quantity"
           onChange={handleInputChange}
           value={values.quantity}
+          placeholder="Quantity in KG"
+          required
         />
       </CCol>
       <CCol xs={4}>
@@ -242,11 +255,11 @@ const Validation = () => {
           name="packaging_weight"
           onChange={handleInputChange}
           value={values.packaging_weight}
+          placeholder="Packaging Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="container_size"
           label="Container Size"
           name="container_size"
@@ -255,13 +268,15 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.container_size}
         >
-          <option value="1"> a</option>
-          <option value="2"> b</option>
+          <option value="" hidden>
+            Choose...
+          </option>
+          <option value="1">20 Feet</option>
+          <option value="2">40 Feet</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="packaging_style"
           label="Packaging Style"
           name="packaging_style"
@@ -270,25 +285,35 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.packaging_style}
         >
-          <option value="1"> a</option>
-          <option value="2"> b</option>
+          <option value="" hidden>
+            Choose...
+          </option>
+          <option value="1">Loose</option>
+          <option value="2">Bundle</option>
+          <option value="3">Bracket</option>
+          <option value="4">Jumbo</option>
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="Buying Price" name="buying_price" />
+        <CFormInput
+          type="number"
+          label="Buying Price"
+          placeholder="Buying price..."
+          name="buying_price"
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
           label="Selling Price"
           name="selling_price"
+          placeholder="Selling price..."
           onChange={handleInputChange}
           value={values.selling_price}
         />
       </CCol>
       <CCol xs={4}>
         <CFormSelect
-          feedbackInvalid="Please select a valid id."
           id="term"
           label="Term"
           name="term"
@@ -297,9 +322,9 @@ const Validation = () => {
           onChange={handleInputChange}
           value={values.term}
         >
-          <option value="1"> a</option>
-          <option value="2"> b</option>
-          <option value="3"> c</option>
+          <option value="1">FCA</option>
+          <option value="2">FOB</option>
+          <option value="3">DF</option>
         </CFormSelect>
       </CCol>
 
@@ -310,6 +335,7 @@ const Validation = () => {
           name="analysis_result"
           onChange={handleInputChange}
           value={values.analysis_result}
+          placeholder="Received analysis"
         />
       </CCol>
       <CCol xs={12}>
@@ -321,6 +347,7 @@ const Validation = () => {
           name="notes"
           onChange={handleInputChange}
           value={values.notes}
+          placeholder="Related notes"
         />
       </CCol>
       <br></br>
@@ -334,7 +361,7 @@ const Validation = () => {
           inline
           name="sdts1"
           value="1"
-          label="1"
+          label="Received"
           onChange={handleSendingDocsChange}
           checked={sdts1}
         />
@@ -342,17 +369,9 @@ const Validation = () => {
           inline
           name="sdts2"
           value="2"
-          label="2"
+          label="Sent"
           onChange={handleSendingDocsChange}
           checked={sdts2}
-        />
-        <CFormCheck
-          inline
-          name="sdts3"
-          value="3"
-          label="3"
-          onChange={handleSendingDocsChange}
-          checked={sdts3}
         />
       </CCol>
       <CCol xs={4}>
@@ -361,7 +380,7 @@ const Validation = () => {
           inline
           name="coo1"
           value="1"
-          label="1"
+          label="Need?"
           onChange={handleCooChange}
           checked={coo1}
         />
@@ -369,7 +388,7 @@ const Validation = () => {
           inline
           name="coo2"
           value="2"
-          label="2"
+          label="Announced"
           onChange={handleCooChange}
           checked={coo2}
         />
@@ -377,7 +396,15 @@ const Validation = () => {
           inline
           name="coo3"
           value="3"
-          label="3"
+          label="Received"
+          onChange={handleCooChange}
+          checked={coo3}
+        />
+        <CFormCheck
+          inline
+          name="coo4"
+          value="4"
+          label="Sent to client"
           onChange={handleCooChange}
           checked={coo3}
         />
@@ -388,7 +415,7 @@ const Validation = () => {
           inline
           name="exchangeStatus1"
           value="1"
-          label="1"
+          label="Invoice"
           onChange={handleExchangeStatus}
           checked={exchangeStatus1}
         />
@@ -396,7 +423,7 @@ const Validation = () => {
           inline
           name="exchangeStatus2"
           value="2"
-          label="2"
+          label="Received"
           onChange={handleExchangeStatus}
           checked={exchangeStatus2}
         />
@@ -404,19 +431,15 @@ const Validation = () => {
           inline
           name="exchangeStatus3"
           value="3"
-          label="3"
+          label="Sent"
           onChange={handleExchangeStatus}
           checked={exchangeStatus3}
         />
       </CCol>
       <CButtonToolbar className="mb-3">
         <CCol>
-          <CButton
-            style={{ marginBottom: "5px" }}
-            type="submit"
-            onClick={SubmitHandler}
-          >
-            Next Page
+          <CButton style={{ marginBottom: "5px" }} type="submit">
+            Next
           </CButton>
         </CCol>
       </CButtonToolbar>

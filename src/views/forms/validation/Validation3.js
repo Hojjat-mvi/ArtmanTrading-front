@@ -5,6 +5,8 @@ import {
   CCol,
   CButton,
   CButtonToolbar,
+  CFormCheck,
+  CFormSelect,
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -13,26 +15,41 @@ export const Validation3 = () => {
   const [values, setValues] = useState(false);
   const [secondState, setSecondState] = useState(location.state.firstState);
   const [firstState, setFirst] = useState(location.state.values);
+  const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setValues({
       ...values,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const Navigate = useNavigate();
 
   const SubmitHandler = async (event) => {
-    event.preventDefault();
-    Navigate("/forms/Validation4", {
-      state: { values, firstState, secondState },
-    });
-  };  
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+    if (form.checkValidity()) {
+      event.preventDefault();
+      Navigate("/forms/Validation4", {
+        state: { values, firstState, secondState },
+      });
+    }
+  };
 
   return (
-    <CForm className="row g-3">
+    // outgoing-shipments
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={SubmitHandler}
+    >
       <CCol xs={4}>
         <CFormInput
           type="number"
@@ -40,60 +57,41 @@ export const Validation3 = () => {
           name="number"
           onChange={handleInputChange}
           value={values.number}
+          placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="To Port"
-          name="to_port"
+        <p>Cutomer Agent Invoice Status</p>
+        <CFormCheck
+          inline
+          label="Recorded"
+          name="custom_agent_invoice_status"
           onChange={handleInputChange}
-          value={values.to_port}
+          checked={values.custom_agent_invoice_status}
         />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Analysis"
-          name="analysis"
+        <CFormCheck
+          inline
+          label="Paid"
+          name="custom_agent_invoice_status"
           onChange={handleInputChange}
-          value={values.analysis}
+          checked={values.custom_agent_invoice_status}
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Process"
-          name="process"
-          onChange={handleInputChange}
-          value={values.process}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Picture"
-          name="pic"
-          onChange={handleInputChange}
-          value={values.pic}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Seal Picture"
-          name="seal_pic"
-          onChange={handleInputChange}
-          value={values.seal_pic}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Submit"
+        <p>Submition</p>
+        <CFormCheck
+          inline
+          label="Announced"
           name="submit"
           onChange={handleInputChange}
-          value={values.submit}
+          checked={values.submit}
+        />
+        <CFormCheck
+          inline
+          label="Delievered"
+          name="submit"
+          onChange={handleInputChange}
+          checked={values.submit}
         />
       </CCol>
       <CCol xs={4}>
@@ -106,31 +104,19 @@ export const Validation3 = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="THC Accounting Approval"
-          name="thc_accounting_approval"
-          onChange={handleInputChange}
-          value={values.thc_accounting_approval}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Cutomer Agent Invoice Status"
-          name="custom_agent_invoice_status"
-          onChange={handleInputChange}
-          value={values.custom_agent_invoice_status}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
+        <CFormSelect
           label="Custom Agent Invoice Currency"
           name="custom_agent_invoice_currency"
           onChange={handleInputChange}
           value={values.custom_agent_invoice_currency}
-        />
+        >
+          <option value="" hidden>
+            Choose...
+          </option>
+          <option value="1">US Dollar</option>
+          <option value="2">Great Britain Pound</option>
+          <option value="3">Euro</option>
+        </CFormSelect>
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -139,6 +125,47 @@ export const Validation3 = () => {
           name="custom_agent_invoice_amount"
           onChange={handleInputChange}
           value={values.custom_agent_invoice_amount}
+          placeholder="Enter number..."
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormCheck
+          label="To Port"
+          name="to_port"
+          onChange={handleInputChange}
+          checked={values.to_port}
+        />
+        <CFormCheck
+          label="Analysis"
+          name="analysis"
+          onChange={handleInputChange}
+          checked={values.analysis}
+        />
+        <CFormCheck
+          label="Process"
+          name="process"
+          onChange={handleInputChange}
+          checked={values.process}
+        />
+      </CCol>
+      <CCol xs={4}>
+      <CFormCheck
+          label="Picture"
+          name="pic"
+          onChange={handleInputChange}
+          checked={values.pic}
+        />
+        <CFormCheck
+          label="Seal Picture"
+          name="seal_pic"
+          onChange={handleInputChange}
+          checked={values.seal_pic}
+        />
+        <CFormCheck
+          label="THC Accounting Approval"
+          name="thc_accounting_approval"
+          onChange={handleInputChange}
+          checked={values.thc_accounting_approval}
         />
       </CCol>
       <CButtonToolbar className="mb-3">
@@ -146,9 +173,9 @@ export const Validation3 = () => {
           <CButton
             style={{ marginBottom: "5px" }}
             type="submit"
-            onClick={SubmitHandler}
+            color="primary"
           >
-            next page
+            Next
           </CButton>
         </CCol>
       </CButtonToolbar>

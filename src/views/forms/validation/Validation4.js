@@ -7,6 +7,7 @@ import {
   CButtonToolbar,
   CSpinner,
   CFormSelect,
+  CFormCheck,
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,10 +23,10 @@ export const Validation4 = () => {
   const [values, setValues] = useState(false);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = event.target;
     setValues({
       ...values,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -44,7 +45,6 @@ export const Validation4 = () => {
         }
       );
       const buyingOrderId = (await response).data.data.id;
-      console.log(buyingOrderId);
       if (!buyingOrderId) {
         return <CSpinner color="primary" />;
       }
@@ -77,15 +77,17 @@ export const Validation4 = () => {
   };
 
   return (
+    // selling-orders
     <div>
       <CForm className="row g-3">
         <CCol xs={4}>
           <CFormSelect
-            label="Buyer"
+            label="Customer"
             name="company_id"
             onChange={handleInputChange}
             value={values.company_id}
-          ><Options url={"transit-companies"} />
+          >
+            <Options url={"transit-companies"} />
           </CFormSelect>
         </CCol>
         <CCol xs={4}>
@@ -100,7 +102,7 @@ export const Validation4 = () => {
         </CCol>
         <CCol xs={4}>
           <CFormInput
-            type="number"
+            type="text"
             label="Transit Agent"
             name="transit_agent"
             onChange={handleInputChange}
@@ -117,45 +119,67 @@ export const Validation4 = () => {
           />
         </CCol>
         <CCol xs={4}>
-          <CFormInput
-            type="number"
+          <CFormCheck
             label="Shipping Correspondence"
             name="shipping_correspondence"
             onChange={handleInputChange}
-            value={values.shipping_correspondence}
+            checked={values.shipping_correspondence}
           />
-        </CCol>
-        <CCol xs={4}>
-          <CFormInput
-            type="number"
-            label="Announce Booking"
-            name="announce_booking"
-            onChange={handleInputChange}
-            value={values.announce_booking}
-          />
-        </CCol>
-        <CCol xs={4}>
-          <CFormInput
-            type="number"
+          <CFormCheck
             label="Send Package to Client"
             name="send_package_to_client"
             onChange={handleInputChange}
-            value={values.send_package_to_client}
+            checked={values.send_package_to_client}
           />
-        </CCol>
-        <CCol xs={4}>
-          <CFormInput
-            type="number"
+          <CFormCheck
             label="Invoice Status"
             name="invoice_status"
             onChange={handleInputChange}
-            value={values.invoice_status}
+            checked={values.invoice_status}
+          />
+        </CCol>
+        <CCol xs={4}>
+          <p>Announce Booking</p>
+          <CFormCheck
+            inline
+            label="B"
+            name="announce_booking"
+            onChange={handleInputChange}
+            checked={values.announce_booking}
+          />
+          <CFormCheck
+            inline
+            label="1"
+            name="announce_booking"
+            onChange={handleInputChange}
+            checked={values.announce_booking}
+          />
+          <CFormCheck
+            inline
+            label="2"
+            name="announce_booking"
+            onChange={handleInputChange}
+            checked={values.announce_booking}
+          />
+          <CFormCheck
+            inline
+            label="3"
+            name="announce_booking"
+            onChange={handleInputChange}
+            checked={values.announce_booking}
+          />
+          <CFormCheck
+            inline
+            label="4"
+            name="announce_booking"
+            onChange={handleInputChange}
+            checked={values.announce_booking}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
-            label="Cargos_Statement"
+            label="Cargo Statement"
             name="cargos_statement"
             onChange={handleInputChange}
             value={values.cargos_statement}
@@ -181,7 +205,6 @@ export const Validation4 = () => {
             </CButton>
           </CCol>
         </CButtonToolbar>
-        
       </CForm>
     </div>
   );
