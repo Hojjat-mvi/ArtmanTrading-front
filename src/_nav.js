@@ -1,7 +1,4 @@
-import React from "react";
-import CIcon from "@coreui/icons-react";
-import { cilNotes, cilPuzzle } from "@coreui/icons";
-import { CNavGroup, CNavItem } from "@coreui/react";
+import { CNavItem } from "@coreui/react";
 
 const _nav = [
   {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CPagination, CPaginationItem, CSpinner } from "@coreui/react";
+import { CPagination, CPaginationItem } from "@coreui/react";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types

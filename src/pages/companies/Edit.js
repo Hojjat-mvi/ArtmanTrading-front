@@ -3,10 +3,6 @@ import {
   CFormInput,
   CButton,
   CCol,
-  CToast,
-  CToastBody,
-  CToastClose,
-  CToaster,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";

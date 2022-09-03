@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { CContainer, CSpinner } from "@coreui/react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 // routes config
 import routes from "../routes";

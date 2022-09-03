@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   CCol,
   CForm,
@@ -23,7 +23,7 @@ export const Validation2 = () => {
   const Navigate = useNavigate();
   const location = useLocation();
 
-  const [firstState, setFirst] = useState(location.state.values);
+  const [firstState] = useState(location.state.values);
 
   const SubmitHandler = async (event) => {
     const form = event.currentTarget;

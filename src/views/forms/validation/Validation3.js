@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   CForm,
   CFormInput,
@@ -13,8 +13,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 export const Validation3 = () => {
   const location = useLocation();
   const [values, setValues] = useState(false);
-  const [secondState, setSecondState] = useState(location.state.firstState);
-  const [firstState, setFirst] = useState(location.state.values);
+  const [secondState] = useState(location.state.firstState);
+  const [firstState] = useState(location.state.values);
   const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {

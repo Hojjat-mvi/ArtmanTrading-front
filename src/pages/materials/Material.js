@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CRow,
   CTable,
   CTableBody,
-  CTableCaption,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
@@ -18,7 +12,6 @@ import {
   CForm,
   CFormInput,
   CButton,
-  CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

@@ -9,7 +9,6 @@ import {
   CFormSelect,
   CFormTextarea,
   CButtonToolbar,
-  CButtonGroup,
 } from "@coreui/react";
 import axios from "axios";
 
@@ -28,7 +27,7 @@ const Validation = () => {
   const [coo2, setCoo2] = useState(false);
   const [coo3, setCoo3] = useState(false);
   const [coo, setCoo] = useState(0);
-  const [selects, setSelects] = useState([]);
+  const [setSelects] = useState([]);
   const [exchangeStatus1, setExchangeStatus1] = useState(false);
   const [exchangeStatus2, setExchangeStatus2] = useState(false);
   const [exchangeStatus3, setExchangeStatus3] = useState(false);

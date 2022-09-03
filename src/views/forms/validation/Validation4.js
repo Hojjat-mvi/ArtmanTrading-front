@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   CForm,
   CFormInput,
@@ -9,31 +9,30 @@ import {
   CFormSelect,
   CFormCheck,
 } from "@coreui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Options from "src/components/Options";
 
 export const Validation4 = () => {
   const location = useLocation();
 
-  const [firstState, setFirstState] = useState(location.state.firstState);
-  const [secondState, setSecondState] = useState(location.state.secondState);
-  const [thirdState, setThirdState] = useState(location.state.values);
+  const [firstState] = useState(location.state.firstState);
+  const [secondState] = useState(location.state.secondState);
+  const [thirdState] = useState(location.state.values);
   const [values, setValues] = useState(false);
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value, type, checked } = e.target;
     setValues({
       ...values,
       [name]: type === "checkbox" ? checked : value,
     });
   };
 
-  const Navigate = useNavigate();
   // eslint-disable-next-line no-debugger
-  const SubmitHandler = async (event) => {
-    event.preventDefault();
+  const SubmitHandler = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("token");
 
     try {
