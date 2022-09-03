@@ -69,9 +69,9 @@ export const Validation4 = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      toast.success("data saved successfully");
+      toast.success("Saved");
     } catch (e) {
-      toast.error("can not send data");
+      toast.error("Encountered an Error!");
       console.log(e.message);
     }
   };
