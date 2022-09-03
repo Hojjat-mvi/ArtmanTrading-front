@@ -23,8 +23,7 @@ import Pagination from "src/components/Pagination";
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [address,setAddress] = useState(`http://localhost:8000/api/materials`)
-
+  const [address, setAddress] = useState(`http://localhost:8000/api/materials`);
 
   const Navigate = useNavigate();
 
@@ -142,8 +141,10 @@ const Materials = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
-      <Pagination url={'http://localhost:8000/api/materials'} onUrlChange={setAddress}/>
-
+      <Pagination
+        url={"http://localhost:8000/api/materials"}
+        onUrlChange={setAddress}
+      />
     </>
   );
 };

@@ -18,12 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import Pagination from "src/components/Pagination";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);
-  const [address,setAddress] = useState(`http://localhost:8000/api/agents`)
-  const [searchTerm,setSearchTerm] = useState('')
+  const [address, setAddress] = useState(`http://localhost:8000/api/agents`);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const Navigate = useNavigate();
 
@@ -113,7 +113,12 @@ const Tables = () => {
               }}
               value={searchTerm}
             />
-            <CButton type="submit" color="success" variant="outline" onClick={search}>
+            <CButton
+              type="submit"
+              color="success"
+              variant="outline"
+              onClick={search}
+            >
               Search
             </CButton>
           </CForm>
@@ -136,7 +141,10 @@ const Tables = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
-      <Pagination url={'http://localhost:8000/api/agents'} onUrlChange={setAddress}/>
+      <Pagination
+        url={"http://localhost:8000/api/agents"}
+        onUrlChange={setAddress}
+      />
     </>
   );
 };

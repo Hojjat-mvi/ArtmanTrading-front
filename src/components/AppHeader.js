@@ -9,9 +9,7 @@ import {
   CButton,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import {
-  cilMenu,
-} from "@coreui/icons";
+import { cilMenu } from "@coreui/icons";
 import { logout } from "src/Store/actions";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";

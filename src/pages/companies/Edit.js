@@ -1,9 +1,4 @@
-import {
-  CForm,
-  CFormInput,
-  CButton,
-  CCol,
-} from "@coreui/react";
+import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -18,12 +13,14 @@ const Edit = () => {
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:8000/api/agents/${agent.id}`, values,{headers:{'Authorization':`Bearer ${token}`}});
+      await axios.put(`http://localhost:8000/api/agents/${agent.id}`, values, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success("created");
     } catch (error) {
-      toast.error('didnt created')
+      toast.error("didnt created");
       console.log(error.response);
     }
   };

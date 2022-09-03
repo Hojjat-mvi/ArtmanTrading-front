@@ -149,7 +149,7 @@ export const Validation3 = () => {
         />
       </CCol>
       <CCol xs={4}>
-      <CFormCheck
+        <CFormCheck
           label="Picture"
           name="pic"
           onChange={handleInputChange}

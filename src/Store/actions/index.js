@@ -16,15 +16,14 @@ export const login = (values) => {
 
       if (token === undefined) {
         dispatch(undefinedLogin(token));
-        toast.error('user not found')
-        return 
+        toast.error("user not found");
+        return;
       }
       dispatch({
         type: Login_Success,
         payload: response.data,
       });
-      toast.success('logged in')
-      
+      toast.success("logged in");
     } catch (e) {
       dispatch({ type: Login_Failed, payload: e.message });
     }
