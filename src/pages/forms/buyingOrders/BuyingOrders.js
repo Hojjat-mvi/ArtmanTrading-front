@@ -13,7 +13,7 @@ import {
 
 import Options from "src/components/Options";
 
-const Validation = () => {
+const BuyingOrders = () => {
   const Navigate = useNavigate();
 
   const [values, setValues] = useState(false);
@@ -48,7 +48,7 @@ const Validation = () => {
     setValidated(true);
     if (form.checkValidity()) {
       event.preventDefault();
-      Navigate("/forms/Validation2", { state: { values } });
+      Navigate("/forms/BuyingOrders2", { state: { values } });
     }
   };
 
@@ -118,7 +118,7 @@ const Validation = () => {
 
   return (
     <CForm
-      className="row g-3 needs-validation"
+      className="row g-3 needs-BuyingOrders"
       noValidate
       validated={validated}
       onSubmit={SubmitHandler}
@@ -425,4 +425,4 @@ const Validation = () => {
   );
 };
 
-export default Validation;
+export default BuyingOrders;

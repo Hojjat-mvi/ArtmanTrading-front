@@ -56,7 +56,7 @@ const Companies = () => {
       );
       setCompanies(result.data.data);
     } catch (e) {
-      toast.error("can not send data");
+      toast.error(e.message);
     }
   };
   const makeTableRow = () => {

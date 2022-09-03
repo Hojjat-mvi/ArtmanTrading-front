@@ -46,7 +46,7 @@ export const DeletionModal = ({ resource, url,reRender }) => {
               } catch (e) {
                 alert("delete failed");
               }
-              reRender(`http://localhost:8000/api/agents`)
+              reRender(`http://localhost:8000/api/${url}`)
             }}
           >
             delete

@@ -1,9 +1,12 @@
 import { CForm, CFormInput, CCol, CButton } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Edit = () => {
+  const navigate = useNavigate()
+
   const location = useLocation();
 
   const material = location.state.material;
@@ -19,10 +22,10 @@ const Edit = () => {
         values,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert("success");
+      toast.success("success");
+      navigate('/pages/materials')
     } catch (error) {
-      alert("error");
-      console.log(error.response);
+      toast.error(error.message);
     }
   };
 

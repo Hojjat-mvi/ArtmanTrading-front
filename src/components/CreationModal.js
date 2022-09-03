@@ -37,7 +37,7 @@ export const CreationModal = ({ url, header, reRender }) => {
     } catch (e) {
       toast.error("not created");
     }
-    reRender(`http://localhost:8000/api/agents`)
+    reRender(`http://localhost:8000/api/${url}`)
   };
 
   return (

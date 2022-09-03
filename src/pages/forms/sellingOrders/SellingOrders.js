@@ -14,7 +14,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Options from "src/components/Options";
 
-export const Validation4 = () => {
+const SellingOrders = () => {
   const location = useLocation();
 
   const [firstState] = useState(location.state.firstState);
@@ -208,3 +208,4 @@ export const Validation4 = () => {
     </div>
   );
 };
+export default SellingOrders;

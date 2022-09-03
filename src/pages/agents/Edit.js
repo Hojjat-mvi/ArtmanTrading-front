@@ -25,8 +25,7 @@ const Edit = () => {
       toast.success("created");
       Navigate('/pages/agents')
     } catch (error) {
-      toast.error('did not created')
-      console.log(error.response);
+      toast.error(error.message)
     }
   };
 

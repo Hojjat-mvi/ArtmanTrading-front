@@ -10,7 +10,7 @@ import {
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const Validation3 = () => {
+const OutgoingShipments = () => {
   const location = useLocation();
   const [values, setValues] = useState(false);
   const [secondState] = useState(location.state.firstState);
@@ -182,3 +182,4 @@ export const Validation3 = () => {
     </CForm>
   );
 };
+export default OutgoingShipments;

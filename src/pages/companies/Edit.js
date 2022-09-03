@@ -1,27 +1,29 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Edit = () => {
+  const navigate = useNavigate()
+
   const location = useLocation();
 
-  const agent = location.state.agent;
+  const company = location.state.company;
 
-  const [values, setValues] = useState(agent);
+  const [values, setValues] = useState(company);
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:8000/api/agents/${agent.id}`, values, {
+      await axios.put(`http://localhost:8000/api/companies/${company.id}`, values, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("created");
+      navigate('/pages/companies')
     } catch (error) {
-      toast.error("didnt created");
-      console.log(error.response);
+      toast.error(error.message);
     }
   };
 
@@ -35,18 +37,6 @@ const Edit = () => {
 
   return (
     <CForm>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <CFormInput
         label="Name"
         name="name"

@@ -55,7 +55,7 @@ const Exchanges = () => {
       );
       setExchanges(result.data.data);
     } catch (e) {
-      toast.error("can not send data");
+      toast.error(e.message);
     }
   };
 

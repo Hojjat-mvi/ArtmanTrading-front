@@ -35,7 +35,7 @@ const Tables = () => {
       });
       setUsers(result.data.data);
     } catch (e) {
-      alert("error");
+      alert(e.message);
     }
   };
 

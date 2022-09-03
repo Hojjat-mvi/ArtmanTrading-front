@@ -1,4 +1,4 @@
-import { CNavItem } from "@coreui/react";
+import { CNavItem, CNavGroup } from "@coreui/react";
 
 const _nav = [
   {
@@ -8,6 +8,33 @@ const _nav = [
     badge: {
       color: "info",
     },
+  },
+  {
+    component: CNavGroup,
+    name: "Forms",
+    to: "/pages/forms",
+    items: [
+      {
+        component: CNavItem,
+        name: "buyingOrders",
+        to: "/pages/forms/buyingOrders",
+      },
+      {
+        component: CNavItem,
+        name: "incomingShipments",
+        to: "/pages/forms/incomingShipments",
+      },
+      {
+        component: CNavItem,
+        name: "outgoingShipments",
+        to: "/pages/forms/outgoingShipments",
+      },
+      {
+        component: CNavItem,
+        name: "sellingOrders",
+        to: "/pages/pages/sellingOrders",
+      },
+    ],
   },
 
   {

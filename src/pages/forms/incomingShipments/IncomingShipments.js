@@ -8,7 +8,7 @@ import {
 } from "@coreui/react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const Validation2 = () => {
+ const IncomingShipments = () => {
   const [values, setValues] = useState(false);
   const [validated, setValidated] = useState(false);
 
@@ -214,3 +214,4 @@ export const Validation2 = () => {
     </CForm>
   );
 };
+export default IncomingShipments

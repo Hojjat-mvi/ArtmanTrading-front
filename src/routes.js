@@ -1,18 +1,19 @@
 import React from "react";
 import { Edit } from "./pages/orders/Edit";
-import { Validation2 } from "./views/forms/validation/Validation2";
-import { Validation3 } from "./views/forms/validation/Validation3";
-import { Validation4 } from "./views/forms/validation/Validation4";
+// import { IncomingShipments } from "./pages/forms/incomingShipments/IncomingShipments";
+// import { OutgoingShipments } from "./pages/forms/outgoingShipments/OutgoingShipments";
+// import { SellingOrders } from "./pages/forms/sellingOrders/SellingOrders";
 
 // Base
 const Spinners = React.lazy(() => import("./views/base/spinners/Spinners"));
 
-//Forms
-const Validation = React.lazy(() =>
-  import("./views/forms/validation/Validation")
-);
+// Forms
+const buyingOrders = React.lazy(() => import('./pages/forms/buyingOrders/BuyingOrders'))
+const incomingShipments = React.lazy(() => import('./pages/forms/incomingShipments/IncomingShipments'))
+const outgoingShipments = React.lazy(() => import('./pages/forms/outgoingShipments/OutgoingShipments'))
+const sellingOrders = React.lazy(() => import('./pages/forms/sellingOrders/SellingOrders'))
 
-// Pages
+
 //// Agents
 const Agents = React.lazy(() => import("./pages/agents/Agent"));
 const agentEdit = React.lazy(() => import("./pages/agents/Edit"));
@@ -111,10 +112,10 @@ const routes = [
 
   { path: "/base/spinners", name: "Spinners", element: Spinners },
   { path: "/base/tables/Edit", name: "Edit", element: Edit },
-  { path: "/forms/validation", name: "Form", element: Validation },
-  { path: "/forms/validation2", name: "Form2", element: Validation2 },
-  { path: "/forms/validation3", name: "Form3", element: Validation3 },
-  { path: "/forms/validation4", name: "Form4", element: Validation4 },
+  { path: "/pages/forms/buyingOrders", name: "buyingOrders", element: buyingOrders },
+  { path: "/pages/forms/incomingShipments", name: "incomingShipments", element: incomingShipments },
+  { path: "/pages/forms/outgoingShipments", name: "outgoingShipments", element: outgoingShipments },
+  { path: "/pages/forms/sellingOrders", name: "sellingOrders", element: sellingOrders },
 ];
 
 export default routes;
