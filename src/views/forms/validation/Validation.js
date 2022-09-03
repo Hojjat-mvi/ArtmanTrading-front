@@ -10,9 +10,7 @@ import {
   CFormTextarea,
   CButtonToolbar,
 } from "@coreui/react";
-import axios from "axios";
 
-import { toast } from "react-toastify";
 import Options from "src/components/Options";
 
 const Validation = () => {
@@ -27,7 +25,6 @@ const Validation = () => {
   const [coo2, setCoo2] = useState(false);
   const [coo3, setCoo3] = useState(false);
   const [coo, setCoo] = useState(0);
-  const [setSelects] = useState([]);
   const [exchangeStatus1, setExchangeStatus1] = useState(false);
   const [exchangeStatus2, setExchangeStatus2] = useState(false);
   const [exchangeStatus3, setExchangeStatus3] = useState(false);
@@ -52,22 +49,6 @@ const Validation = () => {
     if (form.checkValidity()) {
       event.preventDefault();
       Navigate("/forms/Validation2", { state: { values } });
-    }
-  };
-
-  const getData = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const result = await axios.get(
-        `http://localhost:8000/api/buying-orders`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setSelects(result.data.data);
-    } catch (e) {
-      toast.error("can not get data");
-      console.log(e.message);
     }
   };
 
@@ -133,9 +114,7 @@ const Validation = () => {
     values.exchangeStatus = exchangeStatus;
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <CForm
