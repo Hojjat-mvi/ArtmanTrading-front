@@ -42,8 +42,9 @@ const Tables = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAgents(result.data.data);
+    // eslint-disable-next-line no-empty
     } catch (e) {
-      alert("error");
+      console.log(e.message)
     }
   };
 
@@ -94,8 +95,8 @@ const Tables = () => {
               </CButton>
               <DeletionModal
                 resource={agent.id}
-                reRender={getAgents}
                 url={"agents"}
+                reRender={getAgents}
               />
             </CTableHeaderCell>
           </CTableRow>
@@ -106,7 +107,6 @@ const Tables = () => {
 
   return (
     <>
-      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">Agents</CNavbarBrand>

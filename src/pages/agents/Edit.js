@@ -9,16 +9,20 @@ import {
   CToaster,
 } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const Edit = () => {
+  const Navigate = useNavigate()
+
   const location = useLocation();
 
   const agent = location.state.agent;
 
   const [values, setValues] = useState(agent);
+
+  
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -26,8 +30,9 @@ const Edit = () => {
     try {
       await axios.put(`http://localhost:8000/api/agents/${agent.id}`, values,{headers:{'Authorization':`Bearer ${token}`}});
       toast.success("created");
+      Navigate('/pages/agents')
     } catch (error) {
-      toast.error('didnt created')
+      toast.error('did not created')
       console.log(error.response);
     }
   };

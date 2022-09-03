@@ -11,8 +11,9 @@ import {
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export const DeletionModal = ({ resource, reRender, url }) => {
+export const DeletionModal = ({ resource, url,reRender }) => {
   const [visible, setVisible] = useState(false);
+  
 
   return (
     <>
@@ -45,7 +46,7 @@ export const DeletionModal = ({ resource, reRender, url }) => {
               } catch (e) {
                 alert("delete failed");
               }
-              reRender();
+              reRender(`http://localhost:8000/api/agents`)
             }}
           >
             delete

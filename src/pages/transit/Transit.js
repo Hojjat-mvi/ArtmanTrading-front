@@ -108,7 +108,6 @@ const Transit = () => {
 
   return (
     <>
-      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">transits</CNavbarBrand>

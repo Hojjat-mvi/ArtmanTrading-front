@@ -107,7 +107,6 @@ const Materials = () => {
 
   return (
     <>
-      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">materials</CNavbarBrand>

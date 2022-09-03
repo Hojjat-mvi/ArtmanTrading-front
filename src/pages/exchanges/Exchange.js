@@ -110,7 +110,6 @@ const Exchanges = () => {
 
   return (
     <>
-    <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">exchanges</CNavbarBrand>
