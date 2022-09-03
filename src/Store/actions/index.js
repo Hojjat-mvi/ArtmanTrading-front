@@ -1,10 +1,10 @@
 import { Login_Success, Login_Failed, undefinedRes, Logout } from "../types";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const login = (values) => {
-  return async (dispatch, store) => {
+  return async (dispatch) => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/login",
@@ -16,15 +16,14 @@ export const login = (values) => {
 
       if (token === undefined) {
         dispatch(undefinedLogin(token));
-        toast.error('user not found')
-        return 
+        toast.error("user not found");
+        return;
       }
       dispatch({
         type: Login_Success,
         payload: response.data,
       });
-      toast.success('logged in')
-      
+      toast.success("logged in");
     } catch (e) {
       dispatch({ type: Login_Failed, payload: e.message });
     }

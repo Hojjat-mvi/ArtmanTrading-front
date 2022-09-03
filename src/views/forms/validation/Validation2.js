@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import {
   CCol,
   CForm,
@@ -10,6 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export const Validation2 = () => {
   const [values, setValues] = useState(false);
+  const [validated, setValidated] = useState(false);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -21,15 +23,29 @@ export const Validation2 = () => {
   const Navigate = useNavigate();
   const location = useLocation();
 
-  const [firstState, setFirst] = useState(location.state.values);
+  const [firstState] = useState(location.state.values);
 
   const SubmitHandler = async (event) => {
-    event.preventDefault();
-    Navigate("/forms/Validation3", { state: { values, firstState }});
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    setValidated(true);
+    if (form.checkValidity()) {
+      event.preventDefault();
+      Navigate("/forms/Validation3", { state: { values, firstState } });
+    }
   };
 
   return (
-    <CForm className="row g-3">
+    // Incoming shipment
+    <CForm
+      className="row g-3 needs-validation"
+      noValidate
+      validated={validated}
+      onSubmit={SubmitHandler}
+    >
       <CCol md={4}>
         <CFormInput
           type="number"
@@ -37,6 +53,7 @@ export const Validation2 = () => {
           name="number"
           onChange={handleInputChange}
           value={values.number}
+          placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
@@ -55,6 +72,7 @@ export const Validation2 = () => {
           name="origin_weight"
           onChange={handleInputChange}
           value={values.origin_weight}
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -73,6 +91,7 @@ export const Validation2 = () => {
           name="first_weight"
           onChange={handleInputChange}
           value={values.first_weight}
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -82,6 +101,7 @@ export const Validation2 = () => {
           name="second_weight"
           onChange={handleInputChange}
           value={values.second_weight}
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -91,6 +111,7 @@ export const Validation2 = () => {
           name="sealed_weight"
           onChange={handleInputChange}
           value={values.sealed_weight}
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -100,6 +121,7 @@ export const Validation2 = () => {
           name="pod"
           onChange={handleInputChange}
           value={values.pod}
+          placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
@@ -109,6 +131,7 @@ export const Validation2 = () => {
           name="bundle"
           onChange={handleInputChange}
           value={values.bundle}
+          placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
@@ -116,6 +139,7 @@ export const Validation2 = () => {
           type="number"
           label="Seller Net Weight"
           name="seller_net_weight"
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -123,6 +147,7 @@ export const Validation2 = () => {
           type="number"
           label="Buyer Net Weight"
           name="buyer_net_weight"
+          placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -130,16 +155,23 @@ export const Validation2 = () => {
           type="number"
           label="Container Number"
           name="container_number"
+          placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="number" label="Seal Number" name="seal_number" />
+        <CFormInput
+          type="number"
+          label="Seal Number"
+          name="seal_number"
+          placeholder="Enter number..."
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="number"
           label="Fixed Seller LME Price"
           name="fixed_seller_lme_price"
+          placeholder="Enter price..."
         />
       </CCol>
       <CCol xs={4}>
@@ -147,6 +179,7 @@ export const Validation2 = () => {
           type="number"
           label="Fixed Buyer LME Price"
           name="fixed_buyer_lme_price"
+          placeholder="Enter price..."
         />
       </CCol>
       <CCol xs={4}>
@@ -172,13 +205,12 @@ export const Validation2 = () => {
           <CButton
             style={{ marginBottom: "5px" }}
             type="submit"
-            onClick={SubmitHandler}
+            color="primary"
           >
-            Next Page
+            Next
           </CButton>
         </CCol>
       </CButtonToolbar>
     </CForm>
   );
 };
-// pod , bundle = number

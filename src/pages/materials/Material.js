@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CRow,
   CTable,
   CTableBody,
-  CTableCaption,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
@@ -18,20 +12,18 @@ import {
   CForm,
   CFormInput,
   CButton,
-  CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
 
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [address,setAddress] = useState(`http://localhost:8000/api/materials`)
-
+  const [address, setAddress] = useState(`http://localhost:8000/api/materials`);
 
   const Navigate = useNavigate();
 
@@ -148,8 +140,10 @@ const Materials = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
-      <Pagination url={'http://localhost:8000/api/materials'} onUrlChange={setAddress}/>
-
+      <Pagination
+        url={"http://localhost:8000/api/materials"}
+        onUrlChange={setAddress}
+      />
     </>
   );
 };

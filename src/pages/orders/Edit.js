@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   CForm,
@@ -9,30 +9,10 @@ import {
   CFormSelect,
   CFormTextarea,
   CButtonToolbar,
-  CButtonGroup,
 } from "@coreui/react";
 import axios from "axios";
 
 export const Edit = () => {
-  const initialValues = {
-    date_of_purchase: "",
-    contract_no: "",
-    analysis: "",
-    company_id: "",
-    material_id: "",
-    analysis_result: "",
-    sending_docs_to_seller: "",
-    exchange_status: "",
-    quantity: "",
-    container_size: "",
-    packaging_style: "",
-    certificate_of_origin: "",
-    buying_price: "",
-    selling_price: "",
-    packaging_weight: "",
-    term: "",
-    notes: "",
-  };
   const location = useLocation();
   const Navigate = useNavigate();
 
