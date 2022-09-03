@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   CButton,
   CModal,

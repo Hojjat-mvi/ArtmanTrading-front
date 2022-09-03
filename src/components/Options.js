@@ -24,6 +24,9 @@ const Options = ({ url }) => {
 
   return (
     <>
+      <option value="" hidden>
+        Choose...
+      </option>
       {values.map((item) => (
         <option key={item.id} value={item.id}>
           {item.name}

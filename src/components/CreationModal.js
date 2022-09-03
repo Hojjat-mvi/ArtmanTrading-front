@@ -13,10 +13,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
-export const CreationModal = ({ url, header ,reRender}) => {
+export const CreationModal = ({ url, header, reRender }) => {
   const [visible, setVisible] = useState(false);
   const [postRequest, setPostRequest] = useState("");
-
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -33,12 +32,12 @@ export const CreationModal = ({ url, header ,reRender}) => {
     };
     try {
       await axios(config);
-      toast.success('created')
-      setVisible(false)
+      toast.success("created");
+      setVisible(false);
     } catch (event) {
-      toast.error('not created')
+      toast.error("not created");
     }
-    reRender()
+    reRender();
   };
 
   return (

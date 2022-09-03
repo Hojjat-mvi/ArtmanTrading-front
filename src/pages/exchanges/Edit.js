@@ -12,11 +12,12 @@ const Edit = () => {
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     try {
       await axios.put(
         `http://localhost:8000/api/exchanges/${exchange.id}`,
-        values,{headers:{'Authorization':`Bearer ${token}`}}
+        values,
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("success");
     } catch (error) {

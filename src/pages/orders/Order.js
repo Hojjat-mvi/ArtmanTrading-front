@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CRow,
   CTable,
   CTableBody,
-  CTableCaption,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
@@ -18,7 +13,6 @@ import {
   CForm,
   CFormInput,
   CButton,
-  CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -26,21 +20,21 @@ import { DeletionModal } from "../../components/DeletionModal";
 import { toast, ToastContainer } from "react-toastify";
 import Pagination from "src/components/Pagination";
 
-
 const Tables = () => {
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [address,setAddress] = useState(`http://localhost:8000/api/buying-orders`)
+  const [address, setAddress] = useState(
+    `http://localhost:8000/api/buying-orders`
+  );
 
   const Navigate = useNavigate();
 
   const getOrders = async (url) => {
     const token = localStorage.getItem("token");
     try {
-      const result = await axios.get(
-        url,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const result = await axios.get(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setOrders(result.data.data);
     } catch (e) {
       alert("error");
@@ -153,7 +147,10 @@ const Tables = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
-      <Pagination url={'http://localhost:8000/api/buying-orders'} onUrlChange={setAddress}/>
+      <Pagination
+        url={"http://localhost:8000/api/buying-orders"}
+        onUrlChange={setAddress}
+      />
     </>
   );
 };

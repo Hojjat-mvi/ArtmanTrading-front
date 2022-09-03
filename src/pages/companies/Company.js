@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  CCard,
-  CCardBody,
-  CCardHeader,
   CCol,
-  CRow,
   CTable,
   CTableBody,
-  CTableCaption,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
@@ -18,7 +12,6 @@ import {
   CForm,
   CFormInput,
   CButton,
-  CFormCheck,
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +22,7 @@ import Pagination from "src/components/Pagination";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
-  const [address,setAddress] = useState(`http://localhost:8000/api/companies`)
+  const [address, setAddress] = useState(`http://localhost:8000/api/companies`);
   const [searchTerm, setSearchTerm] = useState("");
 
   const Navigate = useNavigate();
@@ -105,7 +98,7 @@ const Companies = () => {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
           <CNavbarBrand href="#">companies</CNavbarBrand>
@@ -147,8 +140,10 @@ const Companies = () => {
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
-      <Pagination url={'http://localhost:8000/api/companies'} onUrlChange={setAddress}/>
-
+      <Pagination
+        url={"http://localhost:8000/api/companies"}
+        onUrlChange={setAddress}
+      />
     </>
   );
 };
