@@ -16,13 +16,13 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
-import { CreationModal } from "../../components/CreationModal";
 import { toast,  } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import UserModal from "src/components/UserModal";
 
 const Tables = () => {
   const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [address, setAddress] = useState(`http://localhost:8000/api/users`);
 
   const Navigate = useNavigate();
@@ -127,7 +127,7 @@ const Tables = () => {
             </CButton>
           </CForm>
           <CCol md={12} className={"my-2"}>
-            <CreationModal url={"users"} header={"User"} reRender={getUsers} />
+            <UserModal url={"users"} header={"User"} reRender={getUsers} />
           </CCol>
         </CContainer>
       </CNavbar>
