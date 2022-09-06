@@ -14,6 +14,7 @@ import axios from "axios";
 export const DeletionModal = ({ resource, url,reRender }) => {
   const [visible, setVisible] = useState(false);
   
+  console.log(resource)
 
   return (
     <>

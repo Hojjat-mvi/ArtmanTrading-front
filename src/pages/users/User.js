@@ -59,6 +59,7 @@ const Tables = () => {
     }
   };
 
+console.log(users)
   const makeTableRow = () => {
     return (
       <>

@@ -18,7 +18,8 @@ export const UserModal = ({ url, header, reRender }) => {
     name: "",
     email: "",
     role: "",
-    password:""
+    password: "",
+    password_confirmation: "",
   };
 
   const [visible, setVisible] = useState(false);
@@ -37,7 +38,8 @@ export const UserModal = ({ url, header, reRender }) => {
         name: postRequest.name,
         email: postRequest.email,
         role: postRequest.role,
-        password: postRequest.password
+        password: postRequest.password,
+        password_confirmation: postRequest.password_confirmation,
       },
     };
     try {
@@ -58,7 +60,6 @@ export const UserModal = ({ url, header, reRender }) => {
     });
   };
 
-  console.log(postRequest);
 
   return (
     <div>
@@ -100,6 +101,14 @@ export const UserModal = ({ url, header, reRender }) => {
               name="password"
               label="password"
               value={postRequest.password}
+              onChange={handleInputChange}
+              placeholder={`enter the ${header} password`}
+            />
+            <CFormInput
+              type="password"
+              name="password_confirmation"
+              label="confirm password"
+              value={postRequest.password_confirmation}
               onChange={handleInputChange}
               placeholder={`enter the ${header} password`}
             />
