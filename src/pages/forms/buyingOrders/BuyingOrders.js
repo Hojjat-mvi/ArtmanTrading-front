@@ -9,6 +9,7 @@ import {
   CFormSelect,
   CFormTextarea,
   CButtonToolbar,
+  CFormLabel,
 } from "@coreui/react";
 
 import Options from "src/components/Options";
@@ -145,7 +146,7 @@ const BuyingOrders = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormSelect
+        {/* <CFormSelect
           id="company_id"
           label="Company"
           name="company_id"
@@ -153,9 +154,10 @@ const BuyingOrders = () => {
           tooltipFeedback
           onChange={handleInputChange}
           value={values.company_id}
-        >
+        > */}
+        <CFormLabel>Companies</CFormLabel>
           <Options url={"companies"} />
-        </CFormSelect>
+        {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
         <CFormSelect
@@ -167,7 +169,7 @@ const BuyingOrders = () => {
           onChange={handleInputChange}
           value={values.material_id}
         >
-          <Options url={"materials"} />
+          {/* <Options url={"materials"} /> */}
         </CFormSelect>
       </CCol>
       <CCol md={4}>
@@ -191,7 +193,7 @@ const BuyingOrders = () => {
           name="exchange"
           onChange={handleInputChange}
         >
-          <Options url={"exchanges"} />
+          {/* <Options url={"exchanges"} /> */}
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -212,7 +214,7 @@ const BuyingOrders = () => {
           onChange={handleInputChange}
           value={values.agent_id}
         >
-          <Options url={"agents"} />
+          {/* <Options url={"agents"} /> */}
         </CFormSelect>
       </CCol>
       <CCol xs={4}>
@@ -223,7 +225,7 @@ const BuyingOrders = () => {
           onChange={handleInputChange}
           value={values.transit_company_id}
         >
-          <Options url={"transit-companies"} />
+          {/* <Options url={"transit-companies"} /> */}
         </CFormSelect>
       </CCol>
       <CCol xs={4}>

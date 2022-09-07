@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Select from "react-select";
 
 // eslint-disable-next-line react/prop-types
 const Options = ({ url }) => {
   const [values, setValues] = useState([]);
+  const options = [
+    {
+      value: "",
+      label: "",
+    },
+  ];
 
   const getData = async () => {
     const token = localStorage.getItem("token");
@@ -21,17 +28,15 @@ const Options = ({ url }) => {
   useEffect(() => {
     getData(url);
   }, []);
+  {
+    values.map((item) => options.push({ value: item.id, label: item.name }));
+  }
+
+  console.log(options);
 
   return (
     <>
-      <option value="" hidden>
-        Choose...
-      </option>
-      {values.map((item) => (
-        <option key={item.id} value={item.id}>
-          {item.name}
-        </option>
-      ))}
+      <Select options={options.slice(1,options.length)}></Select>
     </>
   );
 };
