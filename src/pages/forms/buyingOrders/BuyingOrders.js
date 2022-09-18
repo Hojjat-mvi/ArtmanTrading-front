@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   CForm,
   CCol,
@@ -15,9 +15,27 @@ import {
 import Options from "src/components/Options";
 
 const BuyingOrders = () => {
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
-  const [values, setValues] = useState(false);
+  const initialValues = {
+    date_of_purchase: "",
+    contract_no: "",
+    analysis: "",
+    analysis_result: "",
+    sending_docs_to_seller: "",
+    exchange_status: "",
+    quantity: "",
+    container_size: "",
+    packaging_style: "",
+    certificate_of_origin: "",
+    buying_price: "",
+    selling_price: "",
+    packaging_weight: "",
+    term: "",
+    notes: "",
+  };
+
+  const [values, setValues] = useState(initialValues);
   const [sdts1, setsdts1] = useState(false);
   const [sdts2, setsdts2] = useState(false);
   const [sdts3, setsdts3] = useState(false);
@@ -49,7 +67,6 @@ const BuyingOrders = () => {
     setValidated(true);
     if (form.checkValidity()) {
       event.preventDefault();
-      Navigate("/forms/BuyingOrders2", { state: { values } });
     }
   };
 
@@ -117,6 +134,7 @@ const BuyingOrders = () => {
 
   useEffect(() => {}, []);
 
+
   return (
     <CForm
       className="row g-3 needs-BuyingOrders"
@@ -131,7 +149,7 @@ const BuyingOrders = () => {
           label="Date of Purchase"
           name="date_of_purchase"
           onChange={handleInputChange}
-          value={values.date_of_purchase}
+          value={values.date_of_purchase || ""}
           required
         />
       </CCol>
@@ -141,7 +159,7 @@ const BuyingOrders = () => {
           label="Contract"
           name="contract_no"
           onChange={handleInputChange}
-          value={values.contract_no}
+          value={values.contract_no || ""}
           required
         />
       </CCol>
@@ -153,10 +171,10 @@ const BuyingOrders = () => {
           required
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.company_id}
+          value={values.company_id|| ''}
         > */}
         <CFormLabel>Companies</CFormLabel>
-          <Options url={"companies"} />
+        <Options url={"companies"} Data={values} name={"company_id"} />
         {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
@@ -167,10 +185,10 @@ const BuyingOrders = () => {
           required
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.material_id}
+          value={values.material_id|| ''}
         > */}
         <CFormLabel>Material</CFormLabel>
-          <Options url={"materials"} />
+        <Options url={"materials"} Data={values} name={"material_id"}/>
         {/* </CFormSelect> */}
       </CCol>
       <CCol md={4}>
@@ -180,7 +198,7 @@ const BuyingOrders = () => {
           name="analysis"
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.analysis}
+          value={values.analysis || ""}
         >
           <option value="1">Needed</option>
           <option value="2">Reported</option>
@@ -195,7 +213,7 @@ const BuyingOrders = () => {
           onChange={handleInputChange}
         > */}
         <CFormLabel>Exchange</CFormLabel>
-          <Options url={"exchanges"} />
+        <Options url={"exchanges"} Data={values} name={"exchange_id"}/>
         {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
@@ -204,7 +222,7 @@ const BuyingOrders = () => {
           label="Quantity"
           name="quantity"
           onChange={handleInputChange}
-          value={values.quantity}
+          value={values.quantity || ""}
           placeholder="Quantity in KG"
           required
         />
@@ -214,10 +232,10 @@ const BuyingOrders = () => {
           label="Agent"
           name="agent_id"
           onChange={handleInputChange}
-          value={values.agent_id}
+          value={values.agent_id|| ''}
         > */}
         <CFormLabel>Agent</CFormLabel>
-          <Options url={"agents"} />
+        <Options url={"agents"} Data={values} name={"agent_id"}/>
         {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
@@ -226,10 +244,10 @@ const BuyingOrders = () => {
           label="Transit Company"
           name="transit_company_id"
           onChange={handleInputChange}
-          value={values.transit_company_id}
+          value={values.transit_company_id|| ''}
         > */}
         <CFormLabel>Transit Company</CFormLabel>
-          <Options url={"transit-companies"} />
+        <Options url={"transit-companies"} Data={values} name={"transit_company_id"}/>
         {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
@@ -238,8 +256,8 @@ const BuyingOrders = () => {
           label="Packaging Weight"
           name="packaging_weight"
           onChange={handleInputChange}
-          value={values.packaging_weight}
-          placeholder="Packaging Weight in KG"
+          value={values.packaging_weight || ""}
+          placeholder="Packaging Weight in KG" 
         />
       </CCol>
       <CCol xs={4}>
@@ -250,7 +268,7 @@ const BuyingOrders = () => {
           required
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.container_size}
+          value={values.container_size || ""}
         >
           <option value="" hidden>
             Choose...
@@ -267,7 +285,7 @@ const BuyingOrders = () => {
           required
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.packaging_style}
+          value={values.packaging_style || ""}
         >
           <option value="" hidden>
             Choose...
@@ -293,7 +311,7 @@ const BuyingOrders = () => {
           name="selling_price"
           placeholder="Selling price..."
           onChange={handleInputChange}
-          value={values.selling_price}
+          value={values.selling_price || ""}
         />
       </CCol>
       <CCol xs={4}>
@@ -304,7 +322,7 @@ const BuyingOrders = () => {
           required
           tooltipFeedback
           onChange={handleInputChange}
-          value={values.term}
+          value={values.term || ""}
         >
           <option value="1">FCA</option>
           <option value="2">FOB</option>
@@ -318,7 +336,7 @@ const BuyingOrders = () => {
           label="Analysis Result"
           name="analysis_result"
           onChange={handleInputChange}
-          value={values.analysis_result}
+          value={values.analysis_result || ""}
           placeholder="Received analysis"
         />
       </CCol>
@@ -330,7 +348,7 @@ const BuyingOrders = () => {
           label="Notes"
           name="notes"
           onChange={handleInputChange}
-          value={values.notes}
+          value={values.notes || ""}
           placeholder="Related notes"
         />
       </CCol>
@@ -344,7 +362,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="sdts1"
-          value="1"
+          value="1|| ''"
           label="Received"
           onChange={handleSendingDocsChange}
           checked={sdts1}
@@ -352,7 +370,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="sdts2"
-          value="2"
+          value="2|| ''"
           label="Sent"
           onChange={handleSendingDocsChange}
           checked={sdts2}
@@ -371,7 +389,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="coo2"
-          value="2"
+          value="2|| ''"
           label="Announced"
           onChange={handleCooChange}
           checked={coo2}
@@ -379,7 +397,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="coo3"
-          value="3"
+          value="3|| ''"
           label="Received"
           onChange={handleCooChange}
           checked={coo3}
@@ -387,7 +405,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="coo4"
-          value="4"
+          value="4|| ''"
           label="Sent to client"
           onChange={handleCooChange}
           checked={coo3}
@@ -398,7 +416,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="exchangeStatus1"
-          value="1"
+          value="1|| ''"
           label="Invoice"
           onChange={handleExchangeStatus}
           checked={exchangeStatus1}
@@ -406,7 +424,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="exchangeStatus2"
-          value="2"
+          value="2|| ''"
           label="Received"
           onChange={handleExchangeStatus}
           checked={exchangeStatus2}
@@ -414,7 +432,7 @@ const BuyingOrders = () => {
         <CFormCheck
           inline
           name="exchangeStatus3"
-          value="3"
+          value="3|| ''"
           label="Sent"
           onChange={handleExchangeStatus}
           checked={exchangeStatus3}

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
 
 // eslint-disable-next-line react/prop-types
-const Options = ({ url }) => {
+const Options = ({ url, name, Data }) => {
   const [values, setValues] = useState([]);
   const options = [
     {
@@ -26,16 +27,22 @@ const Options = ({ url }) => {
   };
 
   useEffect(() => {
-    getData(url);
+    getData();
   }, []);
   {
     values.map((item) => options.push({ value: item.id, label: item.name }));
   }
 
+  const handleEvent = (e) => {
+    Data[name] = e.value;
+  };
 
   return (
     <>
-      <Select options={options.slice(1,options.length)} ></Select>
+      <Select
+        options={options.slice(1, options.length)}
+        onChange={handleEvent}
+      ></Select>
     </>
   );
 };
