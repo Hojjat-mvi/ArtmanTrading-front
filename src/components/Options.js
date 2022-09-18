@@ -32,11 +32,10 @@ const Options = ({ url }) => {
     values.map((item) => options.push({ value: item.id, label: item.name }));
   }
 
-  console.log(options);
 
   return (
     <>
-      <Select options={options.slice(1,options.length)}></Select>
+      <Select options={options.slice(1,options.length)} ></Select>
     </>
   );
 };

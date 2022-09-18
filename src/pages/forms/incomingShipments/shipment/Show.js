@@ -1,136 +1,117 @@
-import { React, useState } from "react";
-import {
-  CCol,
-  CForm,
-  CFormInput,
-  CButtonToolbar,
-  CButton,
-} from "@coreui/react";
+import React from 'react'
+import { CForm, CCol, CFormInput } from "@coreui/react";
+import { useLocation } from "react-router-dom";
 
- const IncomingShipments = () => {
-  const [values, setValues] = useState(false);
-  const [validated, setValidated] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+const Show = () => {
 
-  
+    const location = useLocation()
 
-  const SubmitHandler = async (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-    if (form.checkValidity()) {
-      event.preventDefault();
-    }
-  };
+    const shipment = location.state.shipment
 
   return (
-    // Incoming shipment
-    <CForm
-      className="row g-3 needs-validation"
-      noValidate
-      validated={validated}
-      onSubmit={SubmitHandler}
-    >
+    <CForm className="row g-3 needs-validation" noValidate>
       <CCol md={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Number"
           name="number"
-          onChange={handleInputChange}
-          value={values.number}
+          value={shipment.number}
           placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="date"
           label="Loading Date"
           name="loading_date"
-          onChange={handleInputChange}
-          value={values.loading_date}
+          value={shipment.loading_date}
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Origin Weight"
           name="origin_weight"
-          onChange={handleInputChange}
-          value={values.origin_weight}
+          value={shipment.origin_weight}
           placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="date"
           label="Departure Date"
           name="departure_date"
-          onChange={handleInputChange}
-          value={values.departure_date}
+          value={shipment.departure_date}
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="First Weight"
           name="first_weight"
-          onChange={handleInputChange}
-          value={values.first_weight}
+          value={shipment.first_weight}
           placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Second Weight"
           name="second_weight"
-          onChange={handleInputChange}
-          value={values.second_weight}
+          value={shipment.second_weight}
           placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Sealed Weight"
           name="sealed_weight"
-          onChange={handleInputChange}
-          value={values.sealed_weight}
+          value={shipment.sealed_weight}
           placeholder="Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="POD"
           name="pod"
-          onChange={handleInputChange}
-          value={values.pod}
+          value={shipment.pod}
           placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Bundle"
           name="bundle"
-          onChange={handleInputChange}
-          value={values.bundle}
+          value={shipment.bundle}
           placeholder="Enter number..."
         />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Seller Net Weight"
           name="seller_net_weight"
@@ -139,6 +120,8 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Buyer Net Weight"
           name="buyer_net_weight"
@@ -147,6 +130,8 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Container Number"
           name="container_number"
@@ -155,6 +140,8 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Seal Number"
           name="seal_number"
@@ -163,6 +150,8 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Fixed Seller LME Price"
           name="fixed_seller_lme_price"
@@ -171,6 +160,8 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="number"
           label="Fixed Buyer LME Price"
           name="fixed_buyer_lme_price"
@@ -179,34 +170,34 @@ import {
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="date"
           label="Fixed Buyer LME Price Date"
           name="fixed_buyer_lme_price_date"
         />
       </CCol>
       <CCol xs={4}>
-        <CFormInput type="date" label="LME Fixed Date" name="lme_fixed_date" />
+        <CFormInput
+          readOnly
+          plainText
+          type="date"
+          label="LME Fixed Date"
+          name="lme_fixed_date"
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput
+          readOnly
+          plainText
           type="date"
           label="LME Expiration Date"
           name="lme_expiration_date"
           style={{ marginBottom: "10px" }}
         />
       </CCol>
-      <CButtonToolbar className="mb-3">
-        <CCol>
-          <CButton
-            style={{ marginBottom: "5px" }}
-            type="submit"
-            color="primary"
-          >
-            submit
-          </CButton>
-        </CCol>
-      </CButtonToolbar>
     </CForm>
-  );
-};
-export default IncomingShipments
+  )
+}
+
+export default Show

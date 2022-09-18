@@ -11,6 +11,7 @@ import {
   CButtonToolbar,
 } from "@coreui/react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const Edit = () => {
   const location = useLocation();
@@ -92,11 +93,10 @@ export const Edit = () => {
         values,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert("success");
-      Navigate("/forms/Validation2");
+      toast.success('success')
+      Navigate("pages/forms/buyingOrders/orders/Order");
     } catch (error) {
-      alert("error");
-      console.log(error.response);
+      toast.error(error.message)
     }
   };
 
@@ -333,3 +333,5 @@ export const Edit = () => {
     </CForm>
   );
 };
+
+export default Edit

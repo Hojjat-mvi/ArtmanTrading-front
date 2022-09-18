@@ -16,33 +16,33 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { DeletionModal } from "../../components/DeletionModal";
+import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
 
-const Tables = () => {
-  const [orders, setOrders] = useState([]);
+const Shipment = () => {
+  const [shipments, setShipments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [address, setAddress] = useState(
-    `http://localhost:8000/api/buying-orders`
+    `http://localhost:8000/api/buying-shipment/buying_shipment/incoming-shipments`
   );
 
   const Navigate = useNavigate();
 
-  const getOrders = async (url) => {
+  const getShipment = async (url) => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setOrders(result.data.data);
+      setShipments(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getOrders(address);
+    getShipment(address);
   }, [address]);
 
   const search = async (e) => {
@@ -50,12 +50,12 @@ const Tables = () => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
-        `http://localhost:8000/api/buying-orders?search=${searchTerm}`,
+        `http://localhost:8000/api/buying-orders/incoming-shipments?search=${searchTerm}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setOrders(result.data.data);
+      setShipments(result.data.data);
     } catch (e) {
       toast.error("can not send data");
     }
@@ -64,33 +64,33 @@ const Tables = () => {
   const makeTableRow = () => {
     return (
       <>
-        {orders.map((order) => (
-          <CTableRow key={order.id}>
+        {shipments.map((shipment) => (
+          <CTableRow key={shipment.id}>
             <CTableDataCell scope="col" className="col-12">
               {" "}
-              {order.id}
+              {shipment.id}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/orders/Show", { state: { order } });
+                  Navigate("/pages/forms/incomingShipments/shipments/Show", { state: { shipment } });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/base/tables/Edit", { state: { order } });
+                  Navigate("/pages/forms/incomingShipments/shipments/Edit", { state: { shipment } });
                 }}
               >
                 edit
               </CButton>
               <DeletionModal
-                resource={order.id}
-                reRender={getOrders}
-                url={"buying-orders"}
+                resource={shipment.id}
+                reRender={getShipment}
+                url={"buying_order/incoming-shipments"}
               />
             </CTableHeaderCell>
           </CTableRow>
@@ -103,12 +103,12 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Orders</CNavbarBrand>
+          <CNavbarBrand href="#">shipment</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search Orders"
+              placeholder="Search shipment"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
@@ -128,7 +128,7 @@ const Tables = () => {
               className={"col-12"}
               color="primary"
               onClick={() => {
-                Navigate("/forms/validation");
+                Navigate("/pages/forms/incomingShipments/IncomingShipments");
               }}
             >
               Create New
@@ -140,18 +140,18 @@ const Tables = () => {
       <CTable hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">shipment ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
       <Pagination
-        url={"http://localhost:8000/api/buying-orders"}
+        url={"http://localhost:8000/api/buying-orders/incoming-shipments"}
         onUrlChange={setAddress}
       />
     </>
   );
 };
 
-export default Tables;
+export default Shipment;

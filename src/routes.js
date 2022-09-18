@@ -1,18 +1,21 @@
 import React from "react";
-import { Edit } from "./pages/orders/Edit";
-// import { IncomingShipments } from "./pages/forms/incomingShipments/IncomingShipments";
-// import { OutgoingShipments } from "./pages/forms/outgoingShipments/OutgoingShipments";
-// import { SellingOrders } from "./pages/forms/sellingOrders/SellingOrders";
 
 // Base
 const Spinners = React.lazy(() => import("./views/base/spinners/Spinners"));
 
 // Forms
-const buyingOrders = React.lazy(() => import('./pages/forms/buyingOrders/BuyingOrders'))
-const incomingShipments = React.lazy(() => import('./pages/forms/incomingShipments/IncomingShipments'))
-const outgoingShipments = React.lazy(() => import('./pages/forms/outgoingShipments/OutgoingShipments'))
-const sellingOrders = React.lazy(() => import('./pages/forms/sellingOrders/SellingOrders'))
-
+const buyingOrders = React.lazy(() =>
+  import("./pages/forms/buyingOrders/BuyingOrders")
+);
+const incomingShipments = React.lazy(() =>
+  import("./pages/forms/incomingShipments/IncomingShipments")
+);
+const outgoingShipments = React.lazy(() =>
+  import("./pages/forms/outgoingShipments/OutgoingShipments")
+);
+const sellingOrders = React.lazy(() =>
+  import("./pages/forms/sellingOrders/SellingOrders")
+);
 
 //// Agents
 const Agents = React.lazy(() => import("./pages/agents/Agent"));
@@ -30,9 +33,15 @@ const materialEdit = React.lazy(() => import("./pages/materials/Edit"));
 const materialShow = React.lazy(() => import("./pages/materials/Show"));
 
 //// Orders
-const Orders = React.lazy(() => import("./pages/orders/Order"));
-const orderEdit = React.lazy(() => import("./pages/orders/Edit"));
-const orderShow = React.lazy(() => import("./pages/orders/Show"));
+const Orders = React.lazy(() =>
+  import("./pages/forms/buyingOrders/orders/Order")
+);
+const orderEdit = React.lazy(() =>
+  import("./pages/forms/buyingOrders/orders/Edit")
+);
+const orderShow = React.lazy(() =>
+  import("./pages/forms/buyingOrders/orders/Show")
+);
 
 //// Transit
 const Transit = React.lazy(() => import("./pages/transit/Transit"));
@@ -111,11 +120,26 @@ const routes = [
   { path: "/pages/companies/Show", name: "CompanyShow", element: CompanyShow },
 
   { path: "/base/spinners", name: "Spinners", element: Spinners },
-  { path: "/base/tables/Edit", name: "Edit", element: Edit },
-  { path: "/pages/forms/buyingOrders", name: "buyingOrders", element: buyingOrders },
-  { path: "/pages/forms/incomingShipments", name: "incomingShipments", element: incomingShipments },
-  { path: "/pages/forms/outgoingShipments", name: "outgoingShipments", element: outgoingShipments },
-  { path: "/pages/forms/sellingOrders", name: "sellingOrders", element: sellingOrders },
+  {
+    path: "/pages/forms/buyingOrders",
+    name: "buyingOrders",
+    element: buyingOrders,
+  },
+  {
+    path: "/pages/forms/incomingShipments",
+    name: "incomingShipments",
+    element: incomingShipments,
+  },
+  {
+    path: "/pages/forms/outgoingShipments",
+    name: "outgoingShipments",
+    element: outgoingShipments,
+  },
+  {
+    path: "/pages/forms/sellingOrders",
+    name: "sellingOrders",
+    element: sellingOrders,
+  },
 ];
 
 export default routes;

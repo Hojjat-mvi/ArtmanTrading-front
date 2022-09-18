@@ -160,7 +160,7 @@ const BuyingOrders = () => {
         {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
-        <CFormSelect
+        {/* <CFormSelect
           id="material_id"
           label="Material "
           name="material_id"
@@ -168,9 +168,10 @@ const BuyingOrders = () => {
           tooltipFeedback
           onChange={handleInputChange}
           value={values.material_id}
-        >
-          {/* <Options url={"materials"} /> */}
-        </CFormSelect>
+        > */}
+        <CFormLabel>Material</CFormLabel>
+          <Options url={"materials"} />
+        {/* </CFormSelect> */}
       </CCol>
       <CCol md={4}>
         <CFormSelect
@@ -187,14 +188,15 @@ const BuyingOrders = () => {
         </CFormSelect>
       </CCol>
       <CCol md={4}>
-        <CFormSelect
+        {/* <CFormSelect
           id="exchange"
           label="Exchange"
           name="exchange"
           onChange={handleInputChange}
-        >
-          {/* <Options url={"exchanges"} /> */}
-        </CFormSelect>
+        > */}
+        <CFormLabel>Exchange</CFormLabel>
+          <Options url={"exchanges"} />
+        {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -208,25 +210,27 @@ const BuyingOrders = () => {
         />
       </CCol>
       <CCol xs={4}>
-        <CFormSelect
+        {/* <CFormSelect
           label="Agent"
           name="agent_id"
           onChange={handleInputChange}
           value={values.agent_id}
-        >
-          {/* <Options url={"agents"} /> */}
-        </CFormSelect>
+        > */}
+        <CFormLabel>Agent</CFormLabel>
+          <Options url={"agents"} />
+        {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
-        <CFormSelect
+        {/* <CFormSelect
           type="number"
           label="Transit Company"
           name="transit_company_id"
           onChange={handleInputChange}
           value={values.transit_company_id}
-        >
-          {/* <Options url={"transit-companies"} /> */}
-        </CFormSelect>
+        > */}
+        <CFormLabel>Transit Company</CFormLabel>
+          <Options url={"transit-companies"} />
+        {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
         <CFormInput
