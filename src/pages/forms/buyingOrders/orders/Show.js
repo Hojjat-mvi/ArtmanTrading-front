@@ -1,16 +1,67 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { CForm, CCol, CFormInput } from "@coreui/react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CForm, CCol, CFormInput, CButton } from "@coreui/react";
 
 const Show = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const order = location.state.order;
 
   return (
     <CForm className="row g-3">
+      <CCol xs={12}>
+        <CButton
+          onClick={() => {
+            navigate("/pages/orders");
+          }}
+          shape="rounded-pill"
+          style={{ marginBottom: "10px" }}
+        >
+          Back
+        </CButton>
+      </CCol>
       {/*buying-orders-table*/}
-
+      <CCol xs={4}>
+        <CFormInput
+          readOnly
+          plainText
+          type="text"
+          label="Company"
+          name="company_id"
+          value={order.company_id}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          readOnly
+          plainText
+          type="text"
+          label="Material"
+          name="material_id"
+          value={order.material_id}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          readOnly
+          plainText
+          type="text"
+          label="Exchange"
+          name="exchange_id"
+          value={order.exchange_id}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          readOnly
+          plainText
+          type="text"
+          label="Agent"
+          name="agent_id"
+          value={order.agent_id}
+        />
+      </CCol>
       <CCol xs={4}>
         <CFormInput
           readOnly

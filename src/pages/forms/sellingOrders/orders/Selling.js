@@ -20,29 +20,29 @@ import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
 
-const Shipment = () => {
-  const [shipments, setShipments] = useState([]);
+const Selling = () => {
+  const [sellings, setSellings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [address, setAddress] = useState(
-    `http://localhost:8000/api/outgoing-shipments`
+    `http://localhost:8000/api/selling-orders`
   );
 
   const Navigate = useNavigate();
 
-  const getShipment = async (url) => {
+  const getSelling = async (url) => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setShipments(result.data.data);
+      setSellings(result.data.data);
     } catch (e) {
       alert("error");
     }
   };
 
   useEffect(() => {
-    getShipment(address);
+    getSelling(address);
   }, [address]);
 
   const search = async (e) => {
@@ -50,12 +50,12 @@ const Shipment = () => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
-        `http://localhost:8000/api/outgoing-shipments?search=${searchTerm}`,
+        `http://localhost:8000/api/selling-orders?search=${searchTerm}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setShipments(result.data.data);
+      setSellings(result.data.data);
     } catch (e) {
       toast.error("can not send data");
     }
@@ -64,33 +64,37 @@ const Shipment = () => {
   const makeTableRow = () => {
     return (
       <>
-        {shipments.map((shipment) => (
-          <CTableRow key={shipment.id}>
+        {sellings.map((selling) => (
+          <CTableRow key={selling.id}>
             <CTableDataCell scope="col" className="col-12">
               {" "}
-              {shipment.id}
+              {selling.id}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingShipments/shipments/Show", { state: { shipment } });
+                  Navigate("/pages/forms/outgoingsellings/sellings/Show", {
+                    state: { selling },
+                  });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingShipments/shipments/Edit", { state: { shipment } });
+                  Navigate("/pages/forms/outgoingsellings/sellings/Edit", {
+                    state: { selling },
+                  });
                 }}
               >
                 edit
               </CButton>
               <DeletionModal
-                resource={shipment.id}
-                reRender={getShipment}
-                url={"outgoing-shipments"}
+                resource={selling.id}
+                reRender={getSelling}
+                url={"selling-orders"}
               />
             </CTableHeaderCell>
           </CTableRow>
@@ -103,12 +107,12 @@ const Shipment = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">shipment</CNavbarBrand>
+          <CNavbarBrand href="#">selling</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search shipment"
+              placeholder="Search selling"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
@@ -128,7 +132,7 @@ const Shipment = () => {
               className={"col-12"}
               color="primary"
               onClick={() => {
-                Navigate("/pages/forms/outgoingShipments");
+                Navigate("/pages/forms/sellingOrders");
               }}
             >
               Create New
@@ -140,18 +144,18 @@ const Shipment = () => {
       <CTable hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">shipment ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">selling ID</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
       <Pagination
-        url={"http://localhost:8000/api/outgoing-shipments"}
+        url={"http://localhost:8000/api/selling-orders"}
         onUrlChange={setAddress}
       />
     </>
   );
 };
 
-export default Shipment;
+export default Selling;

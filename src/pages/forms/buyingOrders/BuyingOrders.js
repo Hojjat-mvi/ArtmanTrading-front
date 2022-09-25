@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   CForm,
   CCol,
@@ -13,9 +13,11 @@ import {
 } from "@coreui/react";
 
 import Options from "src/components/Options";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const BuyingOrders = () => {
-  // const Navigate = useNavigate();
+  const Navigate = useNavigate();
 
   const initialValues = {
     date_of_purchase: "",
@@ -67,6 +69,24 @@ const BuyingOrders = () => {
     setValidated(true);
     if (form.checkValidity()) {
       event.preventDefault();
+      const token = localStorage.getItem("token");
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/api/buying-orders",
+          values,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (res.status === 201) {
+          toast.success("form saved");
+          Navigate("/pages/orders");
+        } else {
+          toast.error("error");
+        }
+      } catch (e) {
+        toast.error(e.message);
+      }
     }
   };
 
@@ -134,7 +154,6 @@ const BuyingOrders = () => {
 
   useEffect(() => {}, []);
 
-
   return (
     <CForm
       className="row g-3 needs-BuyingOrders"
@@ -164,32 +183,12 @@ const BuyingOrders = () => {
         />
       </CCol>
       <CCol xs={4}>
-        {/* <CFormSelect
-          id="company_id"
-          label="Company"
-          name="company_id"
-          required
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.company_id|| ''}
-        > */}
         <CFormLabel>Companies</CFormLabel>
         <Options url={"companies"} Data={values} name={"company_id"} />
-        {/* </CFormSelect> */}
       </CCol>
       <CCol xs={4}>
-        {/* <CFormSelect
-          id="material_id"
-          label="Material "
-          name="material_id"
-          required
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.material_id|| ''}
-        > */}
         <CFormLabel>Material</CFormLabel>
-        <Options url={"materials"} Data={values} name={"material_id"}/>
-        {/* </CFormSelect> */}
+        <Options url={"materials"} Data={values} name={"material_id"} />
       </CCol>
       <CCol md={4}>
         <CFormSelect
@@ -206,15 +205,8 @@ const BuyingOrders = () => {
         </CFormSelect>
       </CCol>
       <CCol md={4}>
-        {/* <CFormSelect
-          id="exchange"
-          label="Exchange"
-          name="exchange"
-          onChange={handleInputChange}
-        > */}
         <CFormLabel>Exchange</CFormLabel>
-        <Options url={"exchanges"} Data={values} name={"exchange_id"}/>
-        {/* </CFormSelect> */}
+        <Options url={"exchanges"} Data={values} name={"exchange_id"} />
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -228,27 +220,16 @@ const BuyingOrders = () => {
         />
       </CCol>
       <CCol xs={4}>
-        {/* <CFormSelect
-          label="Agent"
-          name="agent_id"
-          onChange={handleInputChange}
-          value={values.agent_id|| ''}
-        > */}
         <CFormLabel>Agent</CFormLabel>
-        <Options url={"agents"} Data={values} name={"agent_id"}/>
-        {/* </CFormSelect> */}
+        <Options url={"agents"} Data={values} name={"agent_id"} />
       </CCol>
       <CCol xs={4}>
-        {/* <CFormSelect
-          type="number"
-          label="Transit Company"
-          name="transit_company_id"
-          onChange={handleInputChange}
-          value={values.transit_company_id|| ''}
-        > */}
         <CFormLabel>Transit Company</CFormLabel>
-        <Options url={"transit-companies"} Data={values} name={"transit_company_id"}/>
-        {/* </CFormSelect> */}
+        <Options
+          url={"transit-companies"}
+          Data={values}
+          name={"transit_company_id"}
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -257,7 +238,7 @@ const BuyingOrders = () => {
           name="packaging_weight"
           onChange={handleInputChange}
           value={values.packaging_weight || ""}
-          placeholder="Packaging Weight in KG" 
+          placeholder="Packaging Weight in KG"
         />
       </CCol>
       <CCol xs={4}>
@@ -441,7 +422,7 @@ const BuyingOrders = () => {
       <CButtonToolbar className="mb-3">
         <CCol>
           <CButton style={{ marginBottom: "5px" }} type="submit">
-            Next
+            submit
           </CButton>
         </CCol>
       </CButtonToolbar>

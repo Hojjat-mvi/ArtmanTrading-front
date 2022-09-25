@@ -9,6 +9,7 @@ import {
   CModalFooter,
 } from "@coreui/react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
 export const DeletionModal = ({ resource, url,reRender }) => {
@@ -43,8 +44,9 @@ export const DeletionModal = ({ resource, url,reRender }) => {
                   { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setVisible(false);
+                  toast.success('deleted successfully')
               } catch (e) {
-                alert("delete failed");
+                toast.error(e.message)
               }
               reRender(`http://localhost:8000/api/${url}`)
             }}

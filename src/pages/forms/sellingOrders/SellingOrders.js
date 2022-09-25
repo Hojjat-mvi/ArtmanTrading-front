@@ -5,21 +5,16 @@ import {
   CCol,
   CButton,
   CButtonToolbar,
-  CSpinner,
   CFormSelect,
   CFormCheck,
 } from "@coreui/react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
 import Options from "src/components/Options";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const SellingOrders = () => {
-  const location = useLocation();
+  // const location = useLocation();
 
-  const [firstState] = useState(location.state.firstState);
-  const [secondState] = useState(location.state.secondState);
-  const [thirdState] = useState(location.state.values);
   const [values, setValues] = useState(false);
 
   const handleInputChange = (e) => {
@@ -34,47 +29,15 @@ const SellingOrders = () => {
   const SubmitHandler = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-
     try {
-      const response = axios.post(
-        "http://localhost:8000/api/buying-orders",
-        secondState,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      const buyingOrderId = (await response).data.data.id;
-      if (!buyingOrderId) {
-        return <CSpinner color="primary" />;
-      }
-      axios.post(
-        `http://localhost:8000/api/buying-orders/${buyingOrderId}/incoming-shipments`,
-        firstState,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      axios.post(
-        `http://localhost:8000/api/buying-orders/${buyingOrderId}/outgoing-shipments`,
-        thirdState,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      axios.post(
-        `http://localhost:8000/api/buying-orders/${buyingOrderId}/selling-orders`,
-        values,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      toast.success("Saved");
+      await axios.post("http://localhost:8000/api/selling-orders", values, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
     } catch (e) {
-      toast.error("Encountered an Error!");
-      console.log(e.message);
+      toast.error(e.message);
     }
   };
-
+  console.log(values);
   return (
     // selling-orders
     <div>

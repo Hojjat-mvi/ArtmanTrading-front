@@ -20,11 +20,6 @@ const _nav = [
         items: [
           {
             component: CNavItem,
-            name: "buyingOrders",
-            to: "/pages/forms/buyingOrders",
-          },
-          {
-            component: CNavItem,
             name: "Orders",
             to: "/pages/orders",
           },
@@ -36,8 +31,8 @@ const _nav = [
         items: [
           {
             component: CNavItem,
-            name: "incomingShipments",
-            to: "/pages/forms/incomingShipments",
+            name: "Shipments",
+            to: "/pages/forms/shipments",
           },
         ],
       },
@@ -47,8 +42,8 @@ const _nav = [
         items: [
           {
             component: CNavItem,
-            name: "outgoingShipments",
-            to: "/pages/forms/outgoingShipments",
+            name: "Shipments",
+            to: "/pages/forms/shipmentsOutgoing",
           },
         ],
       },
@@ -58,8 +53,8 @@ const _nav = [
         items: [
           {
             component: CNavItem,
-            name: "sellingOrders",
-            to: "/pages/pages/sellingOrders",
+            name: "selling",
+            to: "/pages/forms/selling",
           },
         ],
       },

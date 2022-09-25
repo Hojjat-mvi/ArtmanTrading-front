@@ -30,7 +30,6 @@ const Pagination = ({ url, onUrlChange }) => {
     getData();
   }, [link]);
 
-  
   const makeItem = () => {
     return (
       <>
@@ -50,10 +49,12 @@ const Pagination = ({ url, onUrlChange }) => {
       </>
     );
   };
-
   return (
     <div>
-      <CPagination aria-label="Page navigation example" align="center">
+      <CPagination
+        aria-label="Page navigation example"
+        align="center"
+      >
         <CPaginationItem
           aria-label="Previous"
           onClick={() => {

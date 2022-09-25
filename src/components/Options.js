@@ -14,6 +14,7 @@ const Options = ({ url, name, Data }) => {
     },
   ];
 
+
   const getData = async () => {
     const token = localStorage.getItem("token");
     try {

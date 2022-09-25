@@ -10,6 +10,12 @@ const buyingOrders = React.lazy(() =>
 const incomingShipments = React.lazy(() =>
   import("./pages/forms/incomingShipments/IncomingShipments")
 );
+const shipmentEdit = React.lazy(() =>
+  import("./pages/forms/incomingShipments/shipment/Edit")
+);
+const shipmentShow = React.lazy(() =>
+  import("./pages/forms/incomingShipments/shipment/Show")
+);
 const outgoingShipments = React.lazy(() =>
   import("./pages/forms/outgoingShipments/OutgoingShipments")
 );
@@ -58,7 +64,31 @@ const companies = React.lazy(() => import("./pages/companies/Company"));
 const CompanyEdit = React.lazy(() => import("./pages/companies/Edit"));
 const CompanyShow = React.lazy(() => import("./pages/companies/Show"));
 
+// shipments(incoming)
+const shipments = React.lazy(() =>
+  import("./pages/forms/incomingShipments/shipment/Shipment")
+);
+
+// shipments(outgoing)
+const shipmentOutgoing = React.lazy(() =>
+  import("./pages/forms/outgoingShipments/shipment/Shipment")
+);
+
+//selling
+const selling = React.lazy(() =>
+  import("./pages/forms/sellingOrders/orders/Selling")
+);
+
 const routes = [
+  { path: "/pages/forms/selling", name: "selling", element: selling },
+  { path: "/pages/forms/shipments", name: "shipments", element: shipments },
+  { path: "/pages/forms/shipments/Edit", name: "Edit", element: shipmentEdit },
+  { path: "/pages/forms/shipments/Show", name: "Show", element: shipmentShow },
+  {
+    path: "/pages/forms/shipmentsOutgoing",
+    name: "shipments",
+    element: shipmentOutgoing,
+  },
   { path: "/", exact: true, name: "Home" },
   { path: "/pages/agents", name: "Agents", element: Agents, exact: true },
   { path: "/pages/agents/Edit", name: "agentEdit", element: agentEdit },

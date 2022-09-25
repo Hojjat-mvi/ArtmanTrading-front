@@ -8,13 +8,13 @@ import {
   CFormCheck,
   CFormSelect,
 } from "@coreui/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+// import { useLocation, useNavigate } from "react-router-dom";
 
 const OutgoingShipments = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [values, setValues] = useState(false);
-  const [secondState] = useState(location.state.firstState);
-  const [firstState] = useState(location.state.values);
   const [validated, setValidated] = useState(false);
 
   const handleInputChange = (e) => {
@@ -25,10 +25,11 @@ const OutgoingShipments = () => {
     });
   };
 
-  const Navigate = useNavigate();
+  // const Navigate = useNavigate();
 
   const SubmitHandler = async (event) => {
     const form = event.currentTarget;
+    const token = localStorage.getItem("token");
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -36,9 +37,14 @@ const OutgoingShipments = () => {
     setValidated(true);
     if (form.checkValidity()) {
       event.preventDefault();
-      Navigate("/forms/Validation4", {
-        state: { values, firstState, secondState },
+    }
+    try {
+      await axios.post("http://localhost:8000/api/outgoing-shipments", values, {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      toast.success('orders saved')
+    } catch (e) {
+      toast.error(e.messages);
     }
   };
 
@@ -175,7 +181,7 @@ const OutgoingShipments = () => {
             type="submit"
             color="primary"
           >
-            Next
+            submit
           </CButton>
         </CCol>
       </CButtonToolbar>

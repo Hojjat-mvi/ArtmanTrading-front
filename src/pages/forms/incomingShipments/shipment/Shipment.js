@@ -24,7 +24,7 @@ const Shipment = () => {
   const [shipments, setShipments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [address, setAddress] = useState(
-    `http://localhost:8000/api/buying-shipment/buying_shipment/incoming-shipments`
+    `http://localhost:8000/api/incoming-shipments`
   );
 
   const Navigate = useNavigate();
@@ -50,7 +50,7 @@ const Shipment = () => {
     const token = localStorage.getItem("token");
     try {
       const result = await axios.get(
-        `http://localhost:8000/api/buying-orders/incoming-shipments?search=${searchTerm}`,
+        `http://localhost:8000/api/outgoing-shipments?search=${searchTerm}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -75,14 +75,18 @@ const Shipment = () => {
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/forms/incomingShipments/shipments/Show", { state: { shipment } });
+                  Navigate("/pages/forms/shipments/Show", {
+                    state: { shipment },
+                  });
                 }}
               >
                 show
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/forms/incomingShipments/shipments/Edit", { state: { shipment } });
+                  Navigate("/pages/forms/shipments/Edit", {
+                    state: { shipment },
+                  });
                 }}
               >
                 edit
@@ -90,7 +94,7 @@ const Shipment = () => {
               <DeletionModal
                 resource={shipment.id}
                 reRender={getShipment}
-                url={"buying_order/incoming-shipments"}
+                url={"incoming-shipments"}
               />
             </CTableHeaderCell>
           </CTableRow>
@@ -128,7 +132,7 @@ const Shipment = () => {
               className={"col-12"}
               color="primary"
               onClick={() => {
-                Navigate("/pages/forms/incomingShipments/IncomingShipments");
+                Navigate("/pages/forms/incomingShipments");
               }}
             >
               Create New
@@ -147,7 +151,7 @@ const Shipment = () => {
         <CTableBody>{makeTableRow()}</CTableBody>
       </CTable>
       <Pagination
-        url={"http://localhost:8000/api/buying-orders/incoming-shipments"}
+        url={"http://localhost:8000/api/incoming-shipments"}
         onUrlChange={setAddress}
       />
     </>
