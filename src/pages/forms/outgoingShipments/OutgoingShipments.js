@@ -91,7 +91,7 @@ const OutgoingShipments = () => {
           </CButton>
         </CCol>
         <CCol md={4}>
-          <CFormLabel>order Id</CFormLabel>
+          <CFormLabel>Contract No.</CFormLabel>
           <Options
             url={"buying-orders"}
             Data={values || ""}

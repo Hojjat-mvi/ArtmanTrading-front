@@ -66,9 +66,9 @@ const Selling = () => {
       <>
         {sellings.map((selling) => (
           <CTableRow key={selling.id}>
-            <CTableDataCell scope="col" className="col-12">
+            <CTableDataCell scope="col" className="col-9">
               {" "}
-              {selling.id}
+              {selling.number}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
@@ -107,12 +107,12 @@ const Selling = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">selling</CNavbarBrand>
+          <CNavbarBrand>Selling Orders</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search selling"
+              placeholder="Search Selling Orders"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}

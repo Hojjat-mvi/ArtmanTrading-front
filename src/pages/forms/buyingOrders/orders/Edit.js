@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import {  useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   CForm,
   CCol,
@@ -9,7 +9,7 @@ import {
   CFormSelect,
   CFormTextarea,
   CButtonToolbar,
-  CFormLabel
+  CFormLabel,
 } from "@coreui/react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -17,8 +17,7 @@ import Options from "src/components/Options";
 
 export const Edit = () => {
   const location = useLocation();
-  const navigate= useNavigate()
-
+  const navigate = useNavigate();
 
   const order = location.state.order;
   const [values, setValues] = useState(order);
@@ -55,9 +54,13 @@ export const Edit = () => {
       event.preventDefault();
       const token = localStorage.getItem("token");
       try {
-         await axios.put(`http://localhost:8000/api/buying-orders/${order.id}`, values, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.put(
+          `http://localhost:8000/api/buying-orders/${order.id}`,
+          values,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         toast.success("order changed");
       } catch (e) {
         toast.error(e.message);
@@ -127,7 +130,6 @@ export const Edit = () => {
     values.exchangeStatus = exchangeStatus;
   };
 
-
   return (
     <CForm
       className="row g-3 needs-BuyingOrders"
@@ -169,11 +171,19 @@ export const Edit = () => {
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Companies</CFormLabel>
-        <Options url={"companies"} Data={values.company_id} name={"company_id"} />
+        <Options
+          url={"companies"}
+          Data={values.company_id}
+          name={"company_id"}
+        />
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Material</CFormLabel>
-        <Options url={"materials"} Data={values.material_id} name={"material_id"} />
+        <Options
+          url={"materials"}
+          Data={values.material_id}
+          name={"material_id"}
+        />
       </CCol>
       <CCol md={4}>
         <CFormSelect
@@ -191,7 +201,11 @@ export const Edit = () => {
       </CCol>
       <CCol md={4}>
         <CFormLabel>Exchange</CFormLabel>
-        <Options url={"exchanges"} Data={values.exchange_id} name={"exchange_id"} />
+        <Options
+          url={"exchanges"}
+          Data={values.exchange_id}
+          name={"exchange_id"}
+        />
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -415,4 +429,4 @@ export const Edit = () => {
   );
 };
 
-export default Edit
+export default Edit;

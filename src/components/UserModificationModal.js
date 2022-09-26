@@ -3,6 +3,7 @@ import { useState } from "react";
 import {
   CModal,
   CButton,
+  CFormSelect,
   CModalHeader,
   CModalFooter,
   CModalTitle,
@@ -13,7 +14,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react/prop-types
-export const UserModal = ({ url, header, reRender }) => {
+export const UserModificationModal = ({ url, header, reRender }) => {
   const initialValues = {
     name: "",
     email: "",
@@ -44,10 +45,11 @@ export const UserModal = ({ url, header, reRender }) => {
     };
     try {
       await axios(config);
-      toast.success("created");
+      toast.success("Successful");
       setVisible(false);
+      setPostRequest(initialValues);
     } catch (e) {
-      toast.error("not created");
+      toast.error("Unsuccessful");
     }
     reRender(`http://localhost:8000/api/${url}`);
   };
@@ -60,7 +62,6 @@ export const UserModal = ({ url, header, reRender }) => {
     });
   };
 
-
   return (
     <div>
       <>
@@ -69,48 +70,59 @@ export const UserModal = ({ url, header, reRender }) => {
         </CButton>
         <CModal visible={visible} onClose={() => setVisible(false)}>
           <CModalHeader onClose={() => setVisible(false)}>
-            <CModalTitle> {`new ${header}`} </CModalTitle>
+            <CModalTitle> {`New ${header}`} </CModalTitle>
           </CModalHeader>
           <CModalBody>
             <CFormInput
               type="text"
               name="name"
-              label="name"
+              label="Username"
               value={postRequest.name}
               onChange={handleInputChange}
-              placeholder={`enter the ${header} name`}
+              placeholder={`Enter Username`}
+              className={"mb-2"}
             />{" "}
             <CFormInput
               type="email"
               name="email"
-              label="email"
+              label="Email address"
               value={postRequest.email}
               onChange={handleInputChange}
-              placeholder={`enter the ${header} email`}
+              placeholder={`Enter Email Address`}
+              className={"mb-2"}
             />{" "}
-            <CFormInput
-              type="number"
+            <CFormSelect
               name="role"
-              label="role"
+              label="Role"
               value={postRequest.role}
               onChange={handleInputChange}
-              placeholder={`enter the ${header} role`}
-            />
+              placeholder={`Select User's role`}
+              className={"mb-2"}
+            >
+              <option value="" hidden>
+                Choose...
+              </option>
+              <option value="0">Administration</option>
+              <option value="1">Documents</option>
+              <option value="2">Logistics</option>
+              <option value="3">Accounting</option>
+            </CFormSelect>
             <CFormInput
               type="password"
               name="password"
-              label="password"
+              label="Password"
               value={postRequest.password}
               onChange={handleInputChange}
-              placeholder={`enter the ${header} password`}
+              placeholder={`Enter ${header} password`}
+              className={"mb-2"}
             />
             <CFormInput
               type="password"
               name="password_confirmation"
-              label="confirm password"
+              label="Confirm Password"
               value={postRequest.password_confirmation}
               onChange={handleInputChange}
-              placeholder={`enter the ${header} password`}
+              placeholder={`Re-type password`}
             />
           </CModalBody>
           <CModalFooter>
@@ -128,4 +140,4 @@ export const UserModal = ({ url, header, reRender }) => {
   );
 };
 
-export default UserModal;
+export default UserModificationModal;

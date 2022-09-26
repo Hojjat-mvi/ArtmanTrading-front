@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Shipment = () => {
   const [shipments, setShipments] = useState([]);
@@ -66,9 +68,13 @@ const Shipment = () => {
       <>
         {shipments.map((shipment) => (
           <CTableRow key={shipment.id}>
-            <CTableDataCell scope="col" className="col-12">
+            <CTableDataCell scope="col" className="col-5">
               {" "}
-              {shipment.id}
+              {shipment.number}
+            </CTableDataCell>
+            <CTableDataCell scope="col" className="col-4">
+              {" "}
+              {shipment.loading_date}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
@@ -80,7 +86,7 @@ const Shipment = () => {
                   });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
@@ -89,7 +95,7 @@ const Shipment = () => {
                   });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={shipment.id}
@@ -107,12 +113,12 @@ const Shipment = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">shipment</CNavbarBrand>
+          <CNavbarBrand>Incoming Shipments</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search shipment"
+              placeholder="Search Incoming Shipments"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
@@ -144,7 +150,8 @@ const Shipment = () => {
       <CTable hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">shipment ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Shipment Number</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Loading Data</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>

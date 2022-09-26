@@ -19,6 +19,8 @@ import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Materials = () => {
   const [materials, setMaterials] = useState([]);
@@ -65,7 +67,7 @@ const Materials = () => {
       <>
         {materials.map((material) => (
           <CTableRow key={material.id}>
-            <CTableHeaderCell scope="col" className="col-12">
+            <CTableHeaderCell scope="col" className="col-9">
               {material.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
@@ -76,14 +78,14 @@ const Materials = () => {
                   Navigate("/pages/materials/Show", { state: { material } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/materials/Edit", { state: { material } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={material.id}
@@ -101,7 +103,7 @@ const Materials = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">materials</CNavbarBrand>
+          <CNavbarBrand>Materials</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"

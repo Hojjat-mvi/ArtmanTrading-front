@@ -11,7 +11,7 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: "Forms",
+    name: "Orders & Shipments",
     to: "/pages/forms",
     items: [
       {
@@ -55,7 +55,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: "Transit",
+    name: "Transit Companies",
     to: "/pages/transit",
   },
   {

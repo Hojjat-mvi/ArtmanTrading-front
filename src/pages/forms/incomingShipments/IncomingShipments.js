@@ -75,18 +75,18 @@ const IncomingShipments = () => {
         onSubmit={SubmitHandler}
       >
         <CCol xs={12}>
-        <CButton
-          onClick={() => {
-            navigate("/pages/forms/shipments");
-          }}
-          shape="rounded-pill"
-          style={{ marginBottom: "10px" }}
-        >
-          Back
-        </CButton>
+          <CButton
+            onClick={() => {
+              navigate("/pages/forms/shipments");
+            }}
+            shape="rounded-pill"
+            style={{ marginBottom: "10px" }}
+          >
+            Back
+          </CButton>
         </CCol>
         <CCol md={4}>
-          <CFormLabel>order Id</CFormLabel>
+          <CFormLabel>Contract No.</CFormLabel>
           <Options
             url={"buying-orders"}
             Data={values}

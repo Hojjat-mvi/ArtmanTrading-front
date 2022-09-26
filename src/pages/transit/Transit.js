@@ -17,8 +17,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
-import { toast,  } from "react-toastify";
+import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Transit = () => {
   const [transits, setTransit] = useState([]);
@@ -66,7 +68,7 @@ const Transit = () => {
       <>
         {transits.map((transit) => (
           <CTableRow key={transit.id}>
-            <CTableHeaderCell scope="col" className="col-12">
+            <CTableHeaderCell scope="col" className="col-9">
               {transit.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
@@ -77,14 +79,14 @@ const Transit = () => {
                   Navigate("/pages/transit/Show", { state: { transit } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/transit/Edit", { state: { transit } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={transit.id}
@@ -102,7 +104,7 @@ const Transit = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">transits</CNavbarBrand>
+          <CNavbarBrand>Transits Companies</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"

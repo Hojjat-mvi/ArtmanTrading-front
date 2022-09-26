@@ -36,8 +36,10 @@ const Options = ({ url, name, Data }) => {
 
   if (url === "buying-orders") {
     {
-      values.map((item) => options.push({ value: item.id, label: item.id }));
-    }  
+      values.map((item) =>
+        options.push({ value: item.id, label: item.contract_no })
+      );
+    }
   } else {
     {
       values.map((item) => options.push({ value: item.id, label: item.name }));
