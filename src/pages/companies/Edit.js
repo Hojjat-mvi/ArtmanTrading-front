@@ -1,11 +1,11 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Edit = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const location = useLocation();
 
@@ -17,11 +17,15 @@ const Edit = () => {
     event.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:8000/api/companies/${company.id}`, values, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `http://localhost:8000/api/companies/${company.id}`,
+        values,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       toast.success("created");
-      navigate('/pages/companies')
+      navigate("/pages/companies");
     } catch (error) {
       toast.error(error.message);
     }

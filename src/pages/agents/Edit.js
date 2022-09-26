@@ -1,19 +1,17 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const Edit = () => {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   const location = useLocation();
 
   const agent = location.state.agent;
 
   const [values, setValues] = useState(agent);
-
-  
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -23,9 +21,9 @@ const Edit = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("created");
-      Navigate('/pages/agents')
+      Navigate("/pages/agents");
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 

@@ -17,8 +17,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
-import { toast,  } from "react-toastify";
+import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
@@ -64,7 +66,7 @@ const Companies = () => {
       <>
         {companies.map((company) => (
           <CTableRow key={company.id}>
-            <CTableHeaderCell scope="col" className="col-12">
+            <CTableHeaderCell scope="col" className="col-9">
               {company.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
@@ -75,14 +77,14 @@ const Companies = () => {
                   Navigate("/pages/companies/Show", { state: { company } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/companies/Edit", { state: { company } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={company.id}
@@ -100,12 +102,12 @@ const Companies = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">companies</CNavbarBrand>
+          <CNavbarBrand href="#">Companies</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search companies"
+              placeholder="Search Companies"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}

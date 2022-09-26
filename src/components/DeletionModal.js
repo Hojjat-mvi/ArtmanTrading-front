@@ -10,16 +10,16 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AiFillDelete } from "react-icons/ai";
 
 // eslint-disable-next-line react/prop-types
-export const DeletionModal = ({ resource, url,reRender }) => {
+export const DeletionModal = ({ resource, url, reRender }) => {
   const [visible, setVisible] = useState(false);
-  
 
   return (
     <>
       <CButton color="danger" onClick={() => setVisible(!visible)}>
-        Delete
+        <AiFillDelete />
       </CButton>
       <CModal
         alignment="center"
@@ -44,11 +44,11 @@ export const DeletionModal = ({ resource, url,reRender }) => {
                   { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setVisible(false);
-                  toast.success('deleted successfully')
+                toast.success("deleted successfully");
               } catch (e) {
-                toast.error(e.message)
+                toast.error(e.message);
               }
-              reRender(`http://localhost:8000/api/${url}`)
+              reRender(`http://localhost:8000/api/${url}`);
             }}
           >
             delete

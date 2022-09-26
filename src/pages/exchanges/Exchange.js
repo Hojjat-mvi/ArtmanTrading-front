@@ -19,6 +19,8 @@ import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Exchanges = () => {
   const [exchanges, setExchanges] = useState([]);
@@ -64,7 +66,7 @@ const Exchanges = () => {
       <>
         {exchanges.map((exchange) => (
           <CTableRow key={exchange.id}>
-            <CTableHeaderCell scope="col" className="col-12">
+            <CTableHeaderCell scope="col" className="col-9">
               {exchange.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
@@ -75,14 +77,14 @@ const Exchanges = () => {
                   Navigate("/pages/exchanges/Show", { state: { exchange } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/exchanges/Edit", { state: { exchange } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={exchange.id}
@@ -100,12 +102,12 @@ const Exchanges = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">exchanges</CNavbarBrand>
+          <CNavbarBrand>Exchanges</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search exchanges"
+              placeholder="Search Exchanges"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}

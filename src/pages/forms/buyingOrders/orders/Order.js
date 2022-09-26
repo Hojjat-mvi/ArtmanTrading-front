@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Tables = () => {
   const [orders, setOrders] = useState([]);
@@ -66,9 +68,9 @@ const Tables = () => {
       <>
         {orders.map((order) => (
           <CTableRow key={order.id}>
-            <CTableDataCell scope="col" className="col-12">
+            <CTableDataCell scope="col" className="col-9">
               {" "}
-              {order.id}
+              {order.contract_no}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
@@ -78,14 +80,14 @@ const Tables = () => {
                   Navigate("/pages/orders/Show", { state: { order } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/orders/Edit", { state: { order } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={order.id}
@@ -103,12 +105,12 @@ const Tables = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">Orders</CNavbarBrand>
+          <CNavbarBrand>Buying Orders</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search Orders"
+              placeholder="Search Buying Orders"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
@@ -140,7 +142,7 @@ const Tables = () => {
       <CTable hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">Order ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Contract No.</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
