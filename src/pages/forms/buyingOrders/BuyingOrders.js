@@ -63,14 +63,11 @@ const BuyingOrders = () => {
         if (res.status === 201) {
           toast.success("form saved");
           Navigate("/pages/orders");
-          console.log(values);
         } else {
           toast.error("error");
-          console.log(values);
         }
       } catch (e) {
         toast.error(e.message);
-        console.log(values);
       }
     }
   };
@@ -143,7 +140,7 @@ const BuyingOrders = () => {
     <ValueProvider
       value={{
         values: values,
-        onValueChange: (value,name) => setValues({ ...values, [name]: value }),
+        onValueChange: (value, name) => setValues({ ...values, [name]: value }),
       }}
     >
       <CForm
@@ -152,6 +149,17 @@ const BuyingOrders = () => {
         validated={validated}
         onSubmit={SubmitHandler}
       >
+        <CCol xs={12}>
+        <CButton
+          onClick={() => {
+            Navigate("/pages/orders");
+          }}
+          shape="rounded-pill"
+          style={{ marginBottom: "10px" }}
+        >
+          Back
+        </CButton>
+        </CCol>
         {/*buying-orders-table*/}
         <CCol xs={4}>
           <CFormInput

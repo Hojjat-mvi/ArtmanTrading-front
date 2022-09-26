@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
@@ -7,8 +7,7 @@ import valueContext from "src/context/valueContext";
 
 // eslint-disable-next-line react/prop-types
 const Options = ({ url, name, Data }) => {
-  const ValueContext = useContext(valueContext)
-
+  const ValueContext = useContext(valueContext);
 
   const [values, setValues] = useState([]);
   const [selectedValue, setSelectedValue] = useState(Data);
@@ -34,13 +33,20 @@ const Options = ({ url, name, Data }) => {
   useEffect(() => {
     getData();
   }, []);
-  {
-    values.map((item) => options.push({ value: item.id, label: item.name }));
+
+  if (url === "buying-orders") {
+    {
+      values.map((item) => options.push({ value: item.id, label: item.id }));
+    }  
+  } else {
+    {
+      values.map((item) => options.push({ value: item.id, label: item.name }));
+    }
   }
 
   const handleEvent = (e) => {
-    setSelectedValue(e.value)
-    ValueContext.onValueChange(e.value,name)
+    setSelectedValue(e.value);
+    ValueContext.onValueChange(e.value, name);
   };
 
   return (

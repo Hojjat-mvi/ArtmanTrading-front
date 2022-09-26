@@ -1,16 +1,27 @@
-import React from 'react'
-import { CForm, CCol, CFormInput } from "@coreui/react";
-import { useLocation } from "react-router-dom";
-
+import React from "react";
+import { CForm, CCol, CFormInput, CButton } from "@coreui/react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Show = () => {
+  const navigate = useNavigate();
 
-    const location = useLocation()
+  const location = useLocation();
 
-    const shipment = location.state.shipment
+  const shipment = location.state.shipment;
 
   return (
     <CForm className="row g-3 needs-validation" noValidate>
+            <CCol xs={12}>
+        <CButton
+          onClick={() => {
+            navigate("/pages/forms/shipments");
+          }}
+          shape="rounded-pill"
+          style={{ marginBottom: "10px" }}
+        >
+          Back
+        </CButton>
+      </CCol>
       <CCol md={4}>
         <CFormInput
           readOnly
@@ -197,7 +208,7 @@ const Show = () => {
         />
       </CCol>
     </CForm>
-  )
-}
+  );
+};
 
-export default Show
+export default Show;
