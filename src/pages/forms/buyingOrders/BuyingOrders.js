@@ -15,29 +15,11 @@ import {
 import Options from "src/components/Options";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { ValueProvider } from "src/context/valueContext";
 const BuyingOrders = () => {
   const Navigate = useNavigate();
 
-  const initialValues = {
-    date_of_purchase: "",
-    contract_no: "",
-    analysis: "",
-    analysis_result: "",
-    sending_docs_to_seller: "",
-    exchange_status: "",
-    quantity: "",
-    container_size: "",
-    packaging_style: "",
-    certificate_of_origin: "",
-    buying_price: "",
-    selling_price: "",
-    packaging_weight: "",
-    term: "",
-    notes: "",
-  };
-
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(false);
   const [sdts1, setsdts1] = useState(false);
   const [sdts2, setsdts2] = useState(false);
   const [sdts3, setsdts3] = useState(false);
@@ -81,11 +63,14 @@ const BuyingOrders = () => {
         if (res.status === 201) {
           toast.success("form saved");
           Navigate("/pages/orders");
+          console.log(values);
         } else {
           toast.error("error");
+          console.log(values);
         }
       } catch (e) {
         toast.error(e.message);
+        console.log(values);
       }
     }
   };
@@ -155,278 +140,285 @@ const BuyingOrders = () => {
   useEffect(() => {}, []);
 
   return (
-    <CForm
-      className="row g-3 needs-BuyingOrders"
-      noValidate
-      validated={validated}
-      onSubmit={SubmitHandler}
+    <ValueProvider
+      value={{
+        values: values,
+        onValueChange: (value,name) => setValues({ ...values, [name]: value }),
+      }}
     >
-      {/*buying-orders-table*/}
-      <CCol xs={4}>
-        <CFormInput
-          type="date"
-          label="Date of Purchase"
-          name="date_of_purchase"
-          onChange={handleInputChange}
-          value={values.date_of_purchase || ""}
-          required
-        />
-      </CCol>
-      <CCol md={4}>
-        <CFormInput
-          type="text"
-          label="Contract"
-          name="contract_no"
-          onChange={handleInputChange}
-          value={values.contract_no || ""}
-          required
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormLabel>Companies</CFormLabel>
-        <Options url={"companies"} Data={values} name={"company_id"} />
-      </CCol>
-      <CCol xs={4}>
-        <CFormLabel>Material</CFormLabel>
-        <Options url={"materials"} Data={values} name={"material_id"} />
-      </CCol>
-      <CCol md={4}>
-        <CFormSelect
-          id="analysis"
-          label="Analysis"
-          name="analysis"
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.analysis || ""}
-        >
-          <option value="1">Needed</option>
-          <option value="2">Reported</option>
-          <option value="2">Sent</option>
-        </CFormSelect>
-      </CCol>
-      <CCol md={4}>
-        <CFormLabel>Exchange</CFormLabel>
-        <Options url={"exchanges"} Data={values} name={"exchange_id"} />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Quantity"
-          name="quantity"
-          onChange={handleInputChange}
-          value={values.quantity || ""}
-          placeholder="Quantity in KG"
-          required
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormLabel>Agent</CFormLabel>
-        <Options url={"agents"} Data={values} name={"agent_id"} />
-      </CCol>
-      <CCol xs={4}>
-        <CFormLabel>Transit Company</CFormLabel>
-        <Options
-          url={"transit-companies"}
-          Data={values}
-          name={"transit_company_id"}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Packaging Weight"
-          name="packaging_weight"
-          onChange={handleInputChange}
-          value={values.packaging_weight || ""}
-          placeholder="Packaging Weight in KG"
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormSelect
-          id="container_size"
-          label="Container Size"
-          name="container_size"
-          required
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.container_size || ""}
-        >
-          <option value="" hidden>
-            Choose...
-          </option>
-          <option value="1">20 Feet</option>
-          <option value="2">40 Feet</option>
-        </CFormSelect>
-      </CCol>
-      <CCol xs={4}>
-        <CFormSelect
-          id="packaging_style"
-          label="Packaging Style"
-          name="packaging_style"
-          required
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.packaging_style || ""}
-        >
-          <option value="" hidden>
-            Choose...
-          </option>
-          <option value="1">Loose</option>
-          <option value="2">Bundle</option>
-          <option value="3">Bracket</option>
-          <option value="4">Jumbo</option>
-        </CFormSelect>
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Buying Price"
-          placeholder="Buying price..."
-          name="buying_price"
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput
-          type="number"
-          label="Selling Price"
-          name="selling_price"
-          placeholder="Selling price..."
-          onChange={handleInputChange}
-          value={values.selling_price || ""}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <CFormSelect
-          id="term"
-          label="Term"
-          name="term"
-          required
-          tooltipFeedback
-          onChange={handleInputChange}
-          value={values.term || ""}
-        >
-          <option value="1">FCA</option>
-          <option value="2">FOB</option>
-          <option value="3">DF</option>
-        </CFormSelect>
-      </CCol>
-
-      <CCol md={12}>
-        <CFormTextarea
-          type="text"
-          label="Analysis Result"
-          name="analysis_result"
-          onChange={handleInputChange}
-          value={values.analysis_result || ""}
-          placeholder="Received analysis"
-        />
-      </CCol>
-      <CCol xs={12}>
-        {" "}
-        {/* textarea */}
-        <CFormTextarea
-          type="text"
-          label="Notes"
-          name="notes"
-          onChange={handleInputChange}
-          value={values.notes || ""}
-          placeholder="Related notes"
-        />
-      </CCol>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <CCol xs={4}>
-        <p>Sending Docs to Seller</p>
-        <CFormCheck
-          inline
-          name="sdts1"
-          value="1|| ''"
-          label="Received"
-          onChange={handleSendingDocsChange}
-          checked={sdts1}
-        />
-        <CFormCheck
-          inline
-          name="sdts2"
-          value="2|| ''"
-          label="Sent"
-          onChange={handleSendingDocsChange}
-          checked={sdts2}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <p>Certificate of Origin</p>
-        <CFormCheck
-          inline
-          name="coo1"
-          value="1"
-          label="Need?"
-          onChange={handleCooChange}
-          checked={coo1}
-        />
-        <CFormCheck
-          inline
-          name="coo2"
-          value="2|| ''"
-          label="Announced"
-          onChange={handleCooChange}
-          checked={coo2}
-        />
-        <CFormCheck
-          inline
-          name="coo3"
-          value="3|| ''"
-          label="Received"
-          onChange={handleCooChange}
-          checked={coo3}
-        />
-        <CFormCheck
-          inline
-          name="coo4"
-          value="4|| ''"
-          label="Sent to client"
-          onChange={handleCooChange}
-          checked={coo3}
-        />
-      </CCol>
-      <CCol xs={4}>
-        <p>Exchange Status</p>
-        <CFormCheck
-          inline
-          name="exchangeStatus1"
-          value="1|| ''"
-          label="Invoice"
-          onChange={handleExchangeStatus}
-          checked={exchangeStatus1}
-        />
-        <CFormCheck
-          inline
-          name="exchangeStatus2"
-          value="2|| ''"
-          label="Received"
-          onChange={handleExchangeStatus}
-          checked={exchangeStatus2}
-        />
-        <CFormCheck
-          inline
-          name="exchangeStatus3"
-          value="3|| ''"
-          label="Sent"
-          onChange={handleExchangeStatus}
-          checked={exchangeStatus3}
-        />
-      </CCol>
-      <CButtonToolbar className="mb-3">
-        <CCol>
-          <CButton style={{ marginBottom: "5px" }} type="submit">
-            submit
-          </CButton>
+      <CForm
+        className="row g-3 needs-BuyingOrders"
+        noValidate
+        validated={validated}
+        onSubmit={SubmitHandler}
+      >
+        {/*buying-orders-table*/}
+        <CCol xs={4}>
+          <CFormInput
+            type="date"
+            label="Date of Purchase"
+            name="date_of_purchase"
+            onChange={handleInputChange}
+            value={values.date_of_purchase || ""}
+            required
+          />
         </CCol>
-      </CButtonToolbar>
-    </CForm>
+        <CCol md={4}>
+          <CFormInput
+            type="text"
+            label="Contract"
+            name="contract_no"
+            onChange={handleInputChange}
+            value={values.contract_no || ""}
+            required
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormLabel>Companies</CFormLabel>
+          <Options url={"companies"} Data={values} name={"company_id"} />
+        </CCol>
+        <CCol xs={4}>
+          <CFormLabel>Material</CFormLabel>
+          <Options url={"materials"} Data={values} name={"material_id"} />
+        </CCol>
+        <CCol md={4}>
+          <CFormSelect
+            id="analysis"
+            label="Analysis"
+            name="analysis"
+            tooltipFeedback
+            onChange={handleInputChange}
+            value={values.analysis || ""}
+          >
+            <option value="1">Needed</option>
+            <option value="2">Reported</option>
+            <option value="2">Sent</option>
+          </CFormSelect>
+        </CCol>
+        <CCol md={4}>
+          <CFormLabel>Exchange</CFormLabel>
+          <Options url={"exchanges"} Data={values} name={"exchange_id"} />
+        </CCol>
+        <CCol xs={4}>
+          <CFormInput
+            type="number"
+            label="Quantity"
+            name="quantity"
+            onChange={handleInputChange}
+            value={values.quantity || ""}
+            placeholder="Quantity in KG"
+            required
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormLabel>Agent</CFormLabel>
+          <Options url={"agents"} Data={values} name={"agent_id"} />
+        </CCol>
+        <CCol xs={4}>
+          <CFormLabel>Transit Company</CFormLabel>
+          <Options
+            url={"transit-companies"}
+            Data={values}
+            name={"transit_company_id"}
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormInput
+            type="number"
+            label="Packaging Weight"
+            name="packaging_weight"
+            onChange={handleInputChange}
+            value={values.packaging_weight || ""}
+            placeholder="Packaging Weight in KG"
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormSelect
+            id="container_size"
+            label="Container Size"
+            name="container_size"
+            required
+            tooltipFeedback
+            onChange={handleInputChange}
+            value={values.container_size || ""}
+          >
+            <option value="" hidden>
+              Choose...
+            </option>
+            <option value="1">20 Feet</option>
+            <option value="2">40 Feet</option>
+          </CFormSelect>
+        </CCol>
+        <CCol xs={4}>
+          <CFormSelect
+            id="packaging_style"
+            label="Packaging Style"
+            name="packaging_style"
+            required
+            tooltipFeedback
+            onChange={handleInputChange}
+            value={values.packaging_style || ""}
+          >
+            <option value="" hidden>
+              Choose...
+            </option>
+            <option value="1">Loose</option>
+            <option value="2">Bundle</option>
+            <option value="3">Bracket</option>
+            <option value="4">Jumbo</option>
+          </CFormSelect>
+        </CCol>
+        <CCol xs={4}>
+          <CFormInput
+            type="number"
+            label="Buying Price"
+            placeholder="Buying price..."
+            name="buying_price"
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormInput
+            type="number"
+            label="Selling Price"
+            name="selling_price"
+            placeholder="Selling price..."
+            onChange={handleInputChange}
+            value={values.selling_price || ""}
+          />
+        </CCol>
+        <CCol xs={4}>
+          <CFormSelect
+            id="term"
+            label="Term"
+            name="term"
+            required
+            tooltipFeedback
+            onChange={handleInputChange}
+            value={values.term || ""}
+          >
+            <option value="1">FCA</option>
+            <option value="2">FOB</option>
+            <option value="3">DF</option>
+          </CFormSelect>
+        </CCol>
+
+        <CCol md={12}>
+          <CFormTextarea
+            type="text"
+            label="Analysis Result"
+            name="analysis_result"
+            onChange={handleInputChange}
+            value={values.analysis_result || ""}
+            placeholder="Received analysis"
+          />
+        </CCol>
+        <CCol xs={12}>
+          {" "}
+          {/* textarea */}
+          <CFormTextarea
+            type="text"
+            label="Notes"
+            name="notes"
+            onChange={handleInputChange}
+            value={values.notes || ""}
+            placeholder="Related notes"
+          />
+        </CCol>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <CCol xs={4}>
+          <p>Sending Docs to Seller</p>
+          <CFormCheck
+            inline
+            name="sdts1"
+            value="1|| ''"
+            label="Received"
+            onChange={handleSendingDocsChange}
+            checked={sdts1}
+          />
+          <CFormCheck
+            inline
+            name="sdts2"
+            value="2|| ''"
+            label="Sent"
+            onChange={handleSendingDocsChange}
+            checked={sdts2}
+          />
+        </CCol>
+        <CCol xs={4}>
+          <p>Certificate of Origin</p>
+          <CFormCheck
+            inline
+            name="coo1"
+            value="1"
+            label="Need?"
+            onChange={handleCooChange}
+            checked={coo1}
+          />
+          <CFormCheck
+            inline
+            name="coo2"
+            value="2|| ''"
+            label="Announced"
+            onChange={handleCooChange}
+            checked={coo2}
+          />
+          <CFormCheck
+            inline
+            name="coo3"
+            value="3|| ''"
+            label="Received"
+            onChange={handleCooChange}
+            checked={coo3}
+          />
+          <CFormCheck
+            inline
+            name="coo4"
+            value="4|| ''"
+            label="Sent to client"
+            onChange={handleCooChange}
+            checked={coo3}
+          />
+        </CCol>
+        <CCol xs={4}>
+          <p>Exchange Status</p>
+          <CFormCheck
+            inline
+            name="exchangeStatus1"
+            value="1|| ''"
+            label="Invoice"
+            onChange={handleExchangeStatus}
+            checked={exchangeStatus1}
+          />
+          <CFormCheck
+            inline
+            name="exchangeStatus2"
+            value="2|| ''"
+            label="Received"
+            onChange={handleExchangeStatus}
+            checked={exchangeStatus2}
+          />
+          <CFormCheck
+            inline
+            name="exchangeStatus3"
+            value="3|| ''"
+            label="Sent"
+            onChange={handleExchangeStatus}
+            checked={exchangeStatus3}
+          />
+        </CCol>
+        <CButtonToolbar className="mb-3">
+          <CCol>
+            <CButton style={{ marginBottom: "5px" }} type="submit">
+              submit
+            </CButton>
+          </CCol>
+        </CButtonToolbar>
+      </CForm>
+    </ValueProvider>
   );
 };
 

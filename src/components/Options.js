@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import valueContext from "src/context/valueContext";
 
 // eslint-disable-next-line react/prop-types
 const Options = ({ url, name, Data }) => {
+  const ValueContext = useContext(valueContext)
+
+
   const [values, setValues] = useState([]);
   const [selectedValue, setSelectedValue] = useState(Data);
   const options = [
@@ -14,7 +18,6 @@ const Options = ({ url, name, Data }) => {
       label: "",
     },
   ];
-
 
   const getData = async () => {
     const token = localStorage.getItem("token");
@@ -37,6 +40,7 @@ const Options = ({ url, name, Data }) => {
 
   const handleEvent = (e) => {
     setSelectedValue(e.value)
+    ValueContext.onValueChange(e.value,name)
   };
 
   return (
