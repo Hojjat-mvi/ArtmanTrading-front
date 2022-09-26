@@ -7,6 +7,7 @@ import Select from "react-select";
 // eslint-disable-next-line react/prop-types
 const Options = ({ url, name, Data }) => {
   const [values, setValues] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(Data);
   const options = [
     {
       value: "",
@@ -35,7 +36,7 @@ const Options = ({ url, name, Data }) => {
   }
 
   const handleEvent = (e) => {
-    Data[name] = e.value;
+    setSelectedValue(e.value)
   };
 
   return (
@@ -43,6 +44,7 @@ const Options = ({ url, name, Data }) => {
       <Select
         options={options.slice(1, options.length)}
         onChange={handleEvent}
+        value={options.filter((option) => option.value === selectedValue)}
       ></Select>
     </>
   );
