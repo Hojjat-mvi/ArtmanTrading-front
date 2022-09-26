@@ -15,48 +15,24 @@ const _nav = [
     to: "/pages/forms",
     items: [
       {
-        component: CNavGroup,
-        name: "buyingOrders",
-        items: [
-          {
-            component: CNavItem,
-            name: "Orders",
-            to: "/pages/orders",
-          },
-        ],
+        component: CNavItem,
+        name: "Buying Orders",
+        to: "/pages/orders",
       },
       {
-        component: CNavGroup,
-        name: "incomingShipments",
-        items: [
-          {
-            component: CNavItem,
-            name: "Shipments",
-            to: "/pages/forms/shipments",
-          },
-        ],
+        component: CNavItem,
+        name: "Incoming Shipments",
+        to: "/pages/forms/shipments",
       },
       {
-        component: CNavGroup,
-        name: "outgoingShipments",
-        items: [
-          {
-            component: CNavItem,
-            name: "Shipments",
-            to: "/pages/forms/shipmentsOutgoing",
-          },
-        ],
+        component: CNavItem,
+        name: "Outgoing Shipments",
+        to: "/pages/forms/shipmentsOutgoing",
       },
       {
-        component: CNavGroup,
-        name: "sellingOrders",
-        items: [
-          {
-            component: CNavItem,
-            name: "selling",
-            to: "/pages/forms/selling",
-          },
-        ],
+        component: CNavItem,
+        name: "Selling Orders",
+        to: "/pages/forms/selling",
       },
     ],
   },

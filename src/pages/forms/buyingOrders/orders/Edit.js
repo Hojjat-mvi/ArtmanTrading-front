@@ -169,11 +169,11 @@ export const Edit = () => {
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Companies</CFormLabel>
-        <Options url={"companies"} Data={values} name={"company_id"} />
+        <Options url={"companies"} Data={values.company_id} name={"company_id"} />
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Material</CFormLabel>
-        <Options url={"materials"} Data={values} name={"material_id"} />
+        <Options url={"materials"} Data={values.material_id} name={"material_id"} />
       </CCol>
       <CCol md={4}>
         <CFormSelect
@@ -191,7 +191,7 @@ export const Edit = () => {
       </CCol>
       <CCol md={4}>
         <CFormLabel>Exchange</CFormLabel>
-        <Options url={"exchanges"} Data={values} name={"exchange_id"} />
+        <Options url={"exchanges"} Data={values.exchange_id} name={"exchange_id"} />
       </CCol>
       <CCol xs={4}>
         <CFormInput
@@ -206,13 +206,13 @@ export const Edit = () => {
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Agent</CFormLabel>
-        <Options url={"agents"} Data={values} name={"agent_id"} />
+        <Options url={"agents"} Data={values.agent_id} name={"agent_id"} />
       </CCol>
       <CCol xs={4}>
         <CFormLabel>Transit Company</CFormLabel>
         <Options
           url={"transit-companies"}
-          Data={values}
+          Data={values.transit_company_id}
           name={"transit_company_id"}
         />
       </CCol>
