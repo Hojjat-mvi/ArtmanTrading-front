@@ -1,19 +1,17 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 
 const Edit = () => {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   const location = useLocation();
 
   const agent = location.state.agent;
 
   const [values, setValues] = useState(agent);
-
-  
 
   const SubmitHandler = async (event) => {
     event.preventDefault();
@@ -23,9 +21,9 @@ const Edit = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("created");
-      Navigate('/pages/agents')
+      Navigate("/pages/agents");
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
@@ -51,14 +49,24 @@ const Edit = () => {
         pauseOnHover
         theme="dark"
       />
-      <CFormInput
-        label="Name"
-        name="name"
-        onChange={handleInputChange}
-        value={values.name}
-      />
+      <CCol md={4}>
+        <CFormInput
+          label="Name"
+          name="name"
+          onChange={handleInputChange}
+          value={values.name}
+        />
+      </CCol>
       <br></br>
       <CCol xs={2}>
+      <CButton
+          onClick={() => {
+            Navigate("/pages/agents");
+          }}
+          className='me-md-2'
+        >
+          Back
+        </CButton>
         <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>

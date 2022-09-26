@@ -113,6 +113,7 @@ const OutgoingShipments = () => {
           <CFormCheck
             inline
             label="Recorded"
+            type="number"
             name="custom_agent_invoice_status"
             onChange={handleInputChange}
             checked={values.custom_agent_invoice_status || ""}

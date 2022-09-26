@@ -1,13 +1,13 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Edit = () => {
   const location = useLocation();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const transit = location.state.transit;
 
@@ -23,7 +23,7 @@ const Edit = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("success");
-      navigate('/pages/transit')
+      navigate("/pages/transit");
     } catch (error) {
       toast.error(error.message);
     }
@@ -37,15 +37,25 @@ const Edit = () => {
     });
   };
   return (
-    <CForm >
-      <CFormInput
-        label="Name"
-        name="name"
-        onChange={handleInputChange}
-        value={values.name}
-      />
+    <CForm>
+      <CCol md={4}>
+        <CFormInput
+          label="Name"
+          name="name"
+          onChange={handleInputChange}
+          value={values.name}
+        />
+      </CCol>
       <br></br>
       <CCol xs={2}>
+        <CButton
+          onClick={() => {
+            navigate("/pages/transit");
+          }}
+          className="me-md-2"
+        >
+          Back
+        </CButton>
         <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>

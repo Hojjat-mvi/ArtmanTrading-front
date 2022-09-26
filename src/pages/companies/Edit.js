@@ -1,11 +1,11 @@
 import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Edit = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const location = useLocation();
 
@@ -17,11 +17,15 @@ const Edit = () => {
     event.preventDefault();
     const token = localStorage.getItem("token");
     try {
-      await axios.put(`http://localhost:8000/api/companies/${company.id}`, values, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `http://localhost:8000/api/companies/${company.id}`,
+        values,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       toast.success("created");
-      navigate('/pages/companies')
+      navigate("/pages/companies");
     } catch (error) {
       toast.error(error.message);
     }
@@ -37,14 +41,24 @@ const Edit = () => {
 
   return (
     <CForm>
-      <CFormInput
-        label="Name"
-        name="name"
-        onChange={handleInputChange}
-        value={values.name}
-      />
+      <CCol md={4}>
+        <CFormInput
+          label="Name"
+          name="name"
+          onChange={handleInputChange}
+          value={values.name}
+        />
+      </CCol>
       <br></br>
       <CCol xs={2}>
+        <CButton
+          onClick={() => {
+            navigate("/pages/companies");
+          }}
+          className="me-md-2"
+        >
+          Back
+        </CButton>
         <CButton onClick={SubmitHandler}>Submit</CButton>
       </CCol>
     </CForm>

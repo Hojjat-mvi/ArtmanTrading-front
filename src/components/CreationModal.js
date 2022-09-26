@@ -34,6 +34,7 @@ export const CreationModal = ({ url, header, reRender }) => {
       await axios(config);
       toast.success("created");
       setVisible(false);
+      setPostRequest('')
     } catch (e) {
       toast.error("not created");
     }

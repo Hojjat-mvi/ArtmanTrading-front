@@ -126,6 +126,7 @@ const Show = () => {
           type="number"
           label="Seller Net Weight"
           name="seller_net_weight"
+          value={shipment.seller_net_weight}
           placeholder="Weight in KG"
         />
       </CCol>
@@ -136,6 +137,7 @@ const Show = () => {
           type="number"
           label="Buyer Net Weight"
           name="buyer_net_weight"
+          value={shipment.buyer_net_weight}
           placeholder="Weight in KG"
         />
       </CCol>
@@ -146,6 +148,7 @@ const Show = () => {
           type="number"
           label="Container Number"
           name="container_number"
+          value={shipment.container_number}
           placeholder="Enter number..."
         />
       </CCol>
@@ -156,6 +159,7 @@ const Show = () => {
           type="number"
           label="Seal Number"
           name="seal_number"
+          value={shipment.seal_number}
           placeholder="Enter number..."
         />
       </CCol>
@@ -166,6 +170,7 @@ const Show = () => {
           type="number"
           label="Fixed Seller LME Price"
           name="fixed_seller_lme_price"
+          value={shipment.fixed_seller_lme_price}
           placeholder="Enter price..."
         />
       </CCol>
@@ -176,6 +181,7 @@ const Show = () => {
           type="number"
           label="Fixed Buyer LME Price"
           name="fixed_buyer_lme_price"
+          value={shipment.fixed_buyer_lme_price}
           placeholder="Enter price..."
         />
       </CCol>
@@ -186,6 +192,7 @@ const Show = () => {
           type="date"
           label="Fixed Buyer LME Price Date"
           name="fixed_buyer_lme_price_date"
+          value={shipment.fixed_buyer_lme_price_date}
         />
       </CCol>
       <CCol xs={4}>
@@ -195,6 +202,7 @@ const Show = () => {
           type="date"
           label="LME Fixed Date"
           name="lme_fixed_date"
+          value={shipment.lme_fixed_date}
         />
       </CCol>
       <CCol xs={4}>
@@ -204,6 +212,7 @@ const Show = () => {
           type="date"
           label="LME Expiration Date"
           name="lme_expiration_date"
+          value={shipment.lme_expiration_date}
           style={{ marginBottom: "10px" }}
         />
       </CCol>
