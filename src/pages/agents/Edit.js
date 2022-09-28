@@ -2,7 +2,7 @@ import { CForm, CFormInput, CButton, CCol } from "@coreui/react";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Edit = () => {
   const Navigate = useNavigate();
@@ -37,18 +37,6 @@ const Edit = () => {
 
   return (
     <CForm>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <CCol md={4}>
         <CFormInput
           label="Name"

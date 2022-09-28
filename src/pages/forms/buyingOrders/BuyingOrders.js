@@ -150,15 +150,15 @@ const BuyingOrders = () => {
         onSubmit={SubmitHandler}
       >
         <CCol xs={12}>
-        <CButton
-          onClick={() => {
-            Navigate("/pages/orders");
-          }}
-          shape="rounded-pill"
-          style={{ marginBottom: "10px" }}
-        >
-          Back
-        </CButton>
+          <CButton
+            onClick={() => {
+              Navigate("/pages/orders");
+            }}
+            shape="rounded-pill"
+            style={{ marginBottom: "10px" }}
+          >
+            Back
+          </CButton>
         </CCol>
         {/*buying-orders-table*/}
         <CCol xs={4}>

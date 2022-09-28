@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Shipment = () => {
   const [shipments, setShipments] = useState([]);
@@ -66,26 +68,30 @@ const Shipment = () => {
       <>
         {shipments.map((shipment) => (
           <CTableRow key={shipment.id}>
-            <CTableDataCell scope="col" className="col-12">
+            <CTableDataCell scope="col" className="col-9">
               {" "}
-              {shipment.id}
+              {shipment.number}
             </CTableDataCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
               {" "}
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingShipments/shipments/Show", { state: { shipment } });
+                  Navigate("/pages/forms/outShipmentShow", {
+                    state: { shipment },
+                  });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingShipments/shipments/Edit", { state: { shipment } });
+                  Navigate("/pages/forms/outShipmentEdit", {
+                    state: { shipment },
+                  });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={shipment.id}
@@ -103,12 +109,12 @@ const Shipment = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">shipment</CNavbarBrand>
+          <CNavbarBrand>Outgoing Shipments</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search shipment"
+              placeholder="Search Outgoing Shipments"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}
@@ -140,7 +146,7 @@ const Shipment = () => {
       <CTable hover>
         <CTableHead>
           <CTableRow>
-            <CTableHeaderCell scope="col">shipment ID</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Shipment Number</CTableHeaderCell>
             <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
           </CTableRow>
         </CTableHead>

@@ -48,17 +48,15 @@ const IncomingShipments = () => {
         if (res.status === 201) {
           toast.success("form saved");
           navigate("/pages/forms/shipments");
-          console.log(values);
         } else {
-          console.log(values);
           toast.error("error");
         }
       } catch (e) {
-        console.log(values);
         toast.error(e.message);
       }
     }
   };
+
 
   return (
     // Incoming shipment
@@ -75,18 +73,18 @@ const IncomingShipments = () => {
         onSubmit={SubmitHandler}
       >
         <CCol xs={12}>
-        <CButton
-          onClick={() => {
-            navigate("/pages/forms/shipments");
-          }}
-          shape="rounded-pill"
-          style={{ marginBottom: "10px" }}
-        >
-          Back
-        </CButton>
+          <CButton
+            onClick={() => {
+              navigate("/pages/forms/shipments");
+            }}
+            shape="rounded-pill"
+            style={{ marginBottom: "10px" }}
+          >
+            Back
+          </CButton>
         </CCol>
         <CCol md={4}>
-          <CFormLabel>order Id</CFormLabel>
+          <CFormLabel>Contract No.</CFormLabel>
           <Options
             url={"buying-orders"}
             Data={values}
@@ -185,6 +183,8 @@ const IncomingShipments = () => {
           <CFormInput
             type="number"
             label="Seller Net Weight"
+            onChange={handleInputChange}
+            value={values.seller_net_weight || ""}
             name="seller_net_weight"
             placeholder="Weight in KG"
           />
@@ -194,60 +194,76 @@ const IncomingShipments = () => {
             type="number"
             label="Buyer Net Weight"
             name="buyer_net_weight"
+            value={values.buyer_net_weight || ""}
             placeholder="Weight in KG"
+            onChange={handleInputChange}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
+            onChange={handleInputChange}
             label="Container Number"
             name="container_number"
             placeholder="Enter number..."
+            value={values.container_number || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
+            onChange={handleInputChange}
             type="number"
             label="Seal Number"
             name="seal_number"
             placeholder="Enter number..."
+            value={values.seal_number || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
             label="Fixed Seller LME Price"
+            onChange={handleInputChange}
             name="fixed_seller_lme_price"
             placeholder="Enter price..."
+            value={values.fixed_seller_lme_price || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="number"
             label="Fixed Buyer LME Price"
+            onChange={handleInputChange}
             name="fixed_buyer_lme_price"
             placeholder="Enter price..."
+            value={values.fixed_buyer_lme_price || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="date"
             label="Fixed Buyer LME Price Date"
+            onChange={handleInputChange}
             name="fixed_buyer_lme_price_date"
+            value={values.fixed_buyer_lme_price_date || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="date"
             label="LME Fixed Date"
+            onChange={handleInputChange}
             name="lme_fixed_date"
+            value={values.lme_fixed_date || ""}
           />
         </CCol>
         <CCol xs={4}>
           <CFormInput
             type="date"
             label="LME Expiration Date"
+            onChange={handleInputChange}
             name="lme_expiration_date"
+            value={values.lme_expiration_date || ""}
             style={{ marginBottom: "10px" }}
           />
         </CCol>

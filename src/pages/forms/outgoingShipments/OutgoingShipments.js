@@ -24,9 +24,10 @@ const OutgoingShipments = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setValues({
       ...values,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
     });
   };
 
@@ -84,14 +85,13 @@ const OutgoingShipments = () => {
             onClick={() => {
               navigate("/pages/forms/shipmentsOutgoing");
             }}
-            shape="rounded-pill"
             style={{ marginBottom: "10px" }}
           >
             Back
           </CButton>
         </CCol>
         <CCol md={4}>
-          <CFormLabel>order Id</CFormLabel>
+          <CFormLabel>Contract No.</CFormLabel>
           <Options
             url={"buying-orders"}
             Data={values || ""}
@@ -113,7 +113,6 @@ const OutgoingShipments = () => {
           <CFormCheck
             inline
             label="Recorded"
-            type="number"
             name="custom_agent_invoice_status"
             onChange={handleInputChange}
             checked={values.custom_agent_invoice_status || ""}

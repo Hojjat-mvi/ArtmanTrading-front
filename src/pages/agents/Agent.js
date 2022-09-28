@@ -19,6 +19,8 @@ import { DeletionModal } from "../../components/DeletionModal";
 import { CreationModal } from "../../components/CreationModal";
 import Pagination from "src/components/Pagination";
 import { toast } from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Tables = () => {
   const [agents, setAgents] = useState([]);
@@ -35,9 +37,9 @@ const Tables = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAgents(result.data.data);
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
     }
   };
 
@@ -66,7 +68,7 @@ const Tables = () => {
       <>
         {agents.map((agent) => (
           <CTableRow key={agent.id}>
-            <CTableHeaderCell scope="col" className="col-12">
+            <CTableHeaderCell scope="col" className="col-9">
               {agent.name}
             </CTableHeaderCell>
             <CTableHeaderCell scope="col" className="d-grid gap-2 d-md-flex">
@@ -77,14 +79,14 @@ const Tables = () => {
                   Navigate("/pages/agents/Show", { state: { agent } });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
                   Navigate("/pages/agents/Edit", { state: { agent } });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={agent.id}

@@ -38,7 +38,7 @@ export const CreationModal = ({ url, header, reRender }) => {
     } catch (e) {
       toast.error("not created");
     }
-    reRender(`http://localhost:8000/api/${url}`)
+    reRender(`http://localhost:8000/api/${url}`);
   };
 
   return (
@@ -49,17 +49,17 @@ export const CreationModal = ({ url, header, reRender }) => {
         </CButton>
         <CModal visible={visible} onClose={() => setVisible(false)}>
           <CModalHeader onClose={() => setVisible(false)}>
-            <CModalTitle> {`new ${header}`} </CModalTitle>
+            <CModalTitle> {`New ${header}`} </CModalTitle>
           </CModalHeader>
           <CModalBody>
             <CFormInput
               type="text"
-              label="name"
+              label="Name"
               value={postRequest}
               onChange={(event) => {
                 setPostRequest(event.target.value);
               }}
-              placeholder={`enter the ${header} name`}
+              placeholder={`Enter ${header} name`}
             />
           </CModalBody>
           <CModalFooter>
@@ -68,7 +68,7 @@ export const CreationModal = ({ url, header, reRender }) => {
             </CButton>
             <CButton color="primary" onClick={SubmitHandler}>
               {" "}
-              create{" "}
+              Create{" "}
             </CButton>
           </CModalFooter>
         </CModal>

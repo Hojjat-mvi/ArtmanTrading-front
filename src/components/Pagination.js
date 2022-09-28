@@ -3,6 +3,7 @@ import axios from "axios";
 import { CPagination, CPaginationItem } from "@coreui/react";
 import { toast } from "react-toastify";
 
+
 // eslint-disable-next-line react/prop-types
 const Pagination = ({ url, onUrlChange }) => {
   const [link, setLink] = useState(url);
@@ -51,10 +52,7 @@ const Pagination = ({ url, onUrlChange }) => {
   };
   return (
     <div>
-      <CPagination
-        aria-label="Page navigation example"
-        align="center"
-      >
+      <CPagination aria-label="Page navigation example" align="center">
         <CPaginationItem
           aria-label="Previous"
           onClick={() => {

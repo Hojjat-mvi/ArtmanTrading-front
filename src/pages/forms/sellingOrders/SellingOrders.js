@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import {
   CForm,
-  CFormInput,
+  CFormInput, 
   CCol,
   CButton,
   CButtonToolbar,
@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { ValueProvider } from "src/context/valueContext";
 
 const SellingOrders = () => {
-  // const location = useLocation();
   const navigate = useNavigate();
 
   const [values, setValues] = useState(false);
@@ -24,7 +23,7 @@ const SellingOrders = () => {
     const { name, value, type, checked } = e.target;
     setValues({
       ...values,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
     });
   };
 
@@ -70,14 +69,13 @@ const SellingOrders = () => {
               onClick={() => {
                 navigate("/pages/forms/selling");
               }}
-              shape="rounded-pill"
               style={{ marginBottom: "10px" }}
             >
               Back
             </CButton>
           </CCol>
           <CCol md={4}>
-            <CFormLabel>order Id</CFormLabel>
+            <CFormLabel>Contract No.</CFormLabel>
             <Options
               url={"buying-orders"}
               Data={values}

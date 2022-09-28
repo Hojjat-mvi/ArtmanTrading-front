@@ -65,7 +65,6 @@ const Edit = () => {
           onClick={() => {
             navigate("/pages/forms/shipments");
           }}
-          shape="rounded-pill"
           style={{ marginBottom: "10px" }}
         >
           Back
@@ -163,7 +162,9 @@ const Edit = () => {
         <CFormInput
           type="number"
           label="Seller Net Weight"
+          onChange={handleInputChange}
           name="seller_net_weight"
+          value={values.seller_net_weight}
           placeholder="Weight in KG"
         />
       </CCol>
@@ -171,7 +172,9 @@ const Edit = () => {
         <CFormInput
           type="number"
           label="Buyer Net Weight"
+          onChange={handleInputChange}
           name="buyer_net_weight"
+          value={values.buyer_net_weight}
           placeholder="Weight in KG"
         />
       </CCol>
@@ -180,6 +183,8 @@ const Edit = () => {
           type="number"
           label="Container Number"
           name="container_number"
+          value={values.container_number}
+          onChange={handleInputChange}
           placeholder="Enter number..."
         />
       </CCol>
@@ -188,6 +193,8 @@ const Edit = () => {
           type="number"
           label="Seal Number"
           name="seal_number"
+          value={values.seal_number}
+          onChange={handleInputChange}
           placeholder="Enter number..."
         />
       </CCol>
@@ -196,6 +203,8 @@ const Edit = () => {
           type="number"
           label="Fixed Seller LME Price"
           name="fixed_seller_lme_price"
+          value={values.fixed_seller_lme_price}
+          onChange={handleInputChange}
           placeholder="Enter price..."
         />
       </CCol>
@@ -204,6 +213,8 @@ const Edit = () => {
           type="number"
           label="Fixed Buyer LME Price"
           name="fixed_buyer_lme_price"
+          value={values.fixed_buyer_lme_price}
+          onChange={handleInputChange}
           placeholder="Enter price..."
         />
       </CCol>
@@ -212,16 +223,26 @@ const Edit = () => {
           type="date"
           label="Fixed Buyer LME Price Date"
           name="fixed_buyer_lme_price_date"
+          value={values.fixed_buyer_lme_price_date}
+          onChange={handleInputChange}
         />
-      </CCol>
-      <CCol xs={4}>
-        <CFormInput type="date" label="LME Fixed Date" name="lme_fixed_date" />
       </CCol>
       <CCol xs={4}>
         <CFormInput
           type="date"
+          label="LME Fixed Date"
+          name="lme_fixed_date"
+          value={values.lme_fixed_date}
+          onChange={handleInputChange}
+        />
+      </CCol>
+      <CCol xs={4}>
+        <CFormInput
+          type="date"
+          onChange={handleInputChange}
           label="LME Expiration Date"
           name="lme_expiration_date"
+          value={values.lme_expiration_date}
           style={{ marginBottom: "10px" }}
         />
       </CCol>

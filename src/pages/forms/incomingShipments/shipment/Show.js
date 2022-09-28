@@ -11,7 +11,7 @@ const Show = () => {
 
   return (
     <CForm className="row g-3 needs-validation" noValidate>
-            <CCol xs={12}>
+      <CCol xs={12}>
         <CButton
           onClick={() => {
             navigate("/pages/forms/shipments");

@@ -10,12 +10,6 @@ const buyingOrders = React.lazy(() =>
 const incomingShipments = React.lazy(() =>
   import("./pages/forms/incomingShipments/IncomingShipments")
 );
-const shipmentEdit = React.lazy(() =>
-  import("./pages/forms/incomingShipments/shipment/Edit")
-);
-const shipmentShow = React.lazy(() =>
-  import("./pages/forms/incomingShipments/shipment/Show")
-);
 const outgoingShipments = React.lazy(() =>
   import("./pages/forms/outgoingShipments/OutgoingShipments")
 );
@@ -68,26 +62,59 @@ const CompanyShow = React.lazy(() => import("./pages/companies/Show"));
 const shipments = React.lazy(() =>
   import("./pages/forms/incomingShipments/shipment/Shipment")
 );
+const shipmentEdit = React.lazy(() =>
+  import("./pages/forms/incomingShipments/shipment/Edit")
+);
+const shipmentShow = React.lazy(() =>
+  import("./pages/forms/incomingShipments/shipment/Show")
+);
 
 // shipments(outgoing)
 const shipmentOutgoing = React.lazy(() =>
   import("./pages/forms/outgoingShipments/shipment/Shipment")
 );
+const outShipmentShow = React.lazy(() =>
+  import("./pages/forms/outgoingShipments/shipment/Show")
+);
+const outShipmentEdit = React.lazy(() => import('./pages/forms/outgoingShipments/shipment/Edit'))
 
 //selling
 const selling = React.lazy(() =>
   import("./pages/forms/sellingOrders/orders/Selling")
 );
+const sellingShow = React.lazy(() => import('./pages/forms/sellingOrders/orders/Show'))
+const sellingEdit = React.lazy(() => import('./pages/forms/sellingOrders/orders/Edit'))
+
 
 const routes = [
   { path: "/pages/forms/selling", name: "selling", element: selling },
+  { path: "/pages/forms/sellingShow", name: "sellingShow", element: sellingShow },
+  { path: "/pages/forms/sellingEdit", name: "sellingEdit", element: sellingEdit },
   { path: "/pages/forms/shipments", name: "shipments", element: shipments },
-  { path: "/pages/forms/shipments/Edit", name: "Edit", element: shipmentEdit },
-  { path: "/pages/forms/shipments/Show", name: "Show", element: shipmentShow },
+  {
+    path: "/pages/forms/shipments/Edit",
+    name: "shipmentEdit",
+    element: shipmentEdit,
+  },
+  {
+    path: "/pages/forms/shipments/Show",
+    name: "shipmentShow",
+    element: shipmentShow,
+  },
   {
     path: "/pages/forms/shipmentsOutgoing",
     name: "shipments",
     element: shipmentOutgoing,
+  },
+  {
+    path: "/pages/forms/outShipmentShow",
+    name: "outShipmentShow",
+    element: outShipmentShow,
+  },
+  {
+    path: "/pages/forms/outShipmentEdit",
+    name: "outShipmentEdit",
+    element: outShipmentEdit,
   },
   { path: "/", exact: true, name: "Home" },
   { path: "/pages/agents", name: "Agents", element: Agents, exact: true },

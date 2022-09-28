@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { DeletionModal } from "../../../../components/DeletionModal";
 import { toast } from "react-toastify";
 import Pagination from "src/components/Pagination";
+import { AiFillEdit } from "react-icons/ai";
+import { BiShow } from "react-icons/bi";
 
 const Selling = () => {
   const [sellings, setSellings] = useState([]);
@@ -66,7 +68,7 @@ const Selling = () => {
       <>
         {sellings.map((selling) => (
           <CTableRow key={selling.id}>
-            <CTableDataCell scope="col" className="col-12">
+            <CTableDataCell scope="col" className="col-9">
               {" "}
               {selling.id}
             </CTableDataCell>
@@ -75,21 +77,21 @@ const Selling = () => {
               <CButton
                 color="success"
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingsellings/sellings/Show", {
+                  Navigate("/pages/forms/sellingShow", {
                     state: { selling },
                   });
                 }}
               >
-                show
+                <BiShow />
               </CButton>
               <CButton
                 onClick={() => {
-                  Navigate("/pages/forms/outgoingsellings/sellings/Edit", {
+                  Navigate("/pages/forms/sellingEdit", {
                     state: { selling },
                   });
                 }}
               >
-                edit
+                <AiFillEdit />
               </CButton>
               <DeletionModal
                 resource={selling.id}
@@ -107,12 +109,12 @@ const Selling = () => {
     <>
       <CNavbar colorScheme="light" className="bg-light">
         <CContainer fluid>
-          <CNavbarBrand href="#">selling</CNavbarBrand>
+          <CNavbarBrand>Selling Orders</CNavbarBrand>
           <CForm className="d-flex">
             <CFormInput
               type="search"
               className="me-2"
-              placeholder="Search selling"
+              placeholder="Search Selling Orders"
               onChange={(event) => {
                 setSearchTerm(event.target.value);
               }}

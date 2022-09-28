@@ -1,8 +1,8 @@
 import React from "react";
 
 const valueContext = React.createContext({
-  values:{},
-  onValueChange : () => {}
+  values: {},
+  onValueChange: () => {},
 });
 
 export default valueContext;
