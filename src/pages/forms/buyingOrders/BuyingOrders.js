@@ -16,23 +16,86 @@ import Options from "src/components/Options";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ValueProvider } from "src/context/valueContext";
+import {
+  sending_docs_to_seller,
+  certificate_of_origin,
+  exchange_status,
+} from "./utils/toppings";
+
 const BuyingOrders = () => {
   const Navigate = useNavigate();
 
-  const [values, setValues] = useState(false);
-  const [sdts1, setsdts1] = useState(false);
-  const [sdts2, setsdts2] = useState(false);
-  const [sdts3, setsdts3] = useState(false);
-  const [sdts, setsdts] = useState(0);
-  const [coo1, setCoo1] = useState(false);
-  const [coo2, setCoo2] = useState(false);
-  const [coo3, setCoo3] = useState(false);
-  const [coo, setCoo] = useState(0);
-  const [exchangeStatus1, setExchangeStatus1] = useState(false);
-  const [exchangeStatus2, setExchangeStatus2] = useState(false);
-  const [exchangeStatus3, setExchangeStatus3] = useState(false);
-  const [exchangeStatus, setExchangeStatus] = useState(false);
+  const [values, setValues] = useState("");
+  const [sendingDocsToSeller, setSendingDocsToSeller] = useState(
+    new Array(sending_docs_to_seller.length).fill(false)
+  );
+  const [certificateOfOrigin, setCertificateOfOrigin] = useState(
+    new Array(certificate_of_origin.length).fill(false)
+  );
+  const [exchangeStatus, setExchangeStatus] = useState(
+    new Array(exchange_status.length).fill(false)
+  );
   const [validated, setValidated] = useState(false);
+
+  const handleExchanges = (position) => {
+    const updated = exchangeStatus.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setExchangeStatus(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + exchange_status[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      exchange_status: result,
+    });
+  };
+
+  const handleDocsChange = (position) => {
+    const updated = sendingDocsToSeller.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setSendingDocsToSeller(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + sending_docs_to_seller[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      sending_docs_to_seller: result,
+    });
+  };
+
+  const handleCooChange = (position) => {
+    const updated = certificateOfOrigin.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCertificateOfOrigin(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + certificate_of_origin[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      certificate_of_origin: result,
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -72,67 +135,7 @@ const BuyingOrders = () => {
     }
   };
 
-  // New way to handle coo value
-  const handleCooChange = (event) => {
-    if (event.target.checked) {
-      setCoo(parseInt(coo) + parseInt(event.target.value));
-    } else {
-      setCoo(parseInt(coo) - parseInt(event.target.value));
-    }
-
-    if (event.target.name == "coo1") {
-      setCoo1(!coo1);
-    } else if (event.target.name == "coo2") {
-      if (coo2) {
-        setCoo(parseInt(coo) - parseInt(event.target.value));
-      } else {
-        setCoo(parseInt(coo) + parseInt(event.target.value));
-      }
-      setCoo2(!coo2);
-    } else if (event.target.name == "coo3") {
-      if (coo3) {
-        setCoo(parseInt(coo) - parseInt(event.target.value));
-      } else {
-        setCoo(parseInt(coo) + parseInt(event.target.value));
-      }
-      setCoo3(!coo3);
-    }
-    values.certificate_of_origin = coo;
-  };
-
-  const handleSendingDocsChange = (event) => {
-    if (event.target.checked) {
-      setsdts(parseInt(sdts) - parseInt(event.target.value));
-    } else {
-      setsdts(parseInt(sdts) + parseInt(event.target.value));
-    }
-
-    if (event.target.name == "sdts1") {
-      setsdts1(!sdts1);
-    } else if (event.target.name == "sdts2") {
-      setsdts2(!sdts2);
-    } else if (event.target.name == "sdts3") {
-      setsdts3(!sdts3);
-    }
-    values.sending_docs_to_seller = sdts;
-  };
-
-  const handleExchangeStatus = (event) => {
-    if (event.target.checked) {
-      setExchangeStatus(parseInt(sdts) - parseInt(event.target.value));
-    } else {
-      setExchangeStatus(parseInt(sdts) + parseInt(event.target.value));
-    }
-
-    if (event.target.name == "exchangeStatus1") {
-      setExchangeStatus1(!exchangeStatus1);
-    } else if (event.target.name == "exchangeStatus2") {
-      setExchangeStatus2(!exchangeStatus2);
-    } else if (event.target.name == "exchangeStatus3") {
-      setExchangeStatus3(!exchangeStatus3);
-    }
-    values.exchangeStatus = exchangeStatus;
-  };
+  console.log(values);
 
   useEffect(() => {}, []);
 
@@ -282,6 +285,8 @@ const BuyingOrders = () => {
             label="Buying Price"
             placeholder="Buying price..."
             name="buying_price"
+            onChange={handleInputChange}
+            value={values.buying_price || ""}
           />
         </CCol>
         <CCol xs={4}>
@@ -339,84 +344,46 @@ const BuyingOrders = () => {
         <br></br>
         <CCol xs={4}>
           <p>Sending Docs to Seller</p>
-          <CFormCheck
-            inline
-            name="sdts1"
-            value="1|| ''"
-            label="Received"
-            onChange={handleSendingDocsChange}
-            checked={sdts1}
-          />
-          <CFormCheck
-            inline
-            name="sdts2"
-            value="2|| ''"
-            label="Sent"
-            onChange={handleSendingDocsChange}
-            checked={sdts2}
-          />
+          {sending_docs_to_seller.map(({ label }, index) => {
+            return (
+              <CFormCheck
+                key={index}
+                inline
+                type="checkbox"
+                label={label}
+                checked={sendingDocsToSeller[index]}
+                onChange={() => handleDocsChange(index)}
+              />
+            );
+          })}
         </CCol>
         <CCol xs={4}>
           <p>Certificate of Origin</p>
-          <CFormCheck
-            inline
-            name="coo1"
-            value="1"
-            label="Need?"
-            onChange={handleCooChange}
-            checked={coo1}
-          />
-          <CFormCheck
-            inline
-            name="coo2"
-            value="2|| ''"
-            label="Announced"
-            onChange={handleCooChange}
-            checked={coo2}
-          />
-          <CFormCheck
-            inline
-            name="coo3"
-            value="3|| ''"
-            label="Received"
-            onChange={handleCooChange}
-            checked={coo3}
-          />
-          <CFormCheck
-            inline
-            name="coo4"
-            value="4|| ''"
-            label="Sent to client"
-            onChange={handleCooChange}
-            checked={coo3}
-          />
+          {certificate_of_origin.map(({ label }, index) => {
+            return (
+              <CFormCheck
+                key={index}
+                inline
+                label={label}
+                checked={certificateOfOrigin[index]}
+                onChange={() => handleCooChange(index)}
+              />
+            );
+          })}
         </CCol>
         <CCol xs={4}>
           <p>Exchange Status</p>
-          <CFormCheck
-            inline
-            name="exchangeStatus1"
-            value="1|| ''"
-            label="Invoice"
-            onChange={handleExchangeStatus}
-            checked={exchangeStatus1}
-          />
-          <CFormCheck
-            inline
-            name="exchangeStatus2"
-            value="2|| ''"
-            label="Received"
-            onChange={handleExchangeStatus}
-            checked={exchangeStatus2}
-          />
-          <CFormCheck
-            inline
-            name="exchangeStatus3"
-            value="3|| ''"
-            label="Sent"
-            onChange={handleExchangeStatus}
-            checked={exchangeStatus3}
-          />
+          {exchange_status.map(({ label }, index) => {
+            return (
+              <CFormCheck
+                key={index}
+                inline
+                label={label}
+                checked={exchangeStatus[index]}
+                onChange={() => handleExchanges(index)}
+              />
+            );
+          })}
         </CCol>
         <CButtonToolbar className="mb-3">
           <CCol>
