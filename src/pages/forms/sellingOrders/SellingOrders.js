@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import {
   CForm,
-  CFormInput, 
+  CFormInput,
   CCol,
   CButton,
   CButtonToolbar,
@@ -13,11 +13,35 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ValueProvider } from "src/context/valueContext";
+import { Announce_Booking } from "./utils/toppings";
 
 const SellingOrders = () => {
   const navigate = useNavigate();
 
   const [values, setValues] = useState(false);
+  const [announceBooking, setAnnounceBooking] = useState(
+    new Array(Announce_Booking.length).fill(false)
+  );
+
+  const handleAnnounce = (position) => {
+    const updated = announceBooking.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setAnnounceBooking(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + Announce_Booking[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      announce_booking: result,
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -134,41 +158,18 @@ const SellingOrders = () => {
           </CCol>
           <CCol xs={4}>
             <p>Announce Booking</p>
-            <CFormCheck
-              inline
-              label="B"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="1"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="2"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="3"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="4"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
+            {Announce_Booking.map(({ label }, index) => {
+              return (
+                <CFormCheck
+                  key={index}
+                  inline
+                  type="checkbox"
+                  label={label}
+                  checked={announceBooking[index]}
+                  onChange={() => handleAnnounce(index)}
+                />
+              );
+            })}
           </CCol>
           <CCol xs={4}>
             <CFormInput

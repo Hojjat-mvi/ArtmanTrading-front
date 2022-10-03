@@ -157,7 +157,6 @@ const BuyingOrders = () => {
             onClick={() => {
               Navigate("/pages/orders");
             }}
-            shape="rounded-pill"
             style={{ marginBottom: "10px" }}
           >
             Back

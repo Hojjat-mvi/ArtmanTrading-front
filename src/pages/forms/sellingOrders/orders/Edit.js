@@ -13,14 +13,81 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ValueProvider } from "src/context/valueContext";
+import { Announce_Booking } from "../utils/toppings";
 
 const Edit = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const selling = location.state.selling
+  const selling = location.state.selling;
+
+  var announceCheck = selling.announce_booking.toString().split("");
+  var announceIsCheck = [];
+  // if (selling.announce_booking < 1 && announceCheck.length < 4) {
+  //   announceCheck.unshift("0");
+  //   announceCheck.unshift("0");
+  //   announceCheck.unshift("0");
+  //   announceCheck.unshift("0");
+  // }
+  if (selling.announce_booking < 10 && announceCheck.length < 5) {
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+  }
+  if (selling.announce_booking < 100 && announceCheck.length < 5) {
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+  }
+  if (selling.announce_booking < 1000 && announceCheck.length < 5) {
+    announceCheck.unshift("0");
+    announceCheck.unshift("0");
+  }
+  if (selling.announce_booking < 10000 && announceCheck.length < 5) {
+    announceCheck.unshift("0");
+  }
+
+  announceCheck[0] === "0"
+    ? (announceIsCheck[0] = false)
+    : (announceIsCheck[0] = true);
+  announceCheck[1] === "0"
+    ? (announceIsCheck[1] = false)
+    : (announceIsCheck[1] = true);
+  announceCheck[2] === "0"
+    ? (announceIsCheck[2] = false)
+    : (announceIsCheck[2] = true);
+  announceCheck[3] === "0"
+    ? (announceIsCheck[3] = false)
+    : (announceIsCheck[3] = true);
+  announceCheck[4] === "0"
+    ? (announceIsCheck[4] = false)
+    : (announceIsCheck[4] = true);
 
   const [values, setValues] = useState(selling);
+  const [announceBooking, setAnnounceBooking] = useState(announceIsCheck);
+
+  const handleAnnounce = (position) => {
+    setAnnounceBooking(new Array(Announce_Booking.length).fill(false));
+
+    const updated = announceBooking.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setAnnounceBooking(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + Announce_Booking[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      announce_booking: result,
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -56,8 +123,10 @@ const Edit = () => {
     }
   };
 
+  console.log(values.announce_booking);
+
   return (
-    // selling-orders
+    // selling-sellings
     <>
       <ValueProvider
         value={{
@@ -95,7 +164,11 @@ const Edit = () => {
           </CCol>
           <CCol xs={4}>
             <CFormLabel>Companies</CFormLabel>
-            <Options url={"companies"} Data={values.company_id} name={"company_id"} />
+            <Options
+              url={"companies"}
+              Data={values.company_id}
+              name={"company_id"}
+            />
           </CCol>
           <CCol xs={4}>
             <CFormInput
@@ -137,41 +210,18 @@ const Edit = () => {
           </CCol>
           <CCol xs={4}>
             <p>Announce Booking</p>
-            <CFormCheck
-              inline
-              label="B"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="1"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="2"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="3"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
-            <CFormCheck
-              inline
-              label="4"
-              name="announce_booking"
-              onChange={handleInputChange}
-              checked={values.announce_booking || ""}
-            />
+            {Announce_Booking.map(({ label }, index) => {
+              return (
+                <CFormCheck
+                  key={index}
+                  inline
+                  type="checkbox"
+                  label={label}
+                  checked={announceBooking[index]}
+                  onChange={() => handleAnnounce(index)}
+                />
+              );
+            })}
           </CCol>
           <CCol xs={4}>
             <CFormInput

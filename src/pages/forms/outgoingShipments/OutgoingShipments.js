@@ -14,6 +14,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ValueProvider } from "src/context/valueContext";
 import Options from "src/components/Options";
+import { Customer_Agent_Invoice_Status, submission } from "./utils/toppings";
 
 const OutgoingShipments = () => {
   // const location = useLocation();
@@ -21,6 +22,52 @@ const OutgoingShipments = () => {
 
   const [values, setValues] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [customerAgentInvoiceStatus, setCustomerAgentInvoiceStatus] = useState(
+    new Array(Customer_Agent_Invoice_Status.length).fill(false)
+  );
+  const [submissionState, setSubmissionState] = useState(
+    new Array(submission.length).fill(false)
+  );
+
+  const handleCustomer = (position) => {
+    const updated = customerAgentInvoiceStatus.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCustomerAgentInvoiceStatus(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + Customer_Agent_Invoice_Status[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      custom_agent_invoice_status: result,
+    });
+  };
+
+  const handleSubmitChange = (position) => {
+    const updated = submissionState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setSubmissionState(updated);
+
+    const result = updated.reduce((sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + submission[index].value;
+      }
+      return sum;
+    }, 0);
+
+    setValues({
+      ...values,
+      submit: result,
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -109,38 +156,34 @@ const OutgoingShipments = () => {
           />
         </CCol>
         <CCol xs={4}>
-          <p>Cutomer Agent Invoice Status</p>
-          <CFormCheck
-            inline
-            label="Recorded"
-            name="custom_agent_invoice_status"
-            onChange={handleInputChange}
-            checked={values.custom_agent_invoice_status || ""}
-          />
-          <CFormCheck
-            inline
-            label="Paid"
-            name="custom_agent_invoice_status"
-            onChange={handleInputChange}
-            checked={values.custom_agent_invoice_status || ""}
-          />
+          <p>Customer Agent Invoice Status</p>
+          {Customer_Agent_Invoice_Status.map(({ label }, index) => {
+            return (
+              <CFormCheck
+                key={index}
+                inline
+                type="checkbox"
+                label={label}
+                checked={customerAgentInvoiceStatus[index]}
+                onChange={() => handleCustomer(index)}
+              />
+            );
+          })}
         </CCol>
         <CCol xs={4}>
-          <p>Submition</p>
-          <CFormCheck
-            inline
-            label="Announced"
-            name="submit"
-            onChange={handleInputChange}
-            checked={values.submit || ""}
-          />
-          <CFormCheck
-            inline
-            label="Delievered"
-            name="submit"
-            onChange={handleInputChange}
-            checked={values.submit || ""}
-          />
+          <p>submission</p>
+          {submission.map(({ label }, index) => {
+            return (
+              <CFormCheck
+                key={index}
+                inline
+                type="checkbox"
+                label={label}
+                checked={submissionState[index]}
+                onChange={() => handleSubmitChange(index)}
+              />
+            );
+          })}
         </CCol>
         <CCol xs={4}>
           <CFormInput
